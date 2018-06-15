@@ -1,7 +1,7 @@
-body {
-  font-family: sans-serif;
-  text-align: right;
-  background-color: black;
+.SigningComponent {
+  color: white;
+  margin-top: 15%;
+  text-align: center;
 }
 body {
   background-image: url("https://wallpaper-house.com/data/out/10/wallpaper2you_419584.jpg");
