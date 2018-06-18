@@ -27592,7 +27592,7 @@ Floated Menu / Item
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin: -45% -10vw;
+  margin: -0.005px -10vw;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
@@ -27601,7 +27601,7 @@ Floated Menu / Item
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin: 45% 10vw;
+  margin: 0.005px 10vw;
   float: none;
 }
 
@@ -27620,7 +27620,7 @@ Floated Menu / Item
 /* Consecutive Card Groups Preserve Row Spacing */
 
 .ui.cards ~ .ui.cards {
-  margin-top: 45%;
+  margin-top: 0.005px;
 }
 
 /*--------------

@@ -1,7 +1,6 @@
 const defaultState = {
   user: null,
   users: null,
-  game: null,
   games: null,
   opponent: null
 }
@@ -9,7 +8,7 @@ const defaultState = {
 function reducer(state = defaultState, action) {
   switch (action.type) {
     case "INIT_DATA":
-      return {...state, users: action.payload.users, games: action.payload.games, user: action.payload.user, game: action.payload.game, opponent: action.payload.opponent}
+      return {...state, users: action.payload.users, games: action.payload.games, user: action.payload.user, opponent: action.payload.opponent}
 
     case "SIGN_USER_IN":
       // console.log(action.payload);
@@ -20,13 +19,17 @@ function reducer(state = defaultState, action) {
       localStorage.removeItem('userId')
       localStorage.removeItem('gameId')
       localStorage.removeItem('opponentId')
-      return {...state, user: null, game: null}
+      return {...state, user: null, game: null, opponent: null}
+
+    case "FORFIT":
+      localStorage.removeItem('gameId')
+      localStorage.removeItem('opponentId')
+      return {...state, game: null, opponent: null}
 
     case "NEW_GAME":
       // console.log("Action", action.payload);
-      localStorage.setItem('opponentId', action.payload.opponent.id)
-      localStorage.setItem('gameId', action.payload.game.id)
-      return {...state, game: action.payload, opponent: action.payload.opponent}
+      localStorage.setItem('opponentId', action.payload.id)
+      return {...state, opponent: action.payload}
     default:
       return state
   }

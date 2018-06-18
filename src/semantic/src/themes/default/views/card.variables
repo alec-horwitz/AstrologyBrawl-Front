@@ -34,7 +34,7 @@
 
 /* Card Group */
 @horizontalSpacing: 20vw;
-@rowSpacing: 90%;
+@rowSpacing: 0.01px;
 
 @groupMargin: -(@rowSpacing / 2) -(@horizontalSpacing / 2);
 @groupDisplay: flex;

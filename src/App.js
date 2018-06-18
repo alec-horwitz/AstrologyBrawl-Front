@@ -10,29 +10,22 @@ class App extends Component {
 
   componentDidMount = () => {
     let userId = localStorage.getItem("userId")
-    let gameId = localStorage.getItem("gameId")
     let opponentId = localStorage.getItem("opponentId")
     let user = null
-    let game = null
     let opponent = null
     fetch(`http://localhost:3000/api/v1/users`).then(res => res.json()).then(users => {
       fetch(`http://localhost:3000/api/v1/games`).then(res => res.json()).then(games => {
         if (userId) {
           user = users.find(user => `${user.id}` === userId)
-          if (gameId) {
-            game = games.find(game => `${game.id}` === gameId)
-            if (opponentId) {
-              opponent = users.find(user => `${user.id}` === opponentId)
-              // console.log(opponentId, opponent);
-              this.props.dataInit({users,games,user,game,opponent})
-            } else {
-              this.props.dataInit({users,games,user,game,opponent})
-            }
+          if (opponentId) {
+            opponent = users.find(user => `${user.id}` === opponentId)
+            // console.log(opponentId, opponent);
+            this.props.dataInit({users,games,user,opponent})
           } else {
-            this.props.dataInit({users,games,user,game,opponent})
+            this.props.dataInit({users,games,user,opponent})
           }
         } else {
-          this.props.dataInit({users,games,user,game,opponent})
+          this.props.dataInit({users,games,user,opponent})
         }
       })
     })
@@ -44,21 +37,39 @@ class App extends Component {
       let index = Math.floor(Math.random() * Math.floor(this.props.users.length))
       opponent = this.props.users.filter(user => !(user.id === this.props.user.id))[index]
     }
-    fetch(`http://localhost:3000/api/v1/games`, {
-      method: "post",
-      headers: {'content-type': 'application/json'},
-      body: JSON.stringify({user_id:this.props.user.id, playername:this.props.user.name, score: 0})
-    }).then(res => res.json()).then(game => {
-      this.props.newGame({game, opponent})
-    })
+    localStorage.setItem('ohp', 100)
+    localStorage.setItem('uhp', 100)
+    localStorage.setItem('oA', 'Attacking')
+    localStorage.setItem('oCharged', false)
+    localStorage.setItem('oDefending', false)
+    localStorage.setItem('uCharged', false)
+    localStorage.setItem('uDefending', false)
+    this.props.newGame(opponent)
+    // fetch(`http://localhost:3000/api/v1/games`, {
+    //   method: "post",
+    //   headers: {'content-type': 'application/json'},
+    //   body: JSON.stringify({user_id:this.props.user.id, playername:this.props.user.name, score: 0})
+    // }).then(res => res.json()).then(game => {
+    // })
+  }
+
+  handleForfit = () => {
+    this.props.forfit()
+    // fetch(`http://localhost:3000/api/v1/games/${game.id}`, {
+    //   method: "PATCH",
+    //   headers: {'content-type': 'application/json'},
+    //   body: JSON.stringify({user_id:opponent.id, playername:opponent.name, score:game.score})
+    // }).then(res => res.json()).then(game => {
+    // })
   }
 
   optionRender = () => {
     if (this.props.user) {
-      if (this.props.game) {
+      if (this.props.opponent) {
         return (
           <Container>
-            <Form.Button color='black' onClick={this.props.handleSignOut} content='Sign Out' />
+            <Divider hidden/>
+            <Form.Button color='black' onClick={this.handleForfit} content='Forfit' />
             <GameContainer />
           </Container>
         )
@@ -71,6 +82,7 @@ class App extends Component {
               <Form.Button color='black' onClick={this.props.handleSignOut} content='Sign Out' />
             </Button.Group>
             <Divider hidden/>
+            <h1>Score Board</h1>
             <ScoreBoardComponent />
           </Container>
         )
@@ -103,6 +115,9 @@ function mapDispatchToProps(dispatch){
     },
     handleSignOut: () => {
       dispatch({type: "SIGN_USER_OUT"})
+    },
+    forfit: () => {
+      dispatch({type: "FORFIT"})
     }
   }
 }

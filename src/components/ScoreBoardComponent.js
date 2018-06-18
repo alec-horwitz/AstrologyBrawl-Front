@@ -4,10 +4,10 @@ import {connect} from 'react-redux'
 import { Icon, Label, Menu, Table } from 'semantic-ui-react'
 
 const tableData = [
-  { name: 'John', age: 15, gender: 'Male' },
-  { name: 'Amber', age: 40, gender: 'Female' },
-  { name: 'Leslie', age: 25, gender: 'Female' },
-  { name: 'Ben', age: 70, gender: 'Male' },
+  { name: 'John', age: 15, gender: 1 },
+  { name: 'Amber', age: 40, gender: 2 },
+  { name: 'Leslie', age: 25, gender: 3 },
+  { name: 'Ben', age: 70, gender: 4 },
 ]
 
 class ScoreBoardComponent extends Component {
@@ -21,6 +21,7 @@ class ScoreBoardComponent extends Component {
     const { column, data, direction } = this.state
 
     if (column !== clickedColumn) {
+      console.log("clickedColumn");
       this.setState({
         column: clickedColumn,
         data: _.sortBy(data, [clickedColumn]),
@@ -36,6 +37,12 @@ class ScoreBoardComponent extends Component {
     })
   }
 
+  componentDidMount = () => {
+    this.setState({
+      data: this.props.games.map(game => ({player: game.playername.toString(), score: Number(game.score)}))
+    })
+  }
+
   render() {
     const { column, data, direction } = this.state
 
@@ -44,31 +51,23 @@ class ScoreBoardComponent extends Component {
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell
-              sorted={column === 'name' ? direction : null}
-              onClick={this.handleSort('name')}
+              sorted={column === 'player' ? direction : null}
+              onClick={this.handleSort('player')}
             >
-              Name
+              Player
             </Table.HeaderCell>
             <Table.HeaderCell
-              sorted={column === 'age' ? direction : null}
-              onClick={this.handleSort('age')}
+              sorted={column === 'score' ? direction : null}
+              onClick={this.handleSort('score')}
             >
-              Age
-            </Table.HeaderCell>
-            <Table.HeaderCell
-              sorted={column === 'gender' ? direction : null}
-              onClick={this.handleSort('gender')}
-            >
-              Gender
-            </Table.HeaderCell>
+              Score            </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {_.map(data, ({ age, gender, name }) => (
-            <Table.Row key={name}>
-              <Table.Cell>{name}</Table.Cell>
-              <Table.Cell>{age}</Table.Cell>
-              <Table.Cell>{gender}</Table.Cell>
+          {_.map(data, ({ score, player }) => (
+            <Table.Row name={player}>
+              <Table.Cell>{player}</Table.Cell>
+              <Table.Cell>{score}</Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
