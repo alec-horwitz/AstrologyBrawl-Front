@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import SigningComponent from '../components/SigningComponent';
 import NewUserComponent from '../components/NewUserComponent';
 import {connect} from 'react-redux'
-import {Form} from 'semantic-ui-react'
+import {Form, Container} from 'semantic-ui-react'
 
 class FormContainer extends Component {
   render() {
     // console.log(this.props);
-    // <NewUserComponent />
     return (
       <div className="FormContainer">
-        {this.props.user ? <Form.Button inverted onClick={this.props.handleSignOut} content='Sign Out' /> : <SigningComponent />}
+        <Container textAlign="right">
+          <Form.Button color='black' onClick={this.props.handleClick} content={this.props.singing ? 'Sign In' : 'Sign Up'} />
+        </Container>
+        {this.props.singing ? <NewUserComponent /> : <SigningComponent />}
       </div>
     );
   }
@@ -22,8 +24,8 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
   return {
-    handleSignOut: () => {
-      dispatch({type: "SIGN_USER_OUT"})
+    handleClick: () => {
+      dispatch({type: "SWITCH_SIGNING"})
     }
   }
 }

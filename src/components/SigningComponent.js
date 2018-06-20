@@ -12,7 +12,7 @@ class SigningComponent extends Component {
   hamdleSubmit = (e) => {
     e.preventDefault()
     //  && (user.password === e.target.password.value)
-    let user = this.props.users.filter(user => (user.name === e.target.name.value))[0];
+    let user = this.props.users.filter(user => (user.name === e.target.name.value) && (user.password === e.target.password.value))[0];
     if (user) {
       this.props.handleSignIn(user)
     } else {

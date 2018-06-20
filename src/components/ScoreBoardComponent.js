@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import { Icon, Label, Menu, Table } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react'
 
 const tableData = [
   { name: 'John', age: 15, gender: 1 },
@@ -21,7 +21,6 @@ class ScoreBoardComponent extends Component {
     const { column, data, direction } = this.state
 
     if (column !== clickedColumn) {
-      console.log("clickedColumn");
       this.setState({
         column: clickedColumn,
         data: _.sortBy(data, [clickedColumn]),
@@ -38,8 +37,13 @@ class ScoreBoardComponent extends Component {
   }
 
   componentDidMount = () => {
+    console.log(this.props.games);
+    let dat = this.props.games.map(game => ({player: game.playername.toString(), score: Number(game.score)}))
     this.setState({
-      data: this.props.games.map(game => ({player: game.playername.toString(), score: Number(game.score)}))
+      direction: 'descending',
+      data: _.sortBy(dat, [(a) => {
+        return 2000 - a.score
+      }])
     })
   }
 
@@ -60,7 +64,8 @@ class ScoreBoardComponent extends Component {
               sorted={column === 'score' ? direction : null}
               onClick={this.handleSort('score')}
             >
-              Score            </Table.HeaderCell>
+              Score
+            </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
