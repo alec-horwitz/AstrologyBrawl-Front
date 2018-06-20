@@ -3,30 +3,16 @@ import ScoreBoardComponent from './components/ScoreBoardComponent';
 import SigningComponent from './components/SigningComponent';
 import {connect} from 'react-redux'
 import GameContainer from './containers/GameContainer';
-import {Form, Container, Button, Segment, Image, Divider} from 'semantic-ui-react'
+import FormContainer from './containers/FormContainer';
+import {Form, Container, Button, Divider} from 'semantic-ui-react'
 import './App.css';
 
 class App extends Component {
 
   componentDidMount = () => {
-    let userId = localStorage.getItem("userId")
-    let opponentId = localStorage.getItem("opponentId")
-    let user = null
-    let opponent = null
     fetch(`http://localhost:3000/api/v1/users`).then(res => res.json()).then(users => {
       fetch(`http://localhost:3000/api/v1/games`).then(res => res.json()).then(games => {
-        if (userId) {
-          user = users.find(user => `${user.id}` === userId)
-          if (opponentId) {
-            opponent = users.find(user => `${user.id}` === opponentId)
-            // console.log(opponentId, opponent);
-            this.props.dataInit({users,games,user,opponent})
-          } else {
-            this.props.dataInit({users,games,user,opponent})
-          }
-        } else {
-          this.props.dataInit({users,games,user,opponent})
-        }
+          this.props.dataInit({users,games})
       })
     })
   }
@@ -37,30 +23,7 @@ class App extends Component {
       let index = Math.floor(Math.random() * Math.floor(this.props.users.length))
       opponent = this.props.users.filter(user => !(user.id === this.props.user.id))[index]
     }
-    localStorage.setItem('ohp', 100)
-    localStorage.setItem('uhp', 100)
-    localStorage.setItem('oA', 'Attacking')
-    localStorage.setItem('oCharged', false)
-    localStorage.setItem('oDefending', false)
-    localStorage.setItem('uCharged', false)
-    localStorage.setItem('uDefending', false)
     this.props.newGame(opponent)
-    // fetch(`http://localhost:3000/api/v1/games`, {
-    //   method: "post",
-    //   headers: {'content-type': 'application/json'},
-    //   body: JSON.stringify({user_id:this.props.user.id, playername:this.props.user.name, score: 0})
-    // }).then(res => res.json()).then(game => {
-    // })
-  }
-
-  handleForfit = () => {
-    this.props.forfit()
-    // fetch(`http://localhost:3000/api/v1/games/${game.id}`, {
-    //   method: "PATCH",
-    //   headers: {'content-type': 'application/json'},
-    //   body: JSON.stringify({user_id:opponent.id, playername:opponent.name, score:game.score})
-    // }).then(res => res.json()).then(game => {
-    // })
   }
 
   optionRender = () => {
@@ -69,7 +32,7 @@ class App extends Component {
         return (
           <Container>
             <Divider hidden/>
-            <Form.Button color='black' onClick={this.handleForfit} content='Forfit' />
+            <Form.Button color='black' onClick={this.props.forfeit} content='Forfeit' />
             <GameContainer />
           </Container>
         )
@@ -77,10 +40,12 @@ class App extends Component {
         return (
           <Container textAlign="center">
             <Divider hidden/>
-            <Button.Group textAlign="center" >
+            <Button.Group >
               <Form.Button color='black' onClick={this.handleStartGame} content='New Game' />
               <Form.Button color='black' onClick={this.props.handleSignOut} content='Sign Out' />
             </Button.Group>
+            <Divider hidden/>
+            <h1> {this.props.game ? this.props.game.mod0 : null} </h1>
             <Divider hidden/>
             <h1>Score Board</h1>
             <ScoreBoardComponent />
@@ -88,7 +53,9 @@ class App extends Component {
         )
       }
     } else {
-      return (<SigningComponent />)
+      return (
+        <FormContainer />
+      )
     }
   }
 
@@ -116,8 +83,8 @@ function mapDispatchToProps(dispatch){
     handleSignOut: () => {
       dispatch({type: "SIGN_USER_OUT"})
     },
-    forfit: () => {
-      dispatch({type: "FORFIT"})
+    forfeit: () => {
+      dispatch({type: "FORFEIT"})
     }
   }
 }
