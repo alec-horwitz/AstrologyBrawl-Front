@@ -11,3 +11,8 @@ Frontend:
 Navigate to the root directory and run the following commands:
 * npm install
 * npm start
+
+
+Here is an acount you can use to test the code:
+Username: test
+Password: test
