@@ -4,7 +4,7 @@ import SigningComponent from './components/SigningComponent';
 import {connect} from 'react-redux'
 import GameContainer from './containers/GameContainer';
 import FormContainer from './containers/FormContainer';
-import {Form, Container, Button, Divider} from 'semantic-ui-react'
+import {Form, Container, Button, Divider, Modal} from 'semantic-ui-react'
 import './App.css';
 
 class App extends Component {
@@ -30,11 +30,43 @@ class App extends Component {
     if (this.props.user) {
       if (this.props.opponent) {
         return (
-          <Container>
+          <div>
             <Divider hidden/>
-            <Form.Button color='black' onClick={this.props.forfeit} content='Forfeit' />
+            <Divider hidden/>
+            <Button.Group >
+              <Modal trigger={<Button color='black'>Help</Button>} basic>
+                <Modal.Content className="modal1">
+                  <h1>Actions</h1>
+                  <p>
+                    <Button color='white' inverted>
+                      Attack
+                    </Button>
+                    Your basic attack action
+                  </p>
+                  <p>
+                    <Button color='white' inverted>
+                      Defend
+                    </Button>
+                    Sacrifice your turn so that you absorb <br/>
+                    more damage durring your opponent's turn
+                    <p>EFFECTS DO NOT STACK</p>
+                  </p>
+                  <p>
+                    <Button color='white' inverted>
+                      Charge
+                    </Button>
+                    Sacrifice your turn so that your <br/>
+                  attack action does more damage your next turn
+                  <p>EFFECTS DO NOT STACK</p>
+                </p>
+                </Modal.Content>
+              </Modal>
+              <Form.Button color='black' onClick={this.props.forfeit} content='Forfeit' />
+            </Button.Group>
+            <Divider hidden/>
+            <Divider hidden/>
             <GameContainer />
-          </Container>
+          </div>
         )
       } else {
         return (
@@ -49,6 +81,7 @@ class App extends Component {
             <Divider hidden/>
             <h1>Score Board</h1>
             <ScoreBoardComponent />
+            <Divider hidden/>
           </Container>
         )
       }

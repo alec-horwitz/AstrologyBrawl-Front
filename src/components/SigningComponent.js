@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Form} from 'semantic-ui-react'
+import {Form, Container} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import './Signing.css';
 
@@ -32,7 +32,7 @@ class SigningComponent extends Component {
   render() {
     const style={color:"red"}
     return (
-      <div className="SigningComponent">
+      <Container className="SigningComponent">
           <h1> Sign In</h1>
           {this.state.notFound ? <p style={style}>{`${"ERROR: Incorrect Username or Password"}`}</p> : null}
           <Form onSubmit = {this.hamdleSubmit}>
@@ -51,7 +51,7 @@ class SigningComponent extends Component {
             />
             <Form.Button color='black' content='Submit' />
           </Form>
-      </div>
+      </Container>
     );
   }
 }
