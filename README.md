@@ -2,7 +2,10 @@
 
 Instuctions: 
 
-Fork this repository and clone it to your computer.
+First make sure the backend is running properly.
+The backend can be fond at this repo: https://github.com/alec-horwitz/AstrologyBrawl-Back
+
+Then Fork this repository and clone it to your computer.
 
 Open up a terminal window and do the following:
 
