@@ -7,43 +7,88 @@ import './Game.css';
 class GameContainer extends Component {
 
   getDmgDelt = (attacker, defender, aMod, dMod) => {
-    let attackerD = aMod === "Charging" ? Number(attacker.main)*2 : Number(attacker.main)*1.5
-    let defenderR = dMod === "Defending" ? Number(defender.main)*2 : Number(defender.main)*1.5
+    let attackerD = aMod === "Charging" ? Number(attacker.main)*2 : Number(attacker.main)
+    let defenderR = dMod === "Defending" ? Number(defender.main)*3 : Number(defender.main)
     console.log(attacker.name, "Attack: ", attackerD, aMod);
     console.log(defender.name, "Defence: ", defenderR, dMod);
-    let attack = (attackerD) + (Math.floor(Math.random() * Math.floor(attacker.attack))+1)
-    let defense = (defenderR*0.75) + (Math.floor(Math.random() * Math.floor(defender.defence))+1)
+    let attack = (attackerD) + (Math.floor(Math.random() * Math.floor(attacker.attack))+1)*5
+    let defense = (defenderR) + (Math.floor(Math.random() * Math.floor(defender.defence))+1)
     if (attack > defense) {
-      return (attack - defense) * 2
+      return (attack - defense)
     } else {
       return 1
     }
   }
 
-  opponentAction = () => {
-    let selection = Math.floor(Math.random() * Math.floor(16))
-    if ((selection === 0) && !this.props.oCharged) {
-      if (this.props.ohp < 25 || this.props.uCharged || !this.props.uDefending) {
-        return 'Defending'
-      } else {
-        return 'Charging'
-      }
-    } else if ((selection === 1 || selection === 2) && !this.props.oCharged) {
-      if (this.props.ohp < 50 || this.props.uCharged || !this.props.uDefending) {
+  opponentAction = (uA) => {
+    let selection = Math.floor(Math.random() * Math.floor(12))
+    if ((selection === 0 || selection === 1 || selection === 2) && !this.props.oCharged) {
+      if (uA === 'Charging') {
         return 'Defending'
       } else {
         return 'Charging'
       }
     } else if ((selection === 3 || selection === 4 || selection === 5) && !this.props.oCharged) {
-      if (this.props.ohp < 75) {
-        return 'Defending'
-      } else {
+      if (uA === 'Charging' && this.props.ohp > 50) {
         return 'Charging'
+      } else {
+        return 'Attacking'
+      }
+    } else if ((selection === 6 || selection === 7 || selection === 8) && !this.props.oCharged) {
+      if (uA === 'Defending') {
+        return 'Charging'
+      } else {
+        return 'Attacking'
+      }
+    } else if ((selection === 9 || selection === 10 || selection === 11) && !this.props.oCharged) {
+      if (uA === 'Attacking' && this.props.ohp > 75) {
+        return 'Charging'
+      } else {
+        return 'Defending'
       }
     } else {
       return 'Attacking'
     }
   }
+
+  // getDmgDelt = (attacker, defender, aMod, dMod) => {
+  //   let attackerD = aMod === "Charging" ? Number(attacker.main)*2 : Number(attacker.main)*1.5
+  //   let defenderR = dMod === "Defending" ? Number(defender.main)*2 : Number(defender.main)*1.5
+  //   console.log(attacker.name, "Attack: ", attackerD, aMod);
+  //   console.log(defender.name, "Defence: ", defenderR, dMod);
+  //   let attack = (attackerD) + (Math.floor(Math.random() * Math.floor(attacker.attack))+1)
+  //   let defense = (defenderR*0.75) + (Math.floor(Math.random() * Math.floor(defender.defence))+1)
+  //   if (attack > defense) {
+  //     return (attack - defense) * 2
+  //   } else {
+  //     return 1
+  //   }
+  // }
+  //
+  // opponentAction = (uA) => {
+  //   let selection = Math.floor(Math.random() * Math.floor(16))
+  //   if ((selection === 0) && !this.props.oCharged) {
+  //     if (this.props.ohp < 25 || (uA === "Charging") || !(uA === "Defending")) {
+  //       return 'Defending'
+  //     } else {
+  //       return 'Charging'
+  //     }
+  //   } else if ((selection === 1 || selection === 2) && !this.props.oCharged) {
+  //     if (this.props.ohp < 50 || (uA === "Charging") || !(uA === "Defending")) {
+  //       return 'Defending'
+  //     } else {
+  //       return 'Charging'
+  //     }
+  //   } else if ((selection === 3 || selection === 4 || selection === 5) && !this.props.oCharged) {
+  //     if (this.props.ohp < 75) {
+  //       return 'Defending'
+  //     } else {
+  //       return 'Charging'
+  //     }
+  //   } else {
+  //     return 'Attacking'
+  //   }
+  // }
 
   handleOpponentAction = (oA, uA) => {
     if (oA === 'Charging') {
@@ -148,9 +193,9 @@ class GameContainer extends Component {
 
             <Card.Content>
               <Button.Group>
-                <Form.Button disabled={!this.props.uStatus} inverted onClick={() => this.handleActions(this.opponentAction(), "Attacking")} content='Attack' />
-                <Form.Button disabled={!this.props.uStatus} inverted onClick={() => this.handleActions(this.opponentAction(), "Defending")} content='Defend' />
-                <Form.Button disabled={!this.props.uStatus} inverted onClick={() => this.handleActions(this.opponentAction(), "Charging")} content='Charge' />
+                <Form.Button disabled={!this.props.uStatus} inverted onClick={() => this.handleActions(this.opponentAction("Attacking"), "Attacking")} content='Attack' />
+                <Form.Button disabled={!this.props.uStatus} inverted onClick={() => this.handleActions(this.opponentAction("Defending"), "Defending")} content='Defend' />
+                <Form.Button disabled={!this.props.uStatus} inverted onClick={() => this.handleActions(this.opponentAction("Charging"), "Charging")} content='Charge' />
               </Button.Group>
             </Card.Content>
           </Card>

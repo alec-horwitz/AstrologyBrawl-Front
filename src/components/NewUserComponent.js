@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Form} from 'semantic-ui-react'
+import {Form, Container} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 
 const types = {
@@ -106,7 +106,7 @@ class NewUserComponent extends Component {
   render() {
     const style={color:"red"}
     return (
-      <div className="NewUserComponent">
+      <Container className="NewUserComponent">
           <h1> {`${"Sign Up"}`} </h1>
           {this.state.notFound ? <p style={style}>{`${"ERROR: Username or Email already in use or fields left blank."}`}</p> : null}
           <Form onSubmit = {this.hamdleSubmit}>
@@ -149,7 +149,7 @@ class NewUserComponent extends Component {
             />
             <Form.Button color='black' content='Submit' />
           </Form>
-      </div>
+      </Container>
     );
   }
 }
