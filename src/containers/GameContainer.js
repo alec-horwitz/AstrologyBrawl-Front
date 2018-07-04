@@ -20,17 +20,23 @@ class GameContainer extends Component {
     }
   }
 
-  normTypeDamage = (normDmg, aType, dType) => {
-    if (aType == dType) {
+  aTypeDamage = (Dmg, aMod, dMod, attacker, defender) => {
 
-    } else if (true) {
-      
-    } else if (true) {
-
+    if (aMod == "Charging" && dMod == "Defending") {
+      threeToThree(attacker, defender)
+    } else if (aMod == "Charging" && dMod != "Defending") {
+      threeToTwo(attacker, defender)
+    } else if (aMod != "Charging" && dMod == "Defending") {
+      twoToThree(attacker, defender)
     } else {
-
+      twoToTwo(attacker, defender)
     }
   }
+
+  threeToTwo = (attacker, defender) => {}
+  threeToThree = (attacker, defender) => {}
+  twoToThree = (attacker, defender) => {}
+  twoToTwo = (attacker, defender) => {}
 
   opponentAction = (uA) => {
     let selection = Math.floor(Math.random() * Math.floor(12))
