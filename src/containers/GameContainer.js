@@ -33,8 +33,8 @@ class GameContainer extends Component {
     }
   }
 
-  threeToTwo = (attacker, defender) => {}
   threeToThree = (attacker, defender) => {}
+  threeToTwo = (attacker, defender) => {}
   twoToThree = (attacker, defender) => {}
   twoToTwo = (attacker, defender) => {}
 
