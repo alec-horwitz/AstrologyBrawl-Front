@@ -20,8 +20,16 @@ class GameContainer extends Component {
     }
   }
 
-  typeDamage = (normDmg, pType, oType) => {
+  normTypeDamage = (normDmg, aType, dType) => {
+    if (aType == dType) {
 
+    } else if (true) {
+      
+    } else if (true) {
+
+    } else {
+
+    }
   }
 
   opponentAction = (uA) => {
