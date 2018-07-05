@@ -5,10 +5,17 @@ import { Button, Grid, Transition, Card, Image, Progress, Segment, Form } from '
 import './Game.css';
 
 typeDmgs = {
-  water: {fire:1, earth:0, air:2},
-  fire: {water:1, earth:2, air:0},
-  earth: {water:2, fire:0, air:1},
-  air: {water:0, fire:2, earth:1}
+  water: {fire:1, earth:1, air:2},
+  fire: {water:1, earth:2, air:1},
+  earth: {water:2, fire:1, air:1},
+  air: {water:1, fire:2, earth:1}
+}
+
+typeDefs = {
+  water: {fire:1, earth:2, air:1},
+  fire: {water:1, earth:1, air:2},
+  earth: {water:1, fire:2, air:1},
+  air: {water:2, fire:1, earth:1}
 }
 
 class GameContainer extends Component {
@@ -42,7 +49,23 @@ class GameContainer extends Component {
 
   threeToThree = (attacker, defender) => {}
   threeToTwo = (attacker, defender) => {}
-  twoToThree = (attacker, defender) => {}
+  twoToThree = (attacker, defender) => {
+    let attack = (Number(attacker.main)*
+    typeDmgs[attacker.type1][defender.type1]) +
+    (Math.floor(Math.random() *
+    Math.floor(attacker.attack))+1)*
+    (5*typeDmgs[attacker.type2][defender.type2])
+
+    let defense = Number(defender.main) +
+    (Math.floor(Math.random() *
+    Math.floor(defender.defence))+1)
+
+    if (attack > defense) {
+      return (attack - defense)
+    } else {
+      return 1
+    }
+  }
   twoToTwo = (attacker, defender) => {
     let attack = (Number(attacker.main)*
     typeDmgs[attacker.type1][defender.type1]) +
