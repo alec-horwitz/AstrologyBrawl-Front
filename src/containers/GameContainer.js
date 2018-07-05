@@ -4,6 +4,13 @@ import {connect} from 'react-redux'
 import { Button, Grid, Transition, Card, Image, Progress, Segment, Form } from 'semantic-ui-react'
 import './Game.css';
 
+typeDmgs = {
+  water: {fire:1, earth:0, air:2},
+  fire: {water:1, earth:2, air:0},
+  earth: {water:2, fire:0, air:1},
+  air: {water:0, fire:2, earth:1}
+}
+
 class GameContainer extends Component {
 
   getDmgDelt = (attacker, defender, aMod, dMod) => {
@@ -20,7 +27,7 @@ class GameContainer extends Component {
     }
   }
 
-  aTypeDamage = (Dmg, aMod, dMod, attacker, defender) => {
+  aTypeDamage = (attacker, defender, aMod, dMod) => {
 
     if (aMod == "Charging" && dMod == "Defending") {
       threeToThree(attacker, defender)
@@ -37,8 +44,11 @@ class GameContainer extends Component {
   threeToTwo = (attacker, defender) => {}
   twoToThree = (attacker, defender) => {}
   twoToTwo = (attacker, defender) => {
-    let attacker = Number(attacker.main) + (Math.floor(Math.random() * Math.floor(attacker.attack))+1)*5
-    let 
+    let attack = (Number(attacker.main)*
+    typeDmgs[attacker.type1][defender.type1]) + 
+    (Math.floor(Math.random() * Math.floor(attacker.attack))+1)*
+    (5*typeDmgs[attacker.type2][defender.type2])
+    let defense = Number(defender.main) + (Math.floor(Math.random() * Math.floor(defender.defence))+1)
   }
 
   opponentAction = (uA) => {
