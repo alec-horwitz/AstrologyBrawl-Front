@@ -30,13 +30,13 @@ class GameContainer extends Component {
   aTypeDamage = (attacker, defender, aMod, dMod) => {
 
     if (aMod == "Charging" && dMod == "Defending") {
-      threeToThree(attacker, defender)
+      return threeToThree(attacker, defender)
     } else if (aMod == "Charging" && dMod != "Defending") {
-      threeToTwo(attacker, defender)
+      return threeToTwo(attacker, defender)
     } else if (aMod != "Charging" && dMod == "Defending") {
-      twoToThree(attacker, defender)
+      return twoToThree(attacker, defender)
     } else {
-      twoToTwo(attacker, defender)
+      return twoToTwo(attacker, defender)
     }
   }
 
@@ -46,9 +46,14 @@ class GameContainer extends Component {
   twoToTwo = (attacker, defender) => {
     let attack = (Number(attacker.main)*
     typeDmgs[attacker.type1][defender.type1]) +
-    (Math.floor(Math.random() * Math.floor(attacker.attack))+1)*
+    (Math.floor(Math.random() *
+    Math.floor(attacker.attack))+1)*
     (5*typeDmgs[attacker.type2][defender.type2])
-    let defense = Number(defender.main) + (Math.floor(Math.random() * Math.floor(defender.defence))+1)
+
+    let defense = Number(defender.main) +
+    (Math.floor(Math.random() *
+    Math.floor(defender.defence))+1)
+
     if (attack > defense) {
       return (attack - defense)
     } else {
