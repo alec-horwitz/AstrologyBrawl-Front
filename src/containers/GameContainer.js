@@ -45,10 +45,15 @@ class GameContainer extends Component {
   twoToThree = (attacker, defender) => {}
   twoToTwo = (attacker, defender) => {
     let attack = (Number(attacker.main)*
-    typeDmgs[attacker.type1][defender.type1]) + 
+    typeDmgs[attacker.type1][defender.type1]) +
     (Math.floor(Math.random() * Math.floor(attacker.attack))+1)*
     (5*typeDmgs[attacker.type2][defender.type2])
     let defense = Number(defender.main) + (Math.floor(Math.random() * Math.floor(defender.defence))+1)
+    if (attack > defense) {
+      return (attack - defense)
+    } else {
+      return 1
+    }
   }
 
   opponentAction = (uA) => {
