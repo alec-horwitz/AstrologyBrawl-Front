@@ -50,23 +50,37 @@ class GameContainer extends Component {
   threeToThree = (attacker, defender) => {}
   threeToTwo = (attacker, defender) => {}
   twoToThree = (attacker, defender) => {
+    let dmg1 = 1
+    let dmg2 = 1
+    let dmg3 = 1
+    
     let attack = (Number(attacker.main)*
     typeDmgs[attacker.type1][defender.type1]) +
     (Math.floor(Math.random() *
     Math.floor(attacker.attack))+1)*
     (5*typeDmgs[attacker.type2][defender.type2])
 
-    let defense = (Number(defender.main)*
-    typeDefs[defender.type1][attacker.type1]) +
-    (Math.floor(Math.random() *
-    Math.floor(defender.defence))+1)*
+    let defense1 = (Math.floor(Math.random() *
+    Math.floor(10))+1)*
+    (typeDefs[defender.type1][attacker.type1])
+    let defense2 = (Math.floor(Math.random() *
+    Math.floor(10))+1)*
     (typeDefs[defender.type2][attacker.type2])
+    let defense3 = (Math.floor(Math.random() *
+    Math.floor(10))+1)*
+    (typeDefs[defender.type3][attacker.type3])
 
-    if (attack > defense) {
-      return (attack - defense)
-    } else {
-      return 1
+    if (attack/3 > defense1) {
+      dmg1 = (attack/3 - defense1)
     }
+    if (attack/3 > defense2) {
+      dmg2 = (attack/3 - defense2)
+    }
+    if (attack/3 > defense3) {
+      dmg3 = (attack/3 - defense3)
+    }
+
+    return dmg1+dmg2+dmg3
   }
   twoToTwo = (attacker, defender) => {
     let attack = (Number(attacker.main)*
