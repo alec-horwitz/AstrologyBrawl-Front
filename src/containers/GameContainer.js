@@ -20,7 +20,7 @@ typeDefs = {
 
 class GameContainer extends Component {
 
-  getDmgDelt = (attacker, defender, aMod, dMod) => {
+  agetDmgDelt = (attacker, defender, aMod, dMod) => {
     let attackerD = aMod === "Charging" ? Number(attacker.main)*2 : Number(attacker.main)
     let defenderR = dMod === "Defending" ? Number(defender.main)*3 : Number(defender.main)
     console.log(attacker.name, "Attack: ", attackerD, aMod);
@@ -34,7 +34,7 @@ class GameContainer extends Component {
     }
   }
 
-  aTypeDamage = (attacker, defender, aMod, dMod) => {
+  getDmgDelt = (attacker, defender, aMod, dMod) => {
 
     if (aMod == "Charging" && dMod == "Defending") {
       return threeToThree(attacker, defender)
