@@ -48,12 +48,46 @@ class GameContainer extends Component {
   }
 
   threeToThree = (attacker, defender) => {}
-  threeToTwo = (attacker, defender) => {}
+  threeToTwo = (attacker, defender) => {
+    let dmg1 = 1
+    let dmg2 = 1
+    let dmg3 = 1
+
+    let attack1 = (Math.floor(Math.random() *
+    Math.floor(10))+1)*
+    (5*typeDmgs[attacker.type1][defender.type1])
+
+    let attack2 = (Math.floor(Math.random() *
+    Math.floor(10))+1)*
+    (5*typeDmgs[attacker.type2][defender.type1])
+
+    let attack3 = (Math.floor(Math.random() *
+    Math.floor(10))+1)*
+    (5*typeDmgs[attacker.type3][defender.type2])
+
+    let defense = (Number(defender.main)*
+    typeDefs[defender.type1][attacker.type1]) +
+    (Math.floor(Math.random() *
+    Math.floor(defender.defence))+1)*
+    (typeDefs[defender.type2][attacker.type2])
+
+    if (attack1 > defense/3) {
+      dmg1 = (attack1 - defense/3)
+    }
+    if (attack2 > defense/3) {
+      dmg2 = (attack2 - defense/3)
+    }
+    if (attack3 > defense/3) {
+      dmg3 = (attack3 - defense/3)
+    }
+
+    return dmg1+dmg2+dmg3
+  }
   twoToThree = (attacker, defender) => {
     let dmg1 = 1
     let dmg2 = 1
     let dmg3 = 1
-    
+
     let attack = (Number(attacker.main)*
     typeDmgs[attacker.type1][defender.type1]) +
     (Math.floor(Math.random() *
@@ -65,10 +99,10 @@ class GameContainer extends Component {
     (typeDefs[defender.type1][attacker.type1])
     let defense2 = (Math.floor(Math.random() *
     Math.floor(10))+1)*
-    (typeDefs[defender.type2][attacker.type2])
+    (typeDefs[defender.type2][attacker.type1])
     let defense3 = (Math.floor(Math.random() *
     Math.floor(10))+1)*
-    (typeDefs[defender.type3][attacker.type3])
+    (typeDefs[defender.type3][attacker.type2])
 
     if (attack/3 > defense1) {
       dmg1 = (attack/3 - defense1)
