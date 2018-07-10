@@ -5,17 +5,17 @@ import { Button, Grid, Transition, Card, Image, Progress, Segment, Form } from '
 import './Game.css';
 
 const typeDmgs = {
-  water: {fire:1, earth:1, air:2},
-  fire: {water:1, earth:2, air:1},
-  earth: {water:2, fire:1, air:1},
-  air: {water:1, fire:2, earth:1}
+  water: {water:1, fire:1, earth:1, air:2},
+  fire: {water:1, fire:1, earth:2, air:1},
+  earth: {water:2, fire:1, earth:1, air:1},
+  air: {water:1, fire:2, earth:1, air:1}
 }
 
 const typeDefs = {
-  water: {fire:1, earth:2, air:1},
-  fire: {water:1, earth:1, air:2},
-  earth: {water:1, fire:2, air:1},
-  air: {water:2, fire:1, earth:1}
+  water: {water:1, fire:1, earth:2, air:1},
+  fire: {water:1, fire:1, earth:1, air:2},
+  earth: {water:1, fire:2, earth:1, air:1},
+  air: {water:2, fire:1, earth:1, air:1}
 }
 
 class GameContainer extends Component {
