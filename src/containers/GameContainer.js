@@ -52,29 +52,23 @@ class GameContainer extends Component {
     let dmg2 = 1
     let dmg3 = 1
 
-    let attack1 = (Math.floor(Math.random() *
-    Math.floor(10))+1)*
-    (typeDmgs[attacker.type1][defender.type1])
+    let attack1 = 10*
+    typeDmgs[attacker.type1][defender.type1]
 
-    let attack2 = (Math.floor(Math.random() *
-    Math.floor(10))+1)*
-    (typeDmgs[attacker.type2][defender.type1])
+    let attack2 = 10*
+    typeDmgs[attacker.type2][defender.type1]
 
-    let attack3 = (Math.floor(Math.random() *
-    Math.floor(10))+1)*
-    (typeDmgs[attacker.type3][defender.type2])
+    let attack3 = 10*
+    typeDmgs[attacker.type3][defender.type2]
 
-    let defense1 = (Math.floor(Math.random() *
-    Math.floor(10))+1)*
-    (typeDefs[defender.type1][attacker.type1])
+    let defense1 = 10*
+    typeDefs[defender.type1][attacker.type1]
 
-    let defense2 = (Math.floor(Math.random() *
-    Math.floor(10))+1)*
-    (typeDefs[defender.type2][attacker.type1])
+    let defense2 = 10*
+    typeDefs[defender.type2][attacker.type1]
 
-    let defense3 = (Math.floor(Math.random() *
-    Math.floor(10))+1)*
-    (typeDefs[defender.type3][attacker.type2])
+    let defense3 = 10*
+    typeDefs[defender.type3][attacker.type2]
 
     if (attack1 > defense1) {
       dmg1 = (attack1 - defense1)
@@ -93,23 +87,19 @@ class GameContainer extends Component {
     let dmg2 = 1
     let dmg3 = 1
 
-    let attack1 = (Math.floor(Math.random() *
-    Math.floor(10))+1)*
-    (typeDmgs[attacker.type1][defender.type1])
+    let attack1 = 10*
+      typeDmgs[attacker.type1][defender.type1]
 
-    let attack2 = (Math.floor(Math.random() *
-    Math.floor(10))+1)*
-    (typeDmgs[attacker.type2][defender.type1])
+    let attack2 = 10*
+      typeDmgs[attacker.type2][defender.type1]
 
-    let attack3 = (Math.floor(Math.random() *
-    Math.floor(10))+1)*
-    (typeDmgs[attacker.type3][defender.type2])
+    let attack3 = 10*
+    typeDmgs[attacker.type3][defender.type2]
 
     let defense = (Number(defender.main)*
     typeDefs[defender.type1][attacker.type1]) +
-    (Math.floor(Math.random() *
-    Math.floor(defender.defence))+1)*
-    (typeDefs[defender.type2][attacker.type2])
+    (Number(defender.defence)*
+    typeDefs[defender.type2][attacker.type2])
 
     if (attack1 > Math.floor(defense/3)) {
       dmg1 = (attack1 - Math.floor(defense/3))
@@ -130,19 +120,12 @@ class GameContainer extends Component {
 
     let attack = (Number(attacker.main)*
     typeDmgs[attacker.type1][defender.type1]) +
-    (Math.floor(Math.random() *
-    Math.floor(attacker.attack))+1)*
-    (typeDmgs[attacker.type2][defender.type2])
+    (Number(attacker.attack)*
+    typeDmgs[attacker.type2][defender.type2])
 
-    let defense1 = (Math.floor(Math.random() *
-    Math.floor(10))+1)*
-    (typeDefs[defender.type1][attacker.type1])
-    let defense2 = (Math.floor(Math.random() *
-    Math.floor(10))+1)*
-    (typeDefs[defender.type2][attacker.type1])
-    let defense3 = (Math.floor(Math.random() *
-    Math.floor(10))+1)*
-    (typeDefs[defender.type3][attacker.type2])
+    let defense1 = (10*[defender.type1][attacker.type1])
+    let defense2 = (10*[defender.type2][attacker.type1])
+    let defense3 = (10*[defender.type3][attacker.type2])
 
     if (Math.floor(attack/3) > defense1) {
       dmg1 = (Math.floor(attack/3) - defense1)
@@ -159,15 +142,13 @@ class GameContainer extends Component {
   twoToTwo = (attacker, defender) => {
     let attack = (Number(attacker.main)*
     typeDmgs[attacker.type1][defender.type1]) +
-    (Math.floor(Math.random() *
-    Math.floor(attacker.attack))+1)*
-    (3*typeDmgs[attacker.type2][defender.type2])
+    (Number(attacker.attack)*
+    typeDmgs[attacker.type2][defender.type2])
 
     let defense = (Number(defender.main)*
     typeDefs[defender.type1][attacker.type1]) +
-    (Math.floor(Math.random() *
-    Math.floor(defender.defence))+1)*
-    (typeDefs[defender.type2][attacker.type2])
+    (Number(defender.defence)*
+    typeDefs[defender.type2][attacker.type2])
 
     if (attack > defense) {
       return (attack - defense)
