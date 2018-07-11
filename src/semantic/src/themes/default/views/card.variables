@@ -13,7 +13,7 @@
 /* Card */
 @fontFamily: @pageFont;
 @display: flex;
-@background: @black;
+@background: @white;
 @borderRadius: @defaultBorderRadius;
 @margin: 1em 0em;
 @minHeight: 0px;
@@ -33,8 +33,8 @@
 ;
 
 /* Card Group */
-@horizontalSpacing: 20vw;
-@rowSpacing: 0.01px;
+@horizontalSpacing: 1em;
+@rowSpacing: 1.75em;
 
 @groupMargin: -(@rowSpacing / 2) -(@horizontalSpacing / 2);
 @groupDisplay: flex;
@@ -74,12 +74,12 @@
 @headerFontWeight: @bold;
 @headerFontSize: @relativeBig;
 @headerLineHeightOffset: -(@lineHeight - 1em) / 2;
-@headerColor: @white;
+@headerColor: @darkTextColor;
 
 /* Metadata */
 @metaFontSize: @relativeMedium;
 @metaSpacing: 0.3em;
-@metaColor: @white;
+@metaColor: @lightTextColor;
 
 /* Icons */
 @actionOpacity: 0.75;
