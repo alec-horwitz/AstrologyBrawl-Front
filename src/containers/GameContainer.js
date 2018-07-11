@@ -4,15 +4,162 @@ import {connect} from 'react-redux'
 import { Button, Grid, Transition, Card, Image, Progress, Segment, Form } from 'semantic-ui-react'
 import './Game.css';
 
+const typeDmgs = {
+  water: {water:1, fire:1, earth:1, air:2},
+  fire: {water:1, fire:1, earth:2, air:1},
+  earth: {water:2, fire:1, earth:1, air:1},
+  air: {water:1, fire:2, earth:1, air:1}
+}
+
+const typeDefs = {
+  water: {water:1, fire:1, earth:2, air:1},
+  fire: {water:1, fire:1, earth:1, air:2},
+  earth: {water:1, fire:2, earth:1, air:1},
+  air: {water:2, fire:1, earth:1, air:1}
+}
+
 class GameContainer extends Component {
 
-  getDmgDelt = (attacker, defender, aMod, dMod) => {
+  agetDmgDelt = (attacker, defender, aMod, dMod) => {
     let attackerD = aMod === "Charging" ? Number(attacker.main)*2 : Number(attacker.main)
     let defenderR = dMod === "Defending" ? Number(defender.main)*3 : Number(defender.main)
     console.log(attacker.name, "Attack: ", attackerD, aMod);
     console.log(defender.name, "Defence: ", defenderR, dMod);
     let attack = (attackerD) + (Math.floor(Math.random() * Math.floor(attacker.attack))+1)*5
     let defense = (defenderR) + (Math.floor(Math.random() * Math.floor(defender.defence))+1)
+    if (attack > defense) {
+      return (attack - defense)
+    } else {
+      return 1
+    }
+  }
+
+  getDmgDelt = (attacker, defender, aMod, dMod) => {
+
+    if (aMod == "Charging" && dMod == "Defending") {
+      return this.threeToThree(attacker, defender)
+    } else if (aMod == "Charging" && dMod != "Defending") {
+      return this.threeToTwo(attacker, defender)
+    } else if (aMod != "Charging" && dMod == "Defending") {
+      return this.twoToThree(attacker, defender)
+    } else {
+      return this.twoToTwo(attacker, defender)
+    }
+  }
+
+  threeToThree = (attacker, defender) => {
+    let dmg1 = 1
+    let dmg2 = 1
+    let dmg3 = 1
+
+    let attack1 = 10*
+    typeDmgs[attacker.type1][defender.type1]
+
+    let attack2 = 10*
+    typeDmgs[attacker.type2][defender.type1]
+
+    let attack3 = 10*
+    typeDmgs[attacker.type3][defender.type2]
+
+    let defense1 = ((Math.floor(Math.random() *
+    Math.floor(Number(defender.defence)))+6)*
+    [defender.type1][attacker.type1])
+    let defense2 = ((Math.floor(Math.random() *
+    Math.floor(Number(defender.defence)))+6)*
+    [defender.type2][attacker.type1])
+    let defense3 = ((Math.floor(Math.random() *
+    Math.floor(Number(defender.defence)))+6)*
+    [defender.type3][attacker.type2])
+
+    if (attack1 > defense1) {
+      dmg1 = (attack1 - defense1)
+    }
+    if (attack2 > defense2) {
+      dmg2 = (attack2 - defense2)
+    }
+    if (attack3 > defense3) {
+      dmg3 = (attack3 - defense3)
+    }
+
+    return dmg1+dmg2+dmg3
+  }
+  threeToTwo = (attacker, defender) => {
+    let dmg1 = 1
+    let dmg2 = 1
+    let dmg3 = 1
+
+    let attack1 = 10*
+      typeDmgs[attacker.type1][defender.type1]
+
+    let attack2 = 10*
+      typeDmgs[attacker.type2][defender.type1]
+
+    let attack3 = 10*
+    typeDmgs[attacker.type3][defender.type2]
+
+    let defense = (Number(defender.main)*
+    typeDefs[defender.type1][attacker.type1]) +
+    ((Math.floor(Math.random() * Math.floor(Number(defender.defence)))+1)*
+    typeDefs[defender.type2][attacker.type2])
+
+    if (attack1 > Math.floor(defense/3)) {
+      dmg1 = (attack1 - Math.floor(defense/3))
+    }
+    if (attack2 > Math.floor(defense/3)) {
+      dmg2 = (attack2 - Math.floor(defense/3))
+    }
+    if (attack3 > Math.floor(defense/3)) {
+      dmg3 = (attack3 - Math.floor(defense/3))
+    }
+
+    return dmg1+dmg2+dmg3
+  }
+  twoToThree = (attacker, defender) => {
+    let dmg1 = 1
+    let dmg2 = 1
+    let dmg3 = 1
+
+    let attack = (Number(attacker.main)*
+    typeDmgs[attacker.type1][defender.type1]) +
+    (Number(attacker.attack)*
+    typeDmgs[attacker.type2][defender.type2]) +
+    (Math.floor(Math.random() * Math.floor(Number(attacker.attack)))+1)
+
+    let defense1 = ((Math.floor(Math.random() *
+    Math.floor(Number(defender.defence)))+6)*
+    [defender.type1][attacker.type1])
+    let defense2 = ((Math.floor(Math.random() *
+    Math.floor(Number(defender.defence)))+6)*
+    [defender.type2][attacker.type1])
+    let defense3 = ((Math.floor(Math.random() *
+    Math.floor(Number(defender.defence)))+6)*
+    [defender.type3][attacker.type2])
+
+    if (Math.floor(attack/3) > defense1) {
+      dmg1 = (Math.floor(attack/3) - defense1)
+    }
+    if (Math.floor(attack/3) > defense2) {
+      dmg2 = (Math.floor(attack/3) - defense2)
+    }
+    if (Math.floor(attack/3) > defense3) {
+      dmg3 = (Math.floor(attack/3) - defense3)
+    }
+
+    return dmg1+dmg2+dmg3
+  }
+  twoToTwo = (attacker, defender) => {
+    let attack = (Number(attacker.main)*
+    typeDmgs[attacker.type1][defender.type1]) +
+    (Number(attacker.attack)*
+    typeDmgs[attacker.type2][defender.type2]) +
+    (Math.floor(Math.random() * Math.floor(Number(attacker.attack)))+1)
+
+    let defense = (Number(defender.main)*
+    typeDefs[defender.type1][attacker.type1]) +
+    ((Math.floor(Math.random() * Math.floor(Number(defender.defence)))+1)*
+    typeDefs[defender.type2][attacker.type2])
+
+
     if (attack > defense) {
       return (attack - defense)
     } else {
@@ -50,45 +197,6 @@ class GameContainer extends Component {
       return 'Attacking'
     }
   }
-
-  // getDmgDelt = (attacker, defender, aMod, dMod) => {
-  //   let attackerD = aMod === "Charging" ? Number(attacker.main)*2 : Number(attacker.main)*1.5
-  //   let defenderR = dMod === "Defending" ? Number(defender.main)*2 : Number(defender.main)*1.5
-  //   console.log(attacker.name, "Attack: ", attackerD, aMod);
-  //   console.log(defender.name, "Defence: ", defenderR, dMod);
-  //   let attack = (attackerD) + (Math.floor(Math.random() * Math.floor(attacker.attack))+1)
-  //   let defense = (defenderR*0.75) + (Math.floor(Math.random() * Math.floor(defender.defence))+1)
-  //   if (attack > defense) {
-  //     return (attack - defense) * 2
-  //   } else {
-  //     return 1
-  //   }
-  // }
-  //
-  // opponentAction = (uA) => {
-  //   let selection = Math.floor(Math.random() * Math.floor(16))
-  //   if ((selection === 0) && !this.props.oCharged) {
-  //     if (this.props.ohp < 25 || (uA === "Charging") || !(uA === "Defending")) {
-  //       return 'Defending'
-  //     } else {
-  //       return 'Charging'
-  //     }
-  //   } else if ((selection === 1 || selection === 2) && !this.props.oCharged) {
-  //     if (this.props.ohp < 50 || (uA === "Charging") || !(uA === "Defending")) {
-  //       return 'Defending'
-  //     } else {
-  //       return 'Charging'
-  //     }
-  //   } else if ((selection === 3 || selection === 4 || selection === 5) && !this.props.oCharged) {
-  //     if (this.props.ohp < 75) {
-  //       return 'Defending'
-  //     } else {
-  //       return 'Charging'
-  //     }
-  //   } else {
-  //     return 'Attacking'
-  //   }
-  // }
 
   handleOpponentAction = (oA, uA) => {
     if (oA === 'Charging') {
