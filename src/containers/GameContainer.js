@@ -161,7 +161,14 @@ class GameContainer extends Component {
 
 
     if (attack > defense) {
-      return (attack - defense)
+      if (typeDmgs[attacker.type1][defender.type1] > 1) {
+        return (attack - defense)*2
+      } else if (typeDefs[defender.type1][attacker.type1] > 1) {
+        return (attack - defense)/2
+      } else {
+        return (attack - defense)
+      }
+
     } else {
       return 1
     }
