@@ -52,6 +52,14 @@ class GameContainer extends Component {
     let dmg2 = 1
     let dmg3 = 1
 
+    let attackerMainTypeDMG = 0
+    let attackerAttackTypeDMG = 0
+    let attackerDefenseTypeDMG = 0
+
+    let defenderMainTypeDMG = 0
+    let defenderAttackTypeDMG = 0
+    let defenderDefenseTypeDMG = 0
+
     let attack1 = 10*
     typeDmgs[attacker.type1][defender.type1]
 
@@ -88,6 +96,14 @@ class GameContainer extends Component {
     let dmg2 = 1
     let dmg3 = 1
 
+    let attackerMainTypeDMG = 0
+    let attackerAttackTypeDMG = 0
+    let attackerDefenseTypeDMG = 0
+
+    let defenderMainTypeDMG = 0
+    let defenderAttackTypeDMG = 0
+    let defenderDefenseTypeDMG = 0
+
     let attack1 = 10*
       typeDmgs[attacker.type1][defender.type1]
 
@@ -119,6 +135,14 @@ class GameContainer extends Component {
     let dmg2 = 1
     let dmg3 = 1
 
+    let attackerMainTypeDMG = 0
+    let attackerAttackTypeDMG = 0
+    let attackerDefenseTypeDMG = 0
+
+    let defenderMainTypeDMG = 0
+    let defenderAttackTypeDMG = 0
+    let defenderDefenseTypeDMG = 0
+
     let attack = (Number(attacker.main)*
     typeDmgs[attacker.type1][defender.type1]) +
     (Number(attacker.attack)*
@@ -148,13 +172,21 @@ class GameContainer extends Component {
     return dmg1+dmg2+dmg3
   }
   twoToTwo = (attacker, defender) => {
-    let attack = (Number(attacker.main)*
+    let attackerMainTypeDMG = 0
+    let attackerAttackTypeDMG = 0
+    let attackerDefenseTypeDMG = 0
+
+    let defenderMainTypeDMG = 0
+    let defenderAttackTypeDMG = 0
+    let defenderDefenseTypeDMG = 0
+
+    let attack = (Number(attacker.main) *
     typeDmgs[attacker.type1][defender.type1]) +
-    (Number(attacker.attack)*
+    (Number(attacker.attack) *
     typeDmgs[attacker.type2][defender.type2]) +
     (Math.floor(Math.random() * Math.floor(Number(attacker.attack)))+1)
 
-    let defense = (Number(defender.main)*
+    let defense = (Number(defender.main) *
     typeDefs[defender.type1][attacker.type1]) +
     ((Math.floor(Math.random() * Math.floor(Number(defender.defence)))+1)*
     typeDefs[defender.type2][attacker.type2])
