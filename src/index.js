@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import App from './App';
 // import 'semantic-ui-css/semantic.min.css';
 import './semantic/dist/semantic.min.css';
+import './index.css';
 import {createStore, compose} from 'redux'
 import reducer from './reducers/reducer'
 import {Provider} from 'react-redux'
 import { loadState, saveState } from './localStorage'
-import './index.css';
 
 const persistedState = loadState();
 const store = createStore(reducer,persistedState, compose(
