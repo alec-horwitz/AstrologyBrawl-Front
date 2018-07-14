@@ -10,8 +10,8 @@ import './App.css';
 class App extends Component {
 
   componentDidMount = () => {
-    fetch(`http://localhost:3000/api/v1/users`).then(res => res.json()).then(users => {
-      fetch(`http://localhost:3000/api/v1/games`).then(res => res.json()).then(games => {
+    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/users`).then(res => res.json()).then(users => {
+      fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games`).then(res => res.json()).then(games => {
           this.props.dataInit({users,games})
       })
     })

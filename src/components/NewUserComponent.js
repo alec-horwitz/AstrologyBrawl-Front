@@ -65,7 +65,7 @@ class NewUserComponent extends Component {
     let user = this.props.users.filter(user => (user.name === this.state.name) || (user.email === this.state.email));
     if (!user.length) {
       if (s.name.length || s.password.length || s.type1.length || s.type2.length || s.type3.length) {
-        fetch(`http://localhost:3000/api/v1/users`, {
+        fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/users`, {
           method: "post",
           headers: {'content-type': 'application/json'},
           body: JSON.stringify({

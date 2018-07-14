@@ -259,7 +259,7 @@ class GameContainer extends Component {
     } else {
       messege = "DEFEATED!!!"
     }
-    fetch(`http://localhost:3000/api/v1/games`, {
+    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games`, {
       method: "post",
       headers: {'content-type': 'application/json'},
       body: JSON.stringify({user_id: winner.id, playername: winner.name, score: ((100 + points)*100)})
