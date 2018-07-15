@@ -149,8 +149,7 @@ class GameContainer extends Component {
     // (Math.floor(Math.random() * Math.floor(Number(attacker.attack)))+1)
 
     let defense = (Number(defender.main)) +
-    Number(defender.defence)
-    // ((Math.floor(Math.random() * Math.floor(Number(defender.defence)))+1))
+    ((Math.floor(Math.random() * Math.floor(Number(defender.defence)))+1))
 
 
     if (attack > defense) {
