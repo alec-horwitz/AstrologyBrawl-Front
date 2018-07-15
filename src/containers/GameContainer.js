@@ -61,12 +61,15 @@ class GameContainer extends Component {
     let attack3 = 10*
     typeDmgs[attacker.type3][defender.type2]
 
-    let defense1 = 10
-    // ((Math.floor(Math.random() * Math.floor(Number(defender.defence)))+6))
-    let defense2 = 10
-    // ((Math.floor(Math.random() * Math.floor(Number(defender.defence)))+6))
-    let defense3 = 10
-    // ((Math.floor(Math.random() * Math.floor(Number(defender.defence)))+6))
+    let defense1 = ((Math.floor(Math.random() *
+    Math.floor(Number(defender.defence *
+    typeDmgs[attacker.type1][defender.type1])))+6))
+    let defense2 = ((Math.floor(Math.random() *
+    Math.floor(Number(defender.defence *
+    typeDmgs[attacker.type2][defender.type1])))+6))
+    let defense3 = ((Math.floor(Math.random() *
+    Math.floor(Number(defender.defence *
+    typeDmgs[attacker.type3][defender.type2])))+6))
 
     if (attack1 > defense1) {
       dmg1 = (attack1 - defense1)
@@ -149,7 +152,7 @@ class GameContainer extends Component {
     // (Math.floor(Math.random() * Math.floor(Number(attacker.attack)))+1)
 
     let defense = (Number(defender.main)) +
-    ((Math.floor(Math.random() * Math.floor(Number(defender.defence)))+1))
+    ((Math.floor(Math.random() * Math.floor(Number(defender.defence)))))
 
 
     if (attack > defense) {
