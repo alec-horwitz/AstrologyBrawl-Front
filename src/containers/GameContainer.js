@@ -91,15 +91,14 @@ class GameContainer extends Component {
     let attack1 = 10*
       typeDmgs[attacker.type1][defender.type1]
 
-    let attack2 = 10*
+    let attack2 = 5*
       typeDmgs[attacker.type2][defender.type1]
 
-    let attack3 = 10*
+    let attack3 = 5*
     typeDmgs[attacker.type3][defender.type2]
 
     let defense = (Number(defender.main)) +
-    Number(defender.defence)
-    // ((Math.floor(Math.random() * Math.floor(Number(defender.defence)))+1))
+    ((Math.floor(Math.random() * Math.floor(Number(defender.defence)))+1))
 
     if (attack1 > Math.floor(defense/3)) {
       dmg1 = (attack1 - Math.floor(defense/3))
