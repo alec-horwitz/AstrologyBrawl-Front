@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 // import GameComponent from '../components/GameComponent'
-import { Button, Grid, Transition, Card, Image, Progress, Segment, Form } from 'semantic-ui-react'
+import { Responsive, Button, Grid, Transition, Card, Image, Progress, Segment, Form } from 'semantic-ui-react'
 import './Game.css';
 
 const typeDmgs = {
@@ -283,7 +283,7 @@ class GameContainer extends Component {
             <Card.Content>
               <Card.Header>{user.name}</Card.Header>
               <Progress percent={this.props.uhp} inverted color='red' progress />
-              <Image src={user.avatar} />
+              <Responsive as={Image} minWidth={701} src={user.avatar} />
               <Grid >
                 <Grid.Row columns={2}>
                   <Grid.Column>Damage: {user.main} {user.type1}</Grid.Column>
@@ -309,7 +309,7 @@ class GameContainer extends Component {
             <Card.Content>
               <Card.Header>{opponent.name}</Card.Header>
               <Progress percent={this.props.ohp} inverted color='red' progress />
-              <Image src={opponent.avatar} />
+              <Responsive as={Image} minWidth={701} src={opponent.avatar}/>
               <Grid >
                 <Grid.Row columns={2}>
                   <Grid.Column>Damage: {opponent.main} {opponent.type1}</Grid.Column>
