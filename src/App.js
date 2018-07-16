@@ -4,7 +4,7 @@ import SigningComponent from './components/SigningComponent';
 import {connect} from 'react-redux'
 import GameContainer from './containers/GameContainer';
 import FormContainer from './containers/FormContainer';
-import {Form, Container, Button, Divider, Modal} from 'semantic-ui-react'
+import {Responsive, Form, Container, Button, Divider, Modal} from 'semantic-ui-react'
 import './App.css';
 
 class App extends Component {
@@ -31,8 +31,8 @@ class App extends Component {
       if (this.props.opponent) {
         return (
           <div>
-            <Divider hidden/>
-            <Divider hidden/>
+            <Responsive as={Divider} minWidth={701} hidden/>
+            <Responsive as={Divider} minWidth={701} hidden/>
             <Button.Group >
               <Modal trigger={<Button color='black'>Help</Button>} basic>
                 <Modal.Content className="modal1">
@@ -63,25 +63,25 @@ class App extends Component {
               </Modal>
               <Form.Button color='black' onClick={this.props.forfeit} content='Forfeit' />
             </Button.Group>
-            <Divider hidden/>
-            <Divider hidden/>
+            <Responsive as={Divider} minWidth={701} hidden/>
+            <Responsive as={Divider} minWidth={701} hidden/>
             <GameContainer />
           </div>
         )
       } else {
         return (
           <Container textAlign="center">
-            <Divider hidden/>
+            <Responsive as={Divider} minWidth={701} hidden/>
             <Button.Group >
               <Form.Button color='black' onClick={this.handleStartGame} content='New Game' />
               <Form.Button color='black' onClick={this.props.handleSignOut} content='Sign Out' />
             </Button.Group>
-            <Divider hidden/>
+            <Responsive as={Divider} minWidth={701} hidden/>
             <h1> {this.props.game ? this.props.game.mod0 : null} </h1>
-            <Divider hidden/>
+            <Responsive as={Divider} minWidth={701} hidden/>
             <h1>Score Board</h1>
             <ScoreBoardComponent />
-            <Divider hidden/>
+            <Responsive as={Divider} minWidth={701} hidden/>
           </Container>
         )
       }
