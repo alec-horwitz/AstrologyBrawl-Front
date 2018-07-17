@@ -283,7 +283,7 @@ class GameContainer extends Component {
             <Card.Content>
               <Card.Header>{user.name}</Card.Header>
               <Progress percent={this.props.uhp} inverted color='red' progress />
-              <Responsive as={Image} minWidth={701} src={user.avatar} />
+              <Responsive as={Image} minWidth={740} src={user.avatar} />
               <Grid >
                 <Grid.Row columns={2}>
                   <Grid.Column>Damage: {user.main} {user.type1}</Grid.Column>
@@ -309,7 +309,7 @@ class GameContainer extends Component {
             <Card.Content>
               <Card.Header>{opponent.name}</Card.Header>
               <Progress percent={this.props.ohp} inverted color='red' progress />
-              <Responsive as={Image} minWidth={701} src={opponent.avatar}/>
+              <Responsive as={Image} minWidth={740} src={opponent.avatar} />
               <Grid >
                 <Grid.Row columns={2}>
                   <Grid.Column>Damage: {opponent.main} {opponent.type1}</Grid.Column>

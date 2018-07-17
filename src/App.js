@@ -31,8 +31,8 @@ class App extends Component {
       if (this.props.opponent) {
         return (
           <div>
-            <Responsive as={Divider} minWidth={701} hidden/>
-            <Responsive as={Divider} minWidth={701} hidden/>
+            <Responsive as={Divider} minWidth={700} hidden/>
+            <Responsive as={Divider} minWidth={700} hidden/>
             <Button.Group >
               <Modal trigger={<Button color='black'>Help</Button>} basic>
                 <Modal.Content className="modal1">
@@ -63,25 +63,25 @@ class App extends Component {
               </Modal>
               <Form.Button color='black' onClick={this.props.forfeit} content='Forfeit' />
             </Button.Group>
-            <Responsive as={Divider} minWidth={701} hidden/>
-            <Responsive as={Divider} minWidth={701} hidden/>
+            <Responsive as={Divider} minWidth={700} hidden/>
+            <Responsive as={Divider} minWidth={700} hidden/>
             <GameContainer />
           </div>
         )
       } else {
         return (
           <Container textAlign="center">
-            <Responsive as={Divider} minWidth={701} hidden/>
+            <Responsive as={Divider} minWidth={700} hidden/>
             <Button.Group >
               <Form.Button color='black' onClick={this.handleStartGame} content='New Game' />
               <Form.Button color='black' onClick={this.props.handleSignOut} content='Sign Out' />
             </Button.Group>
-            <Responsive as={Divider} minWidth={701} hidden/>
+            <Responsive as={Divider} minWidth={700} hidden/>
             <h1> {this.props.game ? this.props.game.mod0 : null} </h1>
-            <Responsive as={Divider} minWidth={701} hidden/>
+            <Responsive as={Divider} minWidth={700} hidden/>
             <h1>Score Board</h1>
             <ScoreBoardComponent />
-            <Responsive as={Divider} minWidth={701} hidden/>
+            <Responsive as={Divider} minWidth={700} hidden/>
           </Container>
         )
       }
