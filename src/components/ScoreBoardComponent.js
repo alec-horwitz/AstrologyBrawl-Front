@@ -37,7 +37,7 @@ class ScoreBoardComponent extends Component {
   }
 
   componentDidMount = () => {
-    console.log(this.props.games);
+    // console.log(this.props.games);
     let dat = this.props.games.map(game => ({player: game.playername.toString(), score: Number(game.score)}))
     this.setState({
       direction: 'descending',
