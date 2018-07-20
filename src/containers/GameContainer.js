@@ -367,7 +367,7 @@ class GameContainer extends Component {
       }
       let opponentDmg = this.getDmgDelt(this.props.opponent, this.props.user, oAttack, uAttack)
 
-      if (this.props.uhp < (opponentDmg)) {
+      if ((this.props.uhp - opponentDmg) < 1) {
         this.GameOver(this.props.opponent, this.props.ohp)
       } else {
         setTimeout(() => {
@@ -400,7 +400,7 @@ class GameContainer extends Component {
         uAttack = 'Charging'
       }
       let userDmg = this.getDmgDelt(this.props.user, this.props.opponent, uAttack, oAttack)
-      if (this.props.ohp < (userDmg)) {
+      if ((this.props.ohp - userDmg) < 1) {
         this.GameOver(this.props.user, this.props.uhp)
       } else {
         this.props.playerAttack(this.props.ohp -(userDmg))
