@@ -5,10 +5,10 @@ import { Responsive, Button, Grid, Transition, Card, Image, Progress, Segment, F
 import './Game.css';
 
 const typeDmgs = {
-  water: {water:1, fire:1, earth:1, air:1.5},
-  fire: {water:1, fire:1, earth:1.5, air:1},
-  earth: {water:1.5, fire:1, earth:1, air:1},
-  air: {water:1, fire:1.5, earth:1, air:1}
+  water: {water:0.75, air:1.5, fire:1, earth:1},
+  air: {water:1, air:0.75, fire:1.5, earth:1},
+  fire: {water:1, air:1, fire:0.75, earth:1.5},
+  earth: {water:1.5, air:1, fire:1, earth:0.75},
 }
 
 const atypeDefs = {
@@ -282,10 +282,10 @@ class GameContainer extends Component {
   }
 
 
-  aopponentAction = (uA) => {
+  opponentAction = (uA) => {
     let selection = Math.floor(Math.random() * Math.floor(8))
     if (uA === 'Charging' && !this.props.oCharged) {
-      if ((this.props.ohp > 25)) {
+      if ((this.props.ohp > 25) && !(selection === 0 || selection === 1 || selection === 2)) {
         return 'Defending'
       } else {
         if ((this.props.uhp < this.props.ohp)) {
@@ -295,10 +295,10 @@ class GameContainer extends Component {
         }
       }
     } else if (uA === 'Defending' && !this.props.oCharged) {
-      if (this.props.ohp > 25) {
+      if ((this.props.ohp > 25) && !(selection === 0 || selection === 1 || selection === 2)) {
         return 'Charging'
       } else {
-        if ((selection === 3 || selection === 4 || selection === 5)) {
+        if ((selection === 0 || selection === 1 || selection === 2)) {
           return 'Charging'
         } else {
           return 'Attacking'
@@ -308,21 +308,23 @@ class GameContainer extends Component {
       if (this.props.oCharged) {
         return 'Attacking'
       } else if (this.props.ohp > 50) {
-        if ((selection === 6 || selection === 7 || selection === 8)) {
+        if ((selection === 0 || selection === 1 || selection === 2)) {
           return 'Charging'
         } else {
           return 'Attacking'
         }
       } else {
-        if ((selection === 6 || selection === 7 || selection === 8)) {
+        if ((selection === 0 || selection === 1 || selection === 2)) {
+          return 'Defending'
+        } else if ((selection === 3 || selection === 4 || selection === 5)) {
           return 'Charging'
         } else {
-          return 'Defending'
+          return 'Attacking'
         }
       }
     }
   }
-  opponentAction = (uA) => {
+  aopponentAction = (uA) => {
     let selection = Math.floor(Math.random() * Math.floor(12))
     if ((selection === 0 || selection === 1 || selection === 2) && !this.props.oCharged) {
       if (uA === 'Charging') {
