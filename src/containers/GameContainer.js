@@ -5,10 +5,10 @@ import { Responsive, Button, Grid, Transition, Card, Image, Progress, Segment, F
 import './Game.css';
 
 const typeDmgs = {
-  water: {water:0.75, air:1.5, fire:1, earth:1},
-  air: {water:1, air:0.75, fire:1.5, earth:1},
-  fire: {water:1, air:1, fire:0.75, earth:1.5},
-  earth: {water:1.5, air:1, fire:1, earth:0.75},
+  water: {water:0.5, air:1.5, fire:1, earth:1},
+  air: {water:1, air:0.5, fire:1.5, earth:1},
+  fire: {water:1, air:1, fire:0.5, earth:1.5},
+  earth: {water:1.5, air:1, fire:1, earth:0.5},
 }
 
 const atypeDefs = {
