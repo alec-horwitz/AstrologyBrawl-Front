@@ -386,8 +386,64 @@ class GameContainer extends Component {
       }
     }
   }
+  ahandleOpponentAction = (oA, uA) => {
+    if (oA === 'Charging') {
+      this.props.opponentCharge()
+    } else if (oA === 'Defending') {
+      this.props.opponentDefense()
+    } else {
+      let oAttack = "Attacking"
+      let uAttack = "Blocking"
+      if (this.props.uDefending === true) {
+        uAttack =  'Defending'
+      }
+      if (this.props.oCharged === true) {
+        oAttack = 'Charging'
+      }
+      let opponentDmg = this.getDmgDelt(this.props.opponent, this.props.user, oAttack, uAttack)
+
+      if ((this.props.uhp - opponentDmg) < 1) {
+        this.GameOver(this.props.opponent, this.props.ohp)
+      } else {
+        setTimeout(() => {
+          this.props.opponentPreAttack()
+          setTimeout(() => {
+            this.props.opponentAttack((this.props.uhp - (opponentDmg)))
+            setTimeout(() => {
+              this.props.opponentPostAttack()
+            }, 1000)
+          }, 1000)
+        }, 0)
+      }
+    }
+  }
 
   handlePlayerAction = (oA, uA) => {
+    if (uA === 'Charging') {
+      this.props.playerCharge()
+      setTimeout(() => this.handleOpponentAction(oA, uA), 1000)
+    } else if (uA === 'Defending') {
+      this.props.playerDefense()
+      setTimeout(() => this.handleOpponentAction(oA, uA), 1000)
+    } else {
+      let uAttack = "Attacking"
+      let oAttack = "Blocking"
+      if (this.props.oDefending === true) {
+        oAttack = 'Defending'
+      }
+      if (this.props.uCharged === true) {
+        uAttack = 'Charging'
+      }
+      let userDmg = this.getDmgDelt(this.props.user, this.props.opponent, uAttack, oAttack)
+      if ((this.props.ohp - userDmg) < 1) {
+        this.GameOver(this.props.user, this.props.uhp)
+      } else {
+        this.props.playerAttack(this.props.ohp -(userDmg))
+        setTimeout(() => this.handleOpponentAction(oA, uA), 1000)
+      }
+    }
+  }
+  ahandlePlayerAction = (oA, uA) => {
     if (uA === 'Charging') {
       this.props.playerCharge()
       setTimeout(() => this.handleOpponentAction(oA, uA), 1000)
