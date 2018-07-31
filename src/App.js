@@ -7,6 +7,16 @@ import FormContainer from './containers/FormContainer';
 import {Responsive, Form, Container, Button, Divider, Modal} from 'semantic-ui-react'
 import './App.css';
 
+const inlineStyle = {
+ marginTop: `0px !important`,
+ marginLeft: `auto`,
+ marginRight: `auto`
+};
+
+const bottonGroupStyle = {
+  textAlign: `center`
+};
+
 class App extends Component {
 
   componentDidMount = () => {
@@ -26,41 +36,48 @@ class App extends Component {
     this.props.newGame(opponent)
   }
 
+  displayHelp = () => {
+    // <Form.Button color='black' onClick={this.props.help} content='X' />
+    return (
+      <Modal open={`open`} onClose={this.props.help} dimmer={false} style={inlineStyle} basic closeIcon>
+        <Modal.Content>
+          <h1>Actions</h1>
+          <p>
+            <Button color='white' inverted>
+              Attack
+            </Button>
+            Your basic attack action
+          </p>
+          <p>
+            <Button color='white' inverted>
+              Defend
+            </Button>
+            Sacrifice your turn so that you absorb more damage durring your opponent's turn
+
+          <p>EFFECTS DO NOT STACK</p>
+          </p>
+          <p>
+            <Button color='white' inverted>
+              Charge
+            </Button>
+            Sacrifice your turn so that your
+          attack action does more damage your next turn
+          <p>EFFECTS DO NOT STACK</p>
+          </p>
+        </Modal.Content>
+      </Modal>
+    )
+  }
+
   optionRender = () => {
     if (this.props.user) {
       if (this.props.opponent) {
         return (
-          <div>
+          <div style={bottonGroupStyle}>
             <Responsive as={Divider} minWidth={700} hidden/>
             <Responsive as={Divider} minWidth={700} hidden/>
             <Button.Group >
-              <Modal trigger={<Button color='black'>Help</Button>} basic>
-                <Modal.Content className="modal1">
-                  <h1>Actions</h1>
-                  <p>
-                    <Button color='white' inverted>
-                      Attack
-                    </Button>
-                    Your basic attack action
-                  </p>
-                  <p>
-                    <Button color='white' inverted>
-                      Defend
-                    </Button>
-                    Sacrifice your turn so that you absorb <br/>
-                    more damage durring your opponent's turn
-                    <p>EFFECTS DO NOT STACK</p>
-                  </p>
-                  <p>
-                    <Button color='white' inverted>
-                      Charge
-                    </Button>
-                    Sacrifice your turn so that your <br/>
-                  attack action does more damage your next turn
-                  <p>EFFECTS DO NOT STACK</p>
-                </p>
-                </Modal.Content>
-              </Modal>
+              <Form.Button color='black' onClick={this.props.help} content='Help' />
               <Form.Button color='black' onClick={this.props.forfeit} content='Forfeit' />
             </Button.Group>
             <Responsive as={Divider} minWidth={700} hidden/>
@@ -95,6 +112,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        {this.props.showHelp ? this.displayHelp() : null}
         {this.props.users ? this.optionRender() : null}
       </div>
     );
@@ -118,6 +136,9 @@ function mapDispatchToProps(dispatch){
     },
     forfeit: () => {
       dispatch({type: "FORFEIT"})
+    },
+    help: () => {
+      dispatch({type: "HELP"})
     }
   }
 }

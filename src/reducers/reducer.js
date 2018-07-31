@@ -17,7 +17,8 @@ const defaultState = {
   oDefending: false,
   uDefending: false,
   uCharged: false,
-  singing: false
+  singing: false,
+  showHelp: false
 }
 
 function reducer(state = defaultState, action) {
@@ -180,6 +181,9 @@ function reducer(state = defaultState, action) {
 
     case "SWITCH_SIGNING":
       return {...state, singing: !state.singing}
+
+    case "HELP":
+      return {...state, showHelp: !state.showHelp}
 
     default:
       return state
