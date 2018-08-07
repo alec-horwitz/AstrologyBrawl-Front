@@ -192,7 +192,6 @@ class App extends Component {
         return (
           <div style={bottonGroupStyle}>
             <Responsive as={Divider} minWidth={700} hidden/>
-            <Responsive as={Divider} minWidth={700} hidden/>
             <Button.Group >
               <Form.Button color='black' onClick={this.props.help} content='Help' />
               <Form.Button color='black' onClick={this.props.forfeit} content='Forfeit' />
