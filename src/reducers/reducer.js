@@ -18,7 +18,8 @@ const defaultState = {
   uDefending: false,
   uCharged: false,
   singing: false,
-  showHelp: false
+  showHelp: false,
+  activeIndex: 0
 }
 
 function reducer(state = defaultState, action) {
@@ -184,6 +185,9 @@ function reducer(state = defaultState, action) {
 
     case "HELP":
       return {...state, showHelp: !state.showHelp}
+
+    case "NEW_INDEX":
+      return {...state, activeIndex: action.payload}
 
     default:
       return state
