@@ -4,7 +4,7 @@ import SigningComponent from './components/SigningComponent';
 import {connect} from 'react-redux'
 import GameContainer from './containers/GameContainer';
 import FormContainer from './containers/FormContainer';
-import {Icon, Accordion, Responsive, Form, Container, Button, Divider, Modal} from 'semantic-ui-react'
+import {Table, Icon, Accordion, Responsive, Form, Container, Button, Divider, Modal} from 'semantic-ui-react'
 import './App.css';
 
 const inlineStyle = {
@@ -25,6 +25,14 @@ class App extends Component {
     const newIndex = activeIndex === index ? -1 : index
 
     this.props.setIndex(newIndex)
+  }
+
+  handleActionsIndex = (e, titleProps) => {
+    const { index } = titleProps
+    const { mainIndex } = this.props
+    const newActionsIndex = mainIndex === index ? -1 : index
+
+    this.props.setActionsIndex(newActionsIndex)
   }
 
   componentDidMount = () => {
@@ -50,51 +58,52 @@ class App extends Component {
       <Modal open={`open`} onClose={this.props.help} dimmer={false} style={inlineStyle} basic closeIcon>
         <Modal.Content>
           <Accordion inverted>
-            <h1>Actions:</h1>
-            <p>
-              <Accordion.Title active={this.props.activeIndex === 0} index={0} onClick={this.handleSetIndex} inverted>
-                <Button color='white' inverted>Attack</Button>
-                Click For Details
-                <Icon name='dropdown' />
-              </Accordion.Title>
-              <Accordion.Content active={this.props.activeIndex === 0} inverted>
-                <h3>
-                  Your basic attack action. By default the opponent still absorbs damage based on they're defence stats.
-                </h3>
+
+            <Accordion.Title active={this.props.mainIndex === 0} index={0} onClick={this.handleActionsIndex} inverted>
+              <h1>Actions<Icon name='dropdown' /></h1>
+            </Accordion.Title>
+            <Accordion.Content active={this.props.mainIndex === 0} inverted>
               <p>
-                <h5>
-                  Here's the equation for how the basic attack damage is calculated: <br/>
-                  ((Player's Damage * Player's Damage Type Multipier) + (Player's Damage Modifier * Player's Damage Modifier Type Multipier) + (A Number Between 1 And The Player's Damage Modifier)) - Opponent's Defence <br/><br/>
-                  Here's the equation for how damage is taken when not defending: <br/>
-                  Opponent's Attack - ((Player's Damage) + (A Number Between 1 And The Player's Defence Modifier))
-                </h5>
+                <Accordion.Title active={this.props.activeIndex === 0} index={0} onClick={this.handleSetIndex} inverted>
+                  <Button color='white' inverted>Attack</Button>
+                  <Icon name='dropdown' />
+                </Accordion.Title>
+                <Accordion.Content active={this.props.activeIndex === 0} inverted>
+                  <h3>
+                    Your basic attack action. By default the opponent still absorbs damage based on they're defence stats.
+                  </h3>
+                  <p>
+                    <h5>
+                      Here's a simplified equation for how the basic attack damage is calculated: <br/>
+                      ((Player's Damage * Player's Damage Type Multipier) + (Player's Damage Modifier * Player's Damage Modifier Type Multipier) + (A Number Between 1 And The Player's Damage Modifier)) - Opponent's Defence <br/><br/>
+                      Here's a simplified equation for how damage is taken when not defending: <br/>
+                      Opponent's Attack - ((Player's Damage) + (A Number Between 1 And The Player's Defence Modifier))
+                    </h5>
+                  </p>
+                </Accordion.Content>
               </p>
-              </Accordion.Content>
-            </p>
-            <p>
-              <Accordion.Title active={this.props.activeIndex === 1} index={1} onClick={this.handleSetIndex} inverted>
-                <Button color='white' inverted>Defend</Button>
-                Click For Details
-                <Icon name='dropdown' />
-              </Accordion.Title>
-              <Accordion.Content active={this.props.activeIndex === 1} inverted>
-                <h3>
-                  When defending you sacrifice your turn so that you absorb more damage durring your opponent's turn.
-                </h3>
-                <p>
-                  <h5>
-                    EFFECTS DO NOT STACK <br/><br/>
-                    Here's the equation for how damage is taken when defending: <br/>
-                    ((Opponent's Attack/3) - 10) * 3 <br/><br/>
-                    Even if this formula results in a number less then 3 you will still recive 3 points of damage as the bare minimum.
-                  </h5>
-                </p>
-              </Accordion.Content>
-            </p>
-            <p>
+              <p>
+                <Accordion.Title active={this.props.activeIndex === 1} index={1} onClick={this.handleSetIndex} inverted>
+                  <Button color='white' inverted>Defend</Button>
+                  <Icon name='dropdown' />
+                </Accordion.Title>
+                <Accordion.Content active={this.props.activeIndex === 1} inverted>
+                  <h3>
+                    When defending you sacrifice your turn so that you absorb more damage durring your opponent's turn.
+                  </h3>
+                  <p>
+                    <h5>
+                      EFFECTS DO NOT STACK <br/><br/>
+                      Here's a simplified equation for how damage is taken when defending: <br/>
+                      ((Opponent's Attack/3) - 10) * 3 <br/><br/>
+                      Even if this formula results in a number less then 3 you will still recive 3 points of damage as the bare minimum.
+                    </h5>
+                  </p>
+                </Accordion.Content>
+              </p>
+              <p>
               <Accordion.Title active={this.props.activeIndex === 2} index={2} onClick={this.handleSetIndex} inverted>
                 <Button color='white' inverted>Charge</Button>
-                Click For Details
                 <Icon name='dropdown' />
               </Accordion.Title>
               <Accordion.Content active={this.props.activeIndex === 2} inverted>
@@ -104,7 +113,7 @@ class App extends Component {
                 <p>
                   <h5>
                     EFFECTS DO NOT STACK <br/><br/>
-                    Here's the equation for how the charged attack damage is calculated: <br/>
+                    Here's a simplified equation for how the charged attack damage is calculated: <br/>
                     ((10 * Player's Damage Type Multipier) - (Opponent's Defence/3)) +
                     ((10 * Player's Damage Modifier Type Multipier) - (Opponent's Defence/3)) +
                     ((10 * Player's Defence Modifier Type Multipier) - (Opponent's Defence/3))<br/><br/>
@@ -113,6 +122,64 @@ class App extends Component {
                 </p>
               </Accordion.Content>
             </p>
+            </Accordion.Content>
+            <Accordion.Title active={this.props.mainIndex === 1} index={1} onClick={this.handleActionsIndex} inverted>
+              <h1>Type Multipiers<Icon name='dropdown' /></h1>
+            </Accordion.Title>
+            <Accordion.Content active={this.props.mainIndex === 1} inverted>
+            <p>
+              <h3>
+                The type multipier helps determin how different elements inflict damage on eachother.
+              </h3>
+              <p>
+                <h5>
+                  Here's the table that determins what a given type multiplier is: <br/>
+                </h5>
+              </p>
+              <Table celled inverted selectable compact size='small' collapsing>
+                <Table.Header>
+                  <Table.Row textAlign='center'>
+                    <Table.HeaderCell>X</Table.HeaderCell>
+                    <Table.HeaderCell>Earth</Table.HeaderCell>
+                    <Table.HeaderCell>Air</Table.HeaderCell>
+                    <Table.HeaderCell>Fire</Table.HeaderCell>
+                    <Table.HeaderCell>Water</Table.HeaderCell>
+                  </Table.Row>
+                </Table.Header>
+
+                <Table.Body>
+                  <Table.Row textAlign='center'>
+                    <Table.Cell>Earth</Table.Cell>
+                    <Table.Cell>0.5</Table.Cell>
+                    <Table.Cell>1</Table.Cell>
+                    <Table.Cell>1</Table.Cell>
+                    <Table.Cell>1.5</Table.Cell>
+                  </Table.Row>
+                  <Table.Row textAlign='center'>
+                    <Table.Cell>Air</Table.Cell>
+                    <Table.Cell>1</Table.Cell>
+                    <Table.Cell>0.5</Table.Cell>
+                    <Table.Cell>1.5</Table.Cell>
+                    <Table.Cell>1</Table.Cell>
+                  </Table.Row>
+                  <Table.Row textAlign='center'>
+                    <Table.Cell>Fire</Table.Cell>
+                    <Table.Cell>1.5</Table.Cell>
+                    <Table.Cell>1</Table.Cell>
+                    <Table.Cell>0.5</Table.Cell>
+                    <Table.Cell>1</Table.Cell>
+                  </Table.Row>
+                  <Table.Row textAlign='center'>
+                    <Table.Cell>Water</Table.Cell>
+                    <Table.Cell>1</Table.Cell>
+                    <Table.Cell>1.5</Table.Cell>
+                    <Table.Cell>1</Table.Cell>
+                    <Table.Cell>0.5</Table.Cell>
+                  </Table.Row>
+                </Table.Body>
+              </Table>
+            </p>
+          </Accordion.Content>
         </Accordion>
       </Modal.Content>
       </Modal>
@@ -195,6 +262,9 @@ function mapDispatchToProps(dispatch){
     },
     setIndex: (newIndex) => {
       dispatch({type: "NEW_INDEX", payload: newIndex})
+    },
+    setActionsIndex: (newActionsIndex) => {
+      dispatch({type: "MAIN_INDEX", payload: newActionsIndex})
     }
   }
 }

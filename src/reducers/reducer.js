@@ -19,7 +19,8 @@ const defaultState = {
   uCharged: false,
   singing: false,
   showHelp: false,
-  activeIndex: 0
+  activeIndex: 0,
+  mainIndex: 0
 }
 
 function reducer(state = defaultState, action) {
@@ -188,6 +189,9 @@ function reducer(state = defaultState, action) {
 
     case "NEW_INDEX":
       return {...state, activeIndex: action.payload}
+
+    case "MAIN_INDEX":
+      return {...state, mainIndex: action.payload}
 
     default:
       return state
