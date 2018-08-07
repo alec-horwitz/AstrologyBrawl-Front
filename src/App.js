@@ -4,7 +4,7 @@ import SigningComponent from './components/SigningComponent';
 import {connect} from 'react-redux'
 import GameContainer from './containers/GameContainer';
 import FormContainer from './containers/FormContainer';
-import {Table, Icon, Accordion, Responsive, Form, Container, Button, Divider, Modal} from 'semantic-ui-react'
+import {Grid, Icon, Accordion, Responsive, Form, Container, Button, Divider, Modal} from 'semantic-ui-react'
 import './App.css';
 
 const inlineStyle = {
@@ -135,55 +135,92 @@ class App extends Component {
                 <h5>
                   Here's the table that determins what a given type multiplier is: <br/>
                 </h5>
+                <Grid columns='equal' textAlign='center' celled>
+                  <Grid.Row color='black' >
+                    <Grid.Column>X</Grid.Column>
+                    <Grid.Column>Earth</Grid.Column>
+                    <Grid.Column>Air</Grid.Column>
+                    <Grid.Column>Fire</Grid.Column>
+                    <Grid.Column>Water</Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row color='black' >
+                    <Grid.Column>Earth</Grid.Column>
+                    <Grid.Column>0.5</Grid.Column>
+                    <Grid.Column>1.0</Grid.Column>
+                    <Grid.Column>1.0</Grid.Column>
+                    <Grid.Column>1.5</Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row color='black' >
+                    <Grid.Column>Air</Grid.Column>
+                    <Grid.Column>1.0</Grid.Column>
+                    <Grid.Column>0.5</Grid.Column>
+                    <Grid.Column>1.5</Grid.Column>
+                    <Grid.Column>1.0</Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row color='black' >
+                    <Grid.Column>Fire</Grid.Column>
+                    <Grid.Column>1.5</Grid.Column>
+                    <Grid.Column>1.0</Grid.Column>
+                    <Grid.Column>0.5</Grid.Column>
+                    <Grid.Column>1.0</Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row color='black' >
+                    <Grid.Column>Water</Grid.Column>
+                    <Grid.Column>1.0</Grid.Column>
+                    <Grid.Column>1.5</Grid.Column>
+                    <Grid.Column>1.0</Grid.Column>
+                    <Grid.Column>0.5</Grid.Column>
+                  </Grid.Row>
+                </Grid>
               </p>
-              <Table celled inverted selectable compact size='small' collapsing>
-                <Table.Header>
-                  <Table.Row textAlign='center'>
-                    <Table.HeaderCell>X</Table.HeaderCell>
-                    <Table.HeaderCell>Earth</Table.HeaderCell>
-                    <Table.HeaderCell>Air</Table.HeaderCell>
-                    <Table.HeaderCell>Fire</Table.HeaderCell>
-                    <Table.HeaderCell>Water</Table.HeaderCell>
-                  </Table.Row>
-                </Table.Header>
-
-                <Table.Body>
-                  <Table.Row textAlign='center'>
-                    <Table.Cell>Earth</Table.Cell>
-                    <Table.Cell>0.5</Table.Cell>
-                    <Table.Cell>1</Table.Cell>
-                    <Table.Cell>1</Table.Cell>
-                    <Table.Cell>1.5</Table.Cell>
-                  </Table.Row>
-                  <Table.Row textAlign='center'>
-                    <Table.Cell>Air</Table.Cell>
-                    <Table.Cell>1</Table.Cell>
-                    <Table.Cell>0.5</Table.Cell>
-                    <Table.Cell>1.5</Table.Cell>
-                    <Table.Cell>1</Table.Cell>
-                  </Table.Row>
-                  <Table.Row textAlign='center'>
-                    <Table.Cell>Fire</Table.Cell>
-                    <Table.Cell>1.5</Table.Cell>
-                    <Table.Cell>1</Table.Cell>
-                    <Table.Cell>0.5</Table.Cell>
-                    <Table.Cell>1</Table.Cell>
-                  </Table.Row>
-                  <Table.Row textAlign='center'>
-                    <Table.Cell>Water</Table.Cell>
-                    <Table.Cell>1</Table.Cell>
-                    <Table.Cell>1.5</Table.Cell>
-                    <Table.Cell>1</Table.Cell>
-                    <Table.Cell>0.5</Table.Cell>
-                  </Table.Row>
-                </Table.Body>
-              </Table>
             </p>
           </Accordion.Content>
         </Accordion>
       </Modal.Content>
       </Modal>
     )
+    // <Table celled inverted selectable compact size='small' collapsing>
+    //   <Table.Header>
+    //     <Table.Row textAlign='center'>
+    //       <Table.HeaderCell>X</Table.HeaderCell>
+    //       <Table.HeaderCell>Earth</Table.HeaderCell>
+    //       <Table.HeaderCell>Air</Table.HeaderCell>
+    //       <Table.HeaderCell>Fire</Table.HeaderCell>
+    //       <Table.HeaderCell>Water</Table.HeaderCell>
+    //     </Table.Row>
+    //   </Table.Header>
+    //
+    //   <Table.Body>
+    //     <Table.Row textAlign='center'>
+    //       <Table.Cell>Earth</Table.Cell>
+    //       <Table.Cell>0.5</Table.Cell>
+    //       <Table.Cell>1</Table.Cell>
+    //       <Table.Cell>1</Table.Cell>
+    //       <Table.Cell>1.5</Table.Cell>
+    //     </Table.Row>
+    //     <Table.Row textAlign='center'>
+    //       <Table.Cell>Air</Table.Cell>
+    //       <Table.Cell>1</Table.Cell>
+    //       <Table.Cell>0.5</Table.Cell>
+    //       <Table.Cell>1.5</Table.Cell>
+    //       <Table.Cell>1</Table.Cell>
+    //     </Table.Row>
+    //     <Table.Row textAlign='center'>
+    //       <Table.Cell>Fire</Table.Cell>
+    //       <Table.Cell>1.5</Table.Cell>
+    //       <Table.Cell>1</Table.Cell>
+    //       <Table.Cell>0.5</Table.Cell>
+    //       <Table.Cell>1</Table.Cell>
+    //     </Table.Row>
+    //     <Table.Row textAlign='center'>
+    //       <Table.Cell>Water</Table.Cell>
+    //       <Table.Cell>1</Table.Cell>
+    //       <Table.Cell>1.5</Table.Cell>
+    //       <Table.Cell>1</Table.Cell>
+    //       <Table.Cell>0.5</Table.Cell>
+    //     </Table.Row>
+    //   </Table.Body>
+    // </Table>
   }
 
   optionRender = () => {
