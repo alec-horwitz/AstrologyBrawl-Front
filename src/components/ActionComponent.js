@@ -3,23 +3,23 @@ import {connect} from 'react-redux'
 import { Button, Grid, Transition, Card, Icon, Image, Progress, Segment, Form, Container } from 'semantic-ui-react'
 import './Signing.css';
 
-class GameComponent extends Component {
+class CardComponent extends Component {
   render() {
     let user = this.props.user
     let opponent = this.props.opponent
-    // console.log(opponent.name);
+    console.log(this.props.uhp);
     return (
       <Card.Group centered textAlign="center">
-        <Transition animation={this.state.uAnimation} duration={500} visible={this.state.uVisible}>
+        <Transition animation={this.props.uAnimation} duration={500} visible={this.props.uVisible}>
           <Card color='red' className="myCard">
             <Card.Content>
               <Card.Header>{user.name}</Card.Header>
-              <Progress percent={this.state.uhp} inverted color='red' progress />
-              <Image src={user.avatar} />
+              <Progress percent={Math.floor(this.props.uhp)} inverted color='red' progress />
+              <Responsive as={Image} minWidth={740} src={user.avatar} />
               <Grid >
                 <Grid.Row columns={2}>
                   <Grid.Column>Damage: {user.main} {user.type1}</Grid.Column>
-                  <Grid.Column>Defence: {user.main} {user.type1}</Grid.Column>
+                  <Grid.Column>Defense: {user.main} {user.type1}</Grid.Column>
                   <Grid.Column floated='left' >Dmg Mod: {user.attack} {user.type2}</Grid.Column>
                   <Grid.Column floated='right'>Def Mod: {user.defence} {user.type3}</Grid.Column>
                 </Grid.Row>
@@ -28,24 +28,24 @@ class GameComponent extends Component {
 
             <Card.Content>
               <Button.Group>
-                <Form.Button disabled={!this.state.uStatus} inverted onClick={this.handleAttack} content='Attack' />
-                <Form.Button disabled={!this.state.uStatus} inverted onClick={this.handleDefend} content='Defend' />
-                <Form.Button disabled={!this.state.uStatus} inverted onClick={this.handleAttack} content='Charge' />
+                <Form.Button disabled={!this.props.uStatus} inverted onClick={() => this.handleActions(this.opponentAction("Attacking"), "Attacking")} content='Attack' />
+                <Form.Button disabled={!this.props.uStatus} inverted onClick={() => this.handleActions(this.opponentAction("Defending"), "Defending")} content='Defend' />
+                <Form.Button disabled={!this.props.uStatus} inverted onClick={() => this.handleActions(this.opponentAction("Charging"), "Charging")} content='Charge' />
               </Button.Group>
             </Card.Content>
           </Card>
         </Transition>
 
-        <Transition animation={this.state.oAnimation} duration={500} visible={this.state.oVisible}>
+        <Transition animation={this.props.oAnimation} duration={500} visible={this.props.oVisible}>
           <Card className="myCard">
             <Card.Content>
               <Card.Header>{opponent.name}</Card.Header>
-              <Progress percent={this.state.ohp} inverted color='red' progress />
-              <Image src={opponent.avatar} />
+              <Progress percent={Math.floor(this.props.ohp)} inverted color='red' progress />
+              <Responsive as={Image} minWidth={740} src={opponent.avatar} />
               <Grid >
                 <Grid.Row columns={2}>
                   <Grid.Column>Damage: {opponent.main} {opponent.type1}</Grid.Column>
-                  <Grid.Column>Defence: {opponent.main} {opponent.type1}</Grid.Column>
+                  <Grid.Column>Defense: {opponent.main} {opponent.type1}</Grid.Column>
                   <Grid.Column floated='left' >Dmg Mod: {opponent.attack} {opponent.type2}</Grid.Column>
                   <Grid.Column floated='right'>Def Mod: {opponent.defence} {opponent.type3}</Grid.Column>
                 </Grid.Row>
@@ -53,7 +53,7 @@ class GameComponent extends Component {
             </Card.Content>
 
             <Card.Content>
-              <Segment inverted>{this.state.oStatus}</Segment>
+              <Segment inverted>{this.props.oStatus}</Segment>
             </Card.Content>
           </Card>
         </Transition>
@@ -74,4 +74,4 @@ function mapDispatchToProps(dispatch){
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GameComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(CardComponent);

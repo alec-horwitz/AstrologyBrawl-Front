@@ -20,7 +20,13 @@ const defaultState = {
   singing: false,
   showHelp: false,
   activeIndex: 0,
-  mainIndex: 0
+  mainIndex: 0,
+  typeDmgs: {
+    water: {water:0.5, air:1.5, fire:1, earth:1},
+    air: {water:1, air:0.5, fire:1.5, earth:1},
+    fire: {water:1, air:1, fire:0.5, earth:1.5},
+    earth: {water:1.5, air:1, fire:1, earth:0.5},
+  }
 }
 
 function reducer(state = defaultState, action) {

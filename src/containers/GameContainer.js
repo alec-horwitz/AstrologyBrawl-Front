@@ -4,18 +4,11 @@ import {connect} from 'react-redux'
 import { Responsive, Button, Grid, Transition, Card, Image, Progress, Segment, Form } from 'semantic-ui-react'
 import './Game.css';
 
-const typeDmgs = {
+const this.props.typeDmgs = {
   water: {water:0.5, air:1.5, fire:1, earth:1},
   air: {water:1, air:0.5, fire:1.5, earth:1},
   fire: {water:1, air:1, fire:0.5, earth:1.5},
   earth: {water:1.5, air:1, fire:1, earth:0.5},
-}
-
-const atypeDefs = {
-  water: {water:1, fire:1, earth:2, air:1},
-  fire: {water:1, fire:1, earth:1, air:2},
-  earth: {water:1, fire:2, earth:1, air:1},
-  air: {water:2, fire:1, earth:1, air:1}
 }
 
 class GameContainer extends Component {
@@ -39,23 +32,23 @@ class GameContainer extends Component {
     let dmg3 = 1
 
     let attack1 = (10 *
-      typeDmgs[attacker.type1][defender.type1])
+      this.props.typeDmgs[attacker.type1][defender.type1])
 
     let attack2 = (10 *
-      typeDmgs[attacker.type2][defender.type1])
+      this.props.typeDmgs[attacker.type2][defender.type1])
 
     let attack3 = (10 *
-      typeDmgs[attacker.type3][defender.type2])
+      this.props.typeDmgs[attacker.type3][defender.type2])
 
     let defense1 = (((Math.floor(Math.random() *
     (Number(defender.defence)))+(8 *
-    typeDmgs[attacker.type1][defender.type1]))))
+    this.props.typeDmgs[attacker.type1][defender.type1]))))
     let defense2 = (((Math.floor(Math.random() *
     (Number(defender.defence)))+(8 *
-    typeDmgs[attacker.type2][defender.type1]))))
+    this.props.typeDmgs[attacker.type2][defender.type1]))))
     let defense3 = (((Math.floor(Math.random() *
     (Number(defender.defence)))+(8 *
-    typeDmgs[attacker.type3][defender.type2]))))
+    this.props.typeDmgs[attacker.type3][defender.type2]))))
 
     if (attack1 > defense1) {
       dmg1 = (attack1 - defense1)
@@ -75,13 +68,13 @@ class GameContainer extends Component {
     let dmg3 = 1
 
     let attack1 = (10 *
-      typeDmgs[attacker.type1][defender.type1])
+      this.props.typeDmgs[attacker.type1][defender.type1])
 
     let attack2 = (10 *
-      typeDmgs[attacker.type2][defender.type1])
+      this.props.typeDmgs[attacker.type2][defender.type1])
 
     let attack3 = (10 *
-      typeDmgs[attacker.type3][defender.type2])
+      this.props.typeDmgs[attacker.type3][defender.type2])
 
     let defense = (Number(defender.main)) +
     ((Math.floor(Math.random() *
@@ -105,9 +98,9 @@ class GameContainer extends Component {
     let dmg3 = 1
 
     let attack = Math.floor((Number(attacker.main)*
-    typeDmgs[attacker.type1][defender.type1]) +
+    this.props.typeDmgs[attacker.type1][defender.type1]) +
     (Number(attacker.attack)*
-    typeDmgs[attacker.type2][defender.type2]))
+    this.props.typeDmgs[attacker.type2][defender.type2]))
     // (Math.floor(Math.random() * Math.floor(Number(attacker.attack)))+1)
 
     let defense1 = 10
@@ -132,9 +125,9 @@ class GameContainer extends Component {
   twoToTwo = (attacker, defender) => {
 
     let attack = ((Number(attacker.main) *
-    typeDmgs[attacker.type1][defender.type1]) +
+    this.props.typeDmgs[attacker.type1][defender.type1]) +
     (Number(attacker.attack) *
-    typeDmgs[attacker.type2][defender.type2]) +
+    this.props.typeDmgs[attacker.type2][defender.type2]) +
     (Math.floor(Math.random() *
     (Number(attacker.attack)))+1))
 
