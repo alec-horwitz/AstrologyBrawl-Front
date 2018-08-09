@@ -20,20 +20,6 @@ const atypeDefs = {
 
 class GameContainer extends Component {
 
-  agetDmgDelt = (attacker, defender, aMod, dMod) => {
-    let attackerD = aMod === "Charging" ? Number(attacker.main)*2 : Number(attacker.main)
-    let defenderR = dMod === "Defending" ? Number(defender.main)*3 : Number(defender.main)
-    // console.log(attacker.name, "Attack: ", attackerD, aMod);
-    // console.log(defender.name, "Defence: ", defenderR, dMod);
-    let attack = (attackerD) + (Math.floor(Math.random() * Math.floor(attacker.attack))+1)*5
-    let defense = (defenderR) + (Math.floor(Math.random() * Math.floor(defender.defence))+1)
-    if (attack > defense) {
-      return (attack - defense)
-    } else {
-      return 1
-    }
-  }
-
   getDmgDelt = (attacker, defender, aMod, dMod) => {
 
     if (aMod == "Charging" && dMod == "Defending") {
@@ -47,144 +33,28 @@ class GameContainer extends Component {
     }
   }
 
-  athreeToThree = (attacker, defender) => {
-    let dmg1 = 1
-    let dmg2 = 1
-    let dmg3 = 1
-
-    let attack1 = 10*
-    typeDmgs[attacker.type1][defender.type1]
-
-    let attack2 = 10*
-    typeDmgs[attacker.type2][defender.type1]
-
-    let attack3 = 10*
-    typeDmgs[attacker.type3][defender.type2]
-
-    let defense1 = ((Math.floor(Math.random() *
-    Math.floor(Number(defender.defence)))+(8 *
-    typeDmgs[attacker.type1][defender.type1])))
-    let defense2 = ((Math.floor(Math.random() *
-    Math.floor(Number(defender.defence)))+(8 *
-    typeDmgs[attacker.type2][defender.type1])))
-    let defense3 = ((Math.floor(Math.random() *
-    Math.floor(Number(defender.defence)))+(8 *
-    typeDmgs[attacker.type3][defender.type2])))
-
-    if (attack1 > defense1) {
-      dmg1 = (attack1 - defense1)
-    }
-    if (attack2 > defense2) {
-      dmg2 = (attack2 - defense2)
-    }
-    if (attack3 > defense3) {
-      dmg3 = (attack3 - defense3)
-    }
-
-    return dmg1+dmg2+dmg3
-  }
-  athreeToTwo = (attacker, defender) => {
-    let dmg1 = 1
-    let dmg2 = 1
-    let dmg3 = 1
-
-    let attack1 = 10 *
-    typeDmgs[attacker.type1][defender.type1]
-
-    let attack2 = 10 *
-    typeDmgs[attacker.type2][defender.type1]
-
-    let attack3 = 10 *
-    typeDmgs[attacker.type3][defender.type2]
-
-    let defense = (Number(defender.main)) +
-    ((Math.floor(Math.random() *
-    Math.floor(Number(defender.defence)))))
-
-    if (attack1 > Math.floor(defense/3)) {
-      dmg1 = (attack1 - Math.floor(defense/3))
-    }
-    if (attack2 > Math.floor(defense/3)) {
-      dmg2 = (attack2 - Math.floor(defense/3))
-    }
-    if (attack3 > Math.floor(defense/3)) {
-      dmg3 = (attack3 - Math.floor(defense/3))
-    }
-
-    return dmg1+dmg2+dmg3
-  }
-  atwoToThree = (attacker, defender) => {
-    let dmg1 = 1
-    let dmg2 = 1
-    let dmg3 = 1
-
-    let attack = (Number(attacker.main)*
-    typeDmgs[attacker.type1][defender.type1]) +
-    (Number(attacker.attack)*
-    typeDmgs[attacker.type2][defender.type2])
-    // (Math.floor(Math.random() * Math.floor(Number(attacker.attack)))+1)
-
-    let defense1 = 10
-    // ((Math.floor(Math.random() * Math.floor(Number(defender.defence)))+6))
-    let defense2 = 10
-    // ((Math.floor(Math.random() * Math.floor(Number(defender.defence)))+6))
-    let defense3 = 10
-    // ((Math.floor(Math.random() * Math.floor(Number(defender.defence)))+6))
-
-    if (Math.floor(attack/3) > defense1) {
-      dmg1 = (Math.floor(attack/3) - defense1)
-    }
-    if (Math.floor(attack/3) > defense2) {
-      dmg2 = (Math.floor(attack/3) - defense2)
-    }
-    if (Math.floor(attack/3) > defense3) {
-      dmg3 = (Math.floor(attack/3) - defense3)
-    }
-
-    return dmg1+dmg2+dmg3
-  }
-  atwoToTwo = (attacker, defender) => {
-
-    let attack = (Number(attacker.main) *
-    typeDmgs[attacker.type1][defender.type1]) +
-    (Number(attacker.attack) *
-    typeDmgs[attacker.type2][defender.type2]) +
-    (Math.floor(Math.random() * Math.floor(Number(attacker.attack)))+1)
-
-    let defense = (Number(defender.main)) +
-    ((Math.floor(Math.random() * Math.floor(Number(defender.defence)))))
-
-
-    if (attack > defense) {
-      return (attack - defense)
-
-    } else {
-      return 1
-    }
-  }
-
   threeToThree = (attacker, defender) => {
     let dmg1 = 1
     let dmg2 = 1
     let dmg3 = 1
 
-    let attack1 = Math.floor(10 *
+    let attack1 = (10 *
       typeDmgs[attacker.type1][defender.type1])
 
-    let attack2 = Math.floor(10 *
+    let attack2 = (10 *
       typeDmgs[attacker.type2][defender.type1])
 
-    let attack3 = Math.floor(10 *
+    let attack3 = (10 *
       typeDmgs[attacker.type3][defender.type2])
 
-    let defense1 = Math.floor(((Math.floor(Math.random() *
-    Math.floor(Number(defender.defence)))+(8 *
+    let defense1 = (((Math.floor(Math.random() *
+    (Number(defender.defence)))+(8 *
     typeDmgs[attacker.type1][defender.type1]))))
-    let defense2 = Math.floor(((Math.floor(Math.random() *
-    Math.floor(Number(defender.defence)))+(8 *
+    let defense2 = (((Math.floor(Math.random() *
+    (Number(defender.defence)))+(8 *
     typeDmgs[attacker.type2][defender.type1]))))
-    let defense3 = Math.floor(((Math.floor(Math.random() *
-    Math.floor(Number(defender.defence)))+(8 *
+    let defense3 = (((Math.floor(Math.random() *
+    (Number(defender.defence)))+(8 *
     typeDmgs[attacker.type3][defender.type2]))))
 
     if (attack1 > defense1) {
@@ -204,27 +74,27 @@ class GameContainer extends Component {
     let dmg2 = 1
     let dmg3 = 1
 
-    let attack1 = Math.floor(10 *
+    let attack1 = (10 *
       typeDmgs[attacker.type1][defender.type1])
 
-    let attack2 = Math.floor(10 *
+    let attack2 = (10 *
       typeDmgs[attacker.type2][defender.type1])
 
-    let attack3 = Math.floor(10 *
+    let attack3 = (10 *
       typeDmgs[attacker.type3][defender.type2])
 
     let defense = (Number(defender.main)) +
     ((Math.floor(Math.random() *
-    Math.floor(Number(defender.defence)))))
+    (Number(defender.defence)))))
 
-    if (attack1 > Math.floor(defense/3)) {
-      dmg1 = (attack1 - Math.floor(defense/3))
+    if (attack1 > (defense/3)) {
+      dmg1 = (attack1 - (defense/3))
     }
-    if (attack2 > Math.floor(defense/3)) {
-      dmg2 = (attack2 - Math.floor(defense/3))
+    if (attack2 > (defense/3)) {
+      dmg2 = (attack2 - (defense/3))
     }
-    if (attack3 > Math.floor(defense/3)) {
-      dmg3 = (attack3 - Math.floor(defense/3))
+    if (attack3 > defense/3) {
+      dmg3 = (attack3 - defense/3)
     }
 
     return dmg1+dmg2+dmg3
@@ -247,30 +117,30 @@ class GameContainer extends Component {
     let defense3 = 10
     // ((Math.floor(Math.random() * Math.floor(Number(defender.defence)))+6))
 
-    if (Math.floor(attack/3) > defense1) {
-      dmg1 = (Math.floor(attack/3) - defense1)
+    if ((attack/3) > defense1) {
+      dmg1 = ((attack/3) - defense1)
     }
-    if (Math.floor(attack/3) > defense2) {
-      dmg2 = (Math.floor(attack/3) - defense2)
+    if ((attack/3) > defense2) {
+      dmg2 = ((attack/3) - defense2)
     }
-    if (Math.floor(attack/3) > defense3) {
-      dmg3 = (Math.floor(attack/3) - defense3)
+    if ((attack/3) > defense3) {
+      dmg3 = ((attack/3) - defense3)
     }
 
     return dmg1+dmg2+dmg3
   }
   twoToTwo = (attacker, defender) => {
 
-    let attack = Math.floor((Number(attacker.main) *
+    let attack = ((Number(attacker.main) *
     typeDmgs[attacker.type1][defender.type1]) +
     (Number(attacker.attack) *
     typeDmgs[attacker.type2][defender.type2]) +
     (Math.floor(Math.random() *
-    Math.floor(Number(attacker.attack)))+1))
+    (Number(attacker.attack)))+1))
 
     let defense = (Number(defender.main)) +
     ((Math.floor(Math.random() *
-    Math.floor(Number(defender.defence)))))
+    (Number(defender.defence)))))
 
 
     if (attack > defense) {
@@ -324,69 +194,8 @@ class GameContainer extends Component {
       }
     }
   }
-  aopponentAction = (uA) => {
-    let selection = Math.floor(Math.random() * Math.floor(12))
-    if ((selection === 0 || selection === 1 || selection === 2) && !this.props.oCharged) {
-      if (uA === 'Charging') {
-        return 'Defending'
-      } else {
-        return 'Charging'
-      }
-    } else if ((selection === 3 || selection === 4 || selection === 5) && !this.props.oCharged) {
-      if (uA === 'Charging' && this.props.ohp > 50) {
-        return 'Charging'
-      } else {
-        return 'Attacking'
-      }
-    } else if ((selection === 6 || selection === 7 || selection === 8) && !this.props.oCharged) {
-      if (uA === 'Defending') {
-        return 'Charging'
-      } else {
-        return 'Attacking'
-      }
-    } else if ((selection === 9 || selection === 10 || selection === 11) && !this.props.oCharged) {
-      if (uA === 'Attacking' && this.props.ohp > 75) {
-        return 'Charging'
-      } else {
-        return 'Defending'
-      }
-    } else {
-      return 'Attacking'
-    }
-  }
 
   handleOpponentAction = (oA, uA) => {
-    if (oA === 'Charging') {
-      this.props.opponentCharge()
-    } else if (oA === 'Defending') {
-      this.props.opponentDefense()
-    } else {
-      let oAttack = "Attacking"
-      let uAttack = "Blocking"
-      if (this.props.uDefending === true) {
-        uAttack =  'Defending'
-      }
-      if (this.props.oCharged === true) {
-        oAttack = 'Charging'
-      }
-      let opponentDmg = this.getDmgDelt(this.props.opponent, this.props.user, oAttack, uAttack)
-
-      if ((this.props.uhp - opponentDmg) < 1) {
-        this.GameOver(this.props.opponent, this.props.ohp)
-      } else {
-        setTimeout(() => {
-          this.props.opponentPreAttack()
-          setTimeout(() => {
-            this.props.opponentAttack((this.props.uhp - (opponentDmg)))
-            setTimeout(() => {
-              this.props.opponentPostAttack()
-            }, 1000)
-          }, 1000)
-        }, 0)
-      }
-    }
-  }
-  ahandleOpponentAction = (oA, uA) => {
     if (oA === 'Charging') {
       this.props.opponentCharge()
     } else if (oA === 'Defending') {
@@ -443,43 +252,18 @@ class GameContainer extends Component {
       }
     }
   }
-  ahandlePlayerAction = (oA, uA) => {
-    if (uA === 'Charging') {
-      this.props.playerCharge()
-      setTimeout(() => this.handleOpponentAction(oA, uA), 1000)
-    } else if (uA === 'Defending') {
-      this.props.playerDefense()
-      setTimeout(() => this.handleOpponentAction(oA, uA), 1000)
-    } else {
-      let uAttack = "Attacking"
-      let oAttack = "Blocking"
-      if (this.props.oDefending === true) {
-        oAttack = 'Defending'
-      }
-      if (this.props.uCharged === true) {
-        uAttack = 'Charging'
-      }
-      let userDmg = this.getDmgDelt(this.props.user, this.props.opponent, uAttack, oAttack)
-      if ((this.props.ohp - userDmg) < 1) {
-        this.GameOver(this.props.user, this.props.uhp)
-      } else {
-        this.props.playerAttack(this.props.ohp -(userDmg))
-        setTimeout(() => this.handleOpponentAction(oA, uA), 1000)
-      }
-    }
-  }
 
   GameOver = (winner, points) => {
     let messege
     if (winner.id === this.props.user.id) {
-      messege = `YOU WON WITH A SCORE OF: ${((100 + points)*100)}`
+      messege = `YOU WON WITH A SCORE OF: ${Math.floor((100 + points)*100)}`
     } else {
       messege = "DEFEATED!!!"
     }
     fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games`, {
       method: "post",
       headers: {'content-type': 'application/json'},
-      body: JSON.stringify({user_id: winner.id, playername: winner.name, score: ((100 + points)*100)})
+      body: JSON.stringify({user_id: winner.id, playername: winner.name, score: Math.floor((100 + points)*100)})
     }).then(res => res.json()).then(game => {
       // console.log([...this.props.games, game]);
       this.props.endGame({games: [...this.props.games, game], game: {...game, mod0: messege}})
@@ -493,14 +277,14 @@ class GameContainer extends Component {
   handleCards = () => {
     let user = this.props.user
     let opponent = this.props.opponent
-    // console.log(this.props.uVisible);
+    console.log(this.props.uhp);
     return (
       <Card.Group centered textAlign="center">
         <Transition animation={this.props.uAnimation} duration={500} visible={this.props.uVisible}>
           <Card color='red' className="myCard">
             <Card.Content>
               <Card.Header>{user.name}</Card.Header>
-              <Progress percent={this.props.uhp} inverted color='red' progress />
+              <Progress percent={Math.floor(this.props.uhp)} inverted color='red' progress />
               <Responsive as={Image} minWidth={740} src={user.avatar} />
               <Grid >
                 <Grid.Row columns={2}>
@@ -526,7 +310,7 @@ class GameContainer extends Component {
           <Card className="myCard">
             <Card.Content>
               <Card.Header>{opponent.name}</Card.Header>
-              <Progress percent={this.props.ohp} inverted color='red' progress />
+              <Progress percent={Math.floor(this.props.ohp)} inverted color='red' progress />
               <Responsive as={Image} minWidth={740} src={opponent.avatar} />
               <Grid >
                 <Grid.Row columns={2}>

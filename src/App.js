@@ -129,11 +129,11 @@ class App extends Component {
             <Accordion.Content active={this.props.mainIndex === 1} inverted>
             <p>
               <h3>
-                The type multipier helps determin how different elements inflict damage on eachother.
+                The type multipier helps determine how different elements inflict damage on eachother.
               </h3>
               <p>
                 <h5>
-                  Here's the table that determins what a given type multiplier is: <br/>
+                  Here's the table that determines what a given type multiplier is: <br/>
                 </h5>
                 <Grid columns='equal' textAlign='center' celled>
                   <Grid.Row color='black' >
@@ -233,7 +233,6 @@ class App extends Component {
               <Form.Button color='black' onClick={this.props.help} content='Help' />
               <Form.Button color='black' onClick={this.props.forfeit} content='Forfeit' />
             </Button.Group>
-            <Responsive as={Divider} minWidth={700} hidden/>
             <Responsive as={Divider} minWidth={700} hidden/>
             <GameContainer />
           </div>
