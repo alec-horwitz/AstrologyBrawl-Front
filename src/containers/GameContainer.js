@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux'
-// import GameComponent from '../components/GameComponent'
-import { Responsive, Button, Grid, Transition, Card, Image, Progress, Segment, Form } from 'semantic-ui-react'
+import {connect} from 'react-redux';
+import { Responsive, Button, Grid, Transition, Card, Image, Progress, Segment, Form } from 'semantic-ui-react';
 import './Game.css';
 
 class GameContainer extends Component {
 
   getDmgDelt = (attacker, defender, aMod, dMod) => {
 
-    if (aMod == "Charging" && dMod == "Defending") {
+    if (aMod === "Charging" && dMod === "Defending") {
       return this.threeToThree(attacker, defender)
-    } else if (aMod == "Charging" && dMod != "Defending") {
+    } else if (aMod === "Charging" && dMod !== "Defending") {
       return this.threeToTwo(attacker, defender)
-    } else if (aMod != "Charging" && dMod == "Defending") {
+    } else if (aMod !== "Charging" && dMod === "Defending") {
       return this.twoToThree(attacker, defender)
     } else {
       return this.twoToTwo(attacker, defender)
@@ -251,7 +250,6 @@ class GameContainer extends Component {
       headers: {'content-type': 'application/json'},
       body: JSON.stringify({user_id: winner.id, playername: winner.name, score: Math.floor((100 + points)*100)})
     }).then(res => res.json()).then(game => {
-      // console.log([...this.props.games, game]);
       this.props.endGame({games: [...this.props.games, game], game: {...game, mod0: messege}})
     })
   }
