@@ -4,7 +4,7 @@ import HelpComponent from './components/HelpComponent';
 import {connect} from 'react-redux'
 import GameContainer from './containers/GameContainer';
 import FormContainer from './containers/FormContainer';
-import {Grid, Icon, Accordion, Responsive, Form, Container, Button, Divider, Modal} from 'semantic-ui-react'
+import {Responsive, Form, Container, Button, Divider} from 'semantic-ui-react'
 import './App.css';
 
 const bottonGroupStyle = {
@@ -14,10 +14,8 @@ const bottonGroupStyle = {
 class App extends Component {
 
   componentDidMount = () => {
-    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/users`).then(res => res.json()).then(users => {
-      fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games`).then(res => res.json()).then(games => {
-          this.props.dataInit({users,games})
-      })
+    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games/pages/${this.props.scorePage}`).then(res => res.json()).then(games => {
+      this.props.dataInit(games)
     })
   }
 
@@ -66,11 +64,10 @@ class App extends Component {
   }
 
   render() {
-    // this.displayHelp()
     return (
       <div className="App">
         {this.props.showHelp ? <HelpComponent /> : null}
-        {this.props.users ? this.optionRender() : null}
+        {this.props.games ? this.optionRender() : null}
       </div>
     );
   }

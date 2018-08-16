@@ -12,14 +12,22 @@ class SigningComponent extends Component {
   hamdleSubmit = (e) => {
     e.preventDefault()
     //  && (user.password === e.target.password.value)
-    let user = this.props.users.filter(user => (user.name === e.target.name.value) && (user.password === e.target.password.value))[0];
-    if (user) {
-      this.props.handleSignIn(user)
-    } else {
-      this.setState({
-        notFound: true
-      })
-    }
+    // let user = this.props.users.filter(user => (user.name === e.target.name.value) && (user.password === e.target.password.value))[0];
+    // if (user) {
+
+    // } else {
+
+    // }
+
+    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/users/login/${e.target.name.value}/${e.target.password.value}`).then(res => res.json()).then(login => {
+      if (login) {
+        this.props.handleSignIn(login)
+      } else {
+        this.setState({
+          notFound: true
+        })
+      }
+    })
 
   }
 

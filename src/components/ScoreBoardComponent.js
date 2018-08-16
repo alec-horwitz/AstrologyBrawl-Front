@@ -3,17 +3,10 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import { Table } from 'semantic-ui-react'
 
-const tableData = [
-  { name: 'John', age: 15, gender: 1 },
-  { name: 'Amber', age: 40, gender: 2 },
-  { name: 'Leslie', age: 25, gender: 3 },
-  { name: 'Ben', age: 70, gender: 4 },
-]
-
 class ScoreBoardComponent extends Component {
   state = {
     column: null,
-    data: tableData,
+    data: [],
     direction: null,
   }
 
@@ -37,7 +30,6 @@ class ScoreBoardComponent extends Component {
   }
 
   componentDidMount = () => {
-    // console.log(this.props.games);
     let dat = this.props.games.map(game => ({player: game.playername.toString(), score: Number(game.score)}))
     this.setState({
       direction: 'descending',

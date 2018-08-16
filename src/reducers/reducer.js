@@ -1,7 +1,6 @@
 const defaultState = {
   user: null,
-  users: null,
-  games: null,
+  games: "null",
   game: null,
   opponent: null,
   uStatus: true,
@@ -32,7 +31,7 @@ const defaultState = {
 function reducer(state = defaultState, action) {
   switch (action.type) {
     case "INIT_DATA":
-      return {...state, users: action.payload.users, games: action.payload.games}
+      return {...state, games: action.payload}
 
     case "SIGN_USER_IN":
       return {...state, user: action.payload}
