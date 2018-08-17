@@ -321,7 +321,6 @@ class GameContainer extends Component {
   }
 
   render() {
-    console.log(typeDmgs);
     return (
       <div className="GameContainer">
         {this.props.opponent ? this.handleCards() : <Form.Button onClick={this.handleStartGame} content='Start Game' inverted />}
@@ -331,7 +330,6 @@ class GameContainer extends Component {
 }
 
 function mapStateToProps(state){
-  console.log(state);
   return state
 }
 

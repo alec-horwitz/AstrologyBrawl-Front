@@ -62,8 +62,6 @@ class ScoreBoardComponent extends Component {
   }
 
   render() {
-    console.log(this.props.maxScorePage);
-    console.log(this.props.scorePage);
     let { scoreColumn, scoreData, scoreDirection, scorePage, maxScorePage } = this.props
 
     return (

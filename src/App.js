@@ -13,12 +13,6 @@ const bottonGroupStyle = {
 
 class App extends Component {
 
-  // componentDidMount = () => {
-  //   fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games/pages/${this.props.scorePage}`).then(res => res.json()).then(games => {
-  //     this.props.dataInit(games)
-  //   })
-  // }
-
   handleStartGame = () => {
     fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/users/random/${this.props.user.id}`).then(res => res.json()).then(opponent => {
         this.props.newGame(opponent)
@@ -90,6 +84,9 @@ function mapDispatchToProps(dispatch){
     },
     forfeit: () => {
       dispatch({type: "FORFEIT"})
+    },
+    help: () => {
+      dispatch({type: "HELP"})
     }
   }
 }
