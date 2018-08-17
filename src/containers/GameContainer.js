@@ -3,6 +3,13 @@ import {connect} from 'react-redux';
 import { Responsive, Button, Grid, Transition, Card, Image, Progress, Segment, Form } from 'semantic-ui-react';
 import './Game.css';
 
+const typeDmgs = {
+  water: {water:0.5, air:1.5, fire:1, earth:1},
+  air: {water:1, air:0.5, fire:1.5, earth:1},
+  fire: {water:1, air:1, fire:0.5, earth:1.5},
+  earth: {water:1.5, air:1, fire:1, earth:0.5},
+}
+
 class GameContainer extends Component {
 
   getDmgDelt = (attacker, defender, aMod, dMod) => {
@@ -24,23 +31,23 @@ class GameContainer extends Component {
     let dmg3 = 1
 
     let attack1 = (10 *
-      this.props.typeDmgs[attacker.type1][defender.type1])
+      typeDmgs[attacker.type1][defender.type1])
 
     let attack2 = (10 *
-      this.props.typeDmgs[attacker.type2][defender.type1])
+      typeDmgs[attacker.type2][defender.type1])
 
     let attack3 = (10 *
-      this.props.typeDmgs[attacker.type3][defender.type2])
+      typeDmgs[attacker.type3][defender.type2])
 
     let defense1 = (((Math.floor(Math.random() *
     (Number(defender.defence)))+(8 *
-    this.props.typeDmgs[attacker.type1][defender.type1]))))
+    typeDmgs[attacker.type1][defender.type1]))))
     let defense2 = (((Math.floor(Math.random() *
     (Number(defender.defence)))+(8 *
-    this.props.typeDmgs[attacker.type2][defender.type1]))))
+    typeDmgs[attacker.type2][defender.type1]))))
     let defense3 = (((Math.floor(Math.random() *
     (Number(defender.defence)))+(8 *
-    this.props.typeDmgs[attacker.type3][defender.type2]))))
+    typeDmgs[attacker.type3][defender.type2]))))
 
     if (attack1 > defense1) {
       dmg1 = (attack1 - defense1)
@@ -60,13 +67,13 @@ class GameContainer extends Component {
     let dmg3 = 1
 
     let attack1 = (10 *
-      this.props.typeDmgs[attacker.type1][defender.type1])
+      typeDmgs[attacker.type1][defender.type1])
 
     let attack2 = (10 *
-      this.props.typeDmgs[attacker.type2][defender.type1])
+      typeDmgs[attacker.type2][defender.type1])
 
     let attack3 = (10 *
-      this.props.typeDmgs[attacker.type3][defender.type2])
+      typeDmgs[attacker.type3][defender.type2])
 
     let defense = (Number(defender.main)) +
     ((Math.floor(Math.random() *
@@ -90,9 +97,9 @@ class GameContainer extends Component {
     let dmg3 = 1
 
     let attack = Math.floor((Number(attacker.main)*
-    this.props.typeDmgs[attacker.type1][defender.type1]) +
+    typeDmgs[attacker.type1][defender.type1]) +
     (Number(attacker.attack)*
-    this.props.typeDmgs[attacker.type2][defender.type2]))
+    typeDmgs[attacker.type2][defender.type2]))
     // (Math.floor(Math.random() * Math.floor(Number(attacker.attack)))+1)
 
     let defense1 = 10
@@ -115,11 +122,10 @@ class GameContainer extends Component {
     return dmg1+dmg2+dmg3
   }
   twoToTwo = (attacker, defender) => {
-
     let attack = ((Number(attacker.main) *
-    this.props.typeDmgs[attacker.type1][defender.type1]) +
+    typeDmgs[attacker.type1][defender.type1]) +
     (Number(attacker.attack) *
-    this.props.typeDmgs[attacker.type2][defender.type2]) +
+    typeDmgs[attacker.type2][defender.type2]) +
     (Math.floor(Math.random() *
     (Number(attacker.attack)))+1))
 
@@ -261,7 +267,6 @@ class GameContainer extends Component {
   handleCards = () => {
     let user = this.props.user
     let opponent = this.props.opponent
-    console.log(this.props.uhp);
     return (
       <Card.Group centered textAlign="center">
         <Transition animation={this.props.uAnimation} duration={500} visible={this.props.uVisible}>
@@ -316,7 +321,7 @@ class GameContainer extends Component {
   }
 
   render() {
-    // {this.gameRender()}
+    console.log(typeDmgs);
     return (
       <div className="GameContainer">
         {this.props.opponent ? this.handleCards() : <Form.Button onClick={this.handleStartGame} content='Start Game' inverted />}
@@ -326,6 +331,7 @@ class GameContainer extends Component {
 }
 
 function mapStateToProps(state){
+  console.log(state);
   return state
 }
 

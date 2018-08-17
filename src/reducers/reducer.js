@@ -20,12 +20,11 @@ const defaultState = {
   showHelp: false,
   activeIndex: 0,
   mainIndex: 0,
-  typeDmgs: {
-    water: {water:0.5, air:1.5, fire:1, earth:1},
-    air: {water:1, air:0.5, fire:1.5, earth:1},
-    fire: {water:1, air:1, fire:0.5, earth:1.5},
-    earth: {water:1.5, air:1, fire:1, earth:0.5},
-  }
+  scorePage: 0,
+  maxScorePage: 0,
+  scoreColumn: null,
+  scoreData: [],
+  scoreDirection: null,
 }
 
 function reducer(state = defaultState, action) {
@@ -195,6 +194,14 @@ function reducer(state = defaultState, action) {
 
     case "MAIN_INDEX":
       return {...state, mainIndex: action.payload}
+
+      case "SCOREBOARD_MOD":
+        return {...state,
+        scorePage: action.payload.scorePage,
+        maxScorePage: action.payload.maxScorePage,
+        scoreColumn: action.payload.scoreColumn,
+        scoreData: action.payload.scoreData,
+        scoreDirection: action.payload.scoreDirection}
 
     default:
       return state

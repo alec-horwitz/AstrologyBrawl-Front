@@ -11,15 +11,11 @@ class SigningComponent extends Component {
   }
   hamdleSubmit = (e) => {
     e.preventDefault()
-    //  && (user.password === e.target.password.value)
-    // let user = this.props.users.filter(user => (user.name === e.target.name.value) && (user.password === e.target.password.value))[0];
-    // if (user) {
-
-    // } else {
-
-    // }
-
-    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/users/login/${e.target.name.value}/${e.target.password.value}`).then(res => res.json()).then(login => {
+    let name
+    let password
+    e.target.password.value ? password = e.target.password.value : password = null
+    e.target.name.value ? name = e.target.name.value : name = null
+    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/users/login/${name}/${password}`).then(res => res.json()).then(login => {
       if (login) {
         this.props.handleSignIn(login)
       } else {

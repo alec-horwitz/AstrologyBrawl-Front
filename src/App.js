@@ -13,11 +13,11 @@ const bottonGroupStyle = {
 
 class App extends Component {
 
-  componentDidMount = () => {
-    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games/pages/${this.props.scorePage}`).then(res => res.json()).then(games => {
-      this.props.dataInit(games)
-    })
-  }
+  // componentDidMount = () => {
+  //   fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games/pages/${this.props.scorePage}`).then(res => res.json()).then(games => {
+  //     this.props.dataInit(games)
+  //   })
+  // }
 
   handleStartGame = () => {
     fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/users/random/${this.props.user.id}`).then(res => res.json()).then(opponent => {
@@ -67,7 +67,7 @@ class App extends Component {
     return (
       <div className="App">
         {this.props.showHelp ? <HelpComponent /> : null}
-        {this.props.games ? this.optionRender() : null}
+        {this.optionRender()}
       </div>
     );
   }
