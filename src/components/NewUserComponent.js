@@ -51,6 +51,7 @@ class NewUserComponent extends Component {
   state = {
     name: "",
     password: "",
+    passwordConfirmation: "",
     email: "",
     type1: "",
     type2: "",
@@ -62,9 +63,8 @@ class NewUserComponent extends Component {
     let s = this.state
     e.preventDefault()
     console.log(this.state, "this is your sign: type1: ", Avatars[s.type1]);
-    let user = this.props.users.filter(user => (user.name === this.state.name) || (user.email === this.state.email));
-    if (!user.length) {
-      if (s.name.length || s.password.length || s.type1.length || s.type2.length || s.type3.length) {
+    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/users/signup/${this.state.name}`).then(res => res.json()).then(userComf => {
+      if (!Number(userComf) && s.name.length && s.password.length && s.type1.length && s.type2.length && s.type3.length && (s.passwordConfirmation === s.password)) {
         fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/users`, {
           method: "post",
           headers: {'content-type': 'application/json'},
@@ -83,12 +83,12 @@ class NewUserComponent extends Component {
           console.log(user);
           this.props.handleSignIn(user)
         })
+      } else {
+        this.setState({
+          notFound: true
+        })
       }
-    } else {
-      this.setState({
-        notFound: true
-      })
-    }
+    })
   }
 
   handleChange = e => {
@@ -108,7 +108,7 @@ class NewUserComponent extends Component {
     return (
       <Container className="NewUserComponent">
           <h1> {`${"Sign Up"}`} </h1>
-          {this.state.notFound ? <p style={style}>{`${"ERROR: Username or Email already in use or fields left blank."}`}</p> : null}
+          {this.state.notFound ? <p style={style}>{`${"ERROR: Username or Email already in use, fields left blank, or Passwords don't match."}`}</p> : null}
           <Form onSubmit = {this.hamdleSubmit}>
             <Form.Input
               placeholder="Username"
@@ -122,6 +122,13 @@ class NewUserComponent extends Component {
               onChange={this.handleChange}
               name="password"
               value={this.state.password}
+            />
+            <Form.Input
+              type="password"
+              placeholder="Password Confirmation"
+              onChange={this.handleChange}
+              name="passwordConfirmation"
+              value={this.state.passwordConfirmation}
             />
             <Form.Input
               placeholder="Email Address"
