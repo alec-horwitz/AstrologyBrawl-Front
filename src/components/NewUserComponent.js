@@ -63,32 +63,36 @@ class NewUserComponent extends Component {
     let s = this.state
     e.preventDefault()
     console.log(this.state, "this is your sign: type1: ", Avatars[s.type1]);
-    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/users/signup/${this.state.name}`).then(res => res.json()).then(userComf => {
-      if (!Number(userComf) && s.name.length && s.password.length && s.type1.length && s.type2.length && s.type3.length && (s.passwordConfirmation === s.password)) {
-        fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/users`, {
-          method: "post",
-          headers: {'content-type': 'application/json'},
-          body: JSON.stringify({
-            name: s.name,
-            password: s.password,
-            avatar: Avatars[s.type1],
-            main: "15",
-            attack: "5",
-            defence: "5",
-            type1: types[s.type1],
-            type2: types[s.type2],
-            type3: types[s.type3]
-          })
-        }).then(res => res.json()).then(user => {
-          console.log(user);
+    if (s.name.length && s.password.length && s.type1.length && s.type2.length && s.type3.length && (s.passwordConfirmation === s.password)) {
+      fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/users`, {
+        method: "post",
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify({
+          name: s.name,
+          password: s.password,
+          avatar: Avatars[s.type1],
+          main: "15",
+          attack: "5",
+          defence: "5",
+          type1: types[s.type1],
+          type2: types[s.type2],
+          type3: types[s.type3]
+        })
+      }).then(res => res.json()).then(user => {
+        console.log(user);
+        if (user) {
           this.props.handleSignIn(user)
-        })
-      } else {
-        this.setState({
-          notFound: true
-        })
-      }
-    })
+        } else {
+          this.setState({
+            notFound: true
+          })
+        }
+      })
+    } else {
+      this.setState({
+        notFound: true
+      })
+    }
   }
 
   handleChange = e => {
