@@ -29,14 +29,18 @@ class ScoreBoardComponent extends Component {
 
   componentDidMount = () => {
     let { scoreColumn, scorePage, modBoard } = this.props
-    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games/pages/${Number(scorePage)}`, {
-      headers: {'content-type': 'application/json',
-    "Authorization": this.props.token}
-  }).then(res => res.json()).then(games => {
+    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games/pages/${0}`, {
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `${this.props.token}`
+      }
+    }).then(res => res.json()).then(games => {
       fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games/pages`, {
-        headers: {'content-type': 'application/json',
-      "Authorization": this.props.token}
-    }).then(res => res.json()).then(maxScorePage => {
+        headers: {
+          'content-type': 'application/json',
+          'Authorization': `${this.props.token}`
+        }
+      }).then(res => res.json()).then(maxScorePage => {
         let dat = games.map(game => ({player: game.playername.toString(), score: Number(game.score)}))
         modBoard({
           scorePage: 0,

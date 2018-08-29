@@ -1,5 +1,5 @@
 const defaultState = {
-  token: null
+  token: null,
   user: null,
   games: "null",
   game: null,
