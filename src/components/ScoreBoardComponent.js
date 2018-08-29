@@ -29,8 +29,14 @@ class ScoreBoardComponent extends Component {
 
   componentDidMount = () => {
     let { scoreColumn, scorePage, modBoard } = this.props
-    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games/pages/${Number(scorePage)}`).then(res => res.json()).then(games => {
-      fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games/pages`).then(res => res.json()).then(maxScorePage => {
+    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games/pages/${Number(scorePage)}`, {
+      headers: {'content-type': 'application/json',
+    "Authorization": this.props.token}
+  }).then(res => res.json()).then(games => {
+      fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games/pages`, {
+        headers: {'content-type': 'application/json',
+      "Authorization": this.props.token}
+    }).then(res => res.json()).then(maxScorePage => {
         let dat = games.map(game => ({player: game.playername.toString(), score: Number(game.score)}))
         modBoard({
           scorePage: 0,
@@ -47,7 +53,10 @@ class ScoreBoardComponent extends Component {
 
   handleNextPage = (n) => {
     let { scoreColumn, scoreData, scoreDirection, scorePage, maxScorePage, modBoard } = this.props
-    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games/pages/${Number(scorePage+n)}`).then(res => res.json()).then(games => {
+    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games/pages/${Number(scorePage+n)}`, {
+      headers: {'content-type': 'application/json',
+    "Authorization": this.props.token}
+  }).then(res => res.json()).then(games => {
       let dat = games.map(game => ({player: game.playername.toString(), score: Number(game.score)}))
       modBoard({
         scorePage: scorePage + n,

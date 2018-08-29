@@ -66,7 +66,7 @@ class NewUserComponent extends Component {
     if (s.name.length && s.password.length && s.type1.length && s.type2.length && s.type3.length && (s.passwordConfirmation === s.password)) {
       fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/users`, {
         method: "post",
-        headers: {'content-type': 'application/json'},
+        headers: {'content-type': 'application/json',},
         body: JSON.stringify({
           name: s.name,
           password: s.password,
@@ -78,10 +78,10 @@ class NewUserComponent extends Component {
           type2: types[s.type2],
           type3: types[s.type3]
         })
-      }).then(res => res.json()).then(user => {
-        console.log(user);
-        if (user) {
-          this.props.handleSignIn(user)
+      }).then(res => res.json()).then(userData => {
+        console.log(userData);
+        if (userData.token) {
+          this.props.handleSignIn(userData)
         } else {
           this.setState({
             notFound: true

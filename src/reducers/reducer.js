@@ -1,4 +1,5 @@
 const defaultState = {
+  token: null
   user: null,
   games: "null",
   game: null,
@@ -33,7 +34,7 @@ function reducer(state = defaultState, action) {
       return {...state, games: action.payload}
 
     case "SIGN_USER_IN":
-      return {...state, user: action.payload}
+      return {...state, user: action.payload.user, token: action.payload.token}
 
     case "PLAYER_DEFENSE":
       return {

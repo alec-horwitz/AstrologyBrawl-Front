@@ -15,8 +15,15 @@ class SigningComponent extends Component {
     let password
     e.target.password.value ? password = e.target.password.value : password = null
     e.target.name.value ? name = e.target.name.value : name = null
-    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/users/login/${name}/${password}`).then(res => res.json()).then(login => {
-      if (login) {
+    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/sessions`, {
+      method: "post",
+      headers: {'content-type': 'application/json',},
+      body: JSON.stringify({
+        name: name,
+        password: password,
+      })
+    }).then(res => res.json()).then(login => {
+      if (login.token) {
         this.props.handleSignIn(login)
       } else {
         this.setState({
