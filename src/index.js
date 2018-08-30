@@ -16,6 +16,7 @@ const store = createStore(reducer,persistedState, compose(
 
 store.subscribe(() => {
   saveState({
+    token: store.getState().token,
     user: store.getState().user,
     opponent: store.getState().opponent,
     uStatus: store.getState().uStatus,
