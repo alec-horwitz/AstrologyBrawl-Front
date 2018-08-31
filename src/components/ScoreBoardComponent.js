@@ -2,6 +2,7 @@ import _ from 'lodash'
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import { Table, Container, Button } from 'semantic-ui-react'
+import UUID from 'uuid';
 
 class ScoreBoardComponent extends Component {
 
@@ -28,7 +29,7 @@ class ScoreBoardComponent extends Component {
   }
 
   componentDidMount = () => {
-    let { scoreColumn, scorePage, modBoard } = this.props
+    let { scoreColumn, modBoard } = this.props
     fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games/pages/${0}`, {
       headers: {
         'content-type': 'application/json',
@@ -56,7 +57,7 @@ class ScoreBoardComponent extends Component {
   }
 
   handleNextPage = (n) => {
-    let { scoreColumn, scoreData, scoreDirection, scorePage, maxScorePage, modBoard } = this.props
+    let { scoreColumn, scorePage, maxScorePage, modBoard } = this.props
     fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games/pages/${Number(scorePage+n)}`, {
       headers: {'content-type': 'application/json',
     "Authorization": this.props.token}
@@ -98,7 +99,7 @@ class ScoreBoardComponent extends Component {
           </Table.Header>
           <Table.Body>
             {_.map(scoreData, ({ score, player }) => (
-              <Table.Row name={player}>
+              <Table.Row name={player} key={UUID()}>
                 <Table.Cell>{player}</Table.Cell>
                 <Table.Cell>{score}</Table.Cell>
               </Table.Row>
