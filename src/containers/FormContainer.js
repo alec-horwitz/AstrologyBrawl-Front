@@ -6,7 +6,6 @@ import {Form, Container} from 'semantic-ui-react'
 
 class FormContainer extends Component {
   render() {
-    // console.log(this.props);
     return (
       <div className="FormContainer">
         <Container textAlign="right">

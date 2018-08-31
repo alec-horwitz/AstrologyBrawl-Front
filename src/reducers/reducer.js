@@ -123,7 +123,6 @@ function reducer(state = defaultState, action) {
       return {...state, user: null, game: null, opponent: null}
 
     case "FORFEIT":
-    // console.log("hi");
       return {...state,
         opponent: null,
         game: null,
@@ -143,9 +142,6 @@ function reducer(state = defaultState, action) {
       }
 
     case "END_GAME":
-      // console.log("Action", action.payload)
-      console.log(state.games);
-      console.log(action.payload.games);
       return {...state,
         opponent: null,
         games: action.payload.games,
@@ -166,7 +162,6 @@ function reducer(state = defaultState, action) {
       }
 
     case "NEW_GAME":
-      // console.log("Action", action.payload);
       return {...state,
         opponent: action.payload,
         ohp: 100,

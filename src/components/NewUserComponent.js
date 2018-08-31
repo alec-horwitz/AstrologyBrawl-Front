@@ -62,7 +62,6 @@ class NewUserComponent extends Component {
   hamdleSubmit = (e) => {
     let s = this.state
     e.preventDefault()
-    console.log(this.state, "this is your sign: type1: ", Avatars[s.type1]);
     if (s.name.length && s.password.length && s.type1.length && s.type2.length && s.type3.length && (s.passwordConfirmation === s.password)) {
       fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/users`, {
         method: "post",
@@ -79,7 +78,6 @@ class NewUserComponent extends Component {
           type3: types[s.type3]
         })
       }).then(res => res.json()).then(userData => {
-        console.log(userData);
         if (userData.token) {
           this.props.handleSignIn(userData)
         } else {
@@ -96,13 +94,11 @@ class NewUserComponent extends Component {
   }
 
   handleChange = e => {
-    // console.log(e.target.value);
     this.setState({
       [e.target.name]: e.target.value
     })
   }
   handleSelection = (e, v) => {
-    // console.log(v.name);
     this.setState({
       [v.name]: v.value
     })

@@ -26,7 +26,6 @@ class HelpComponent extends Component {
   }
 
   render() {
-    console.log("here");
     return (
       <Modal open={true} onClose={this.props.help} style={inlineStyle} basic closeIcon>
         <Modal.Content>
