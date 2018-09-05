@@ -3,6 +3,7 @@ const defaultState = {
   user: null,
   games: "null",
   game: null,
+  player: null,
   opponent: null,
   singing: false,
   showHelp: false,
@@ -26,40 +27,40 @@ function reducer(state = defaultState, action) {
     case "PLAYER_DEFENSE":
       return {
         ...state,
-        user: action.payload,
+        player: action.payload,
       }
 
     case "PLAYER_CHARGE":
       return {
         ...state,
-        user: action.payload,
+        player: action.payload,
       }
 
     case "PLAYER_ATTACK":
       return {
         ...state,
-        user: action.payload.player,
+        player: action.payload.player,
         opponent: action.payload.opponent,
       }
 
     case "OPPONENT_DEFENSE":
       return {
         ...state,
-        user: action.payload.player,
+        player: action.payload.player,
         opponent: action.payload.opponent,
       }
 
     case "OPPONENT_CHARGE":
       return {
         ...state,
-        user: action.payload.player,
+        player: action.payload.player,
         opponent: action.payload.opponent,
       }
 
     case "OPPONENT_ATTACK":
       return {
         ...state,
-        user: action.payload.player,
+        player: action.payload.player,
         opponent: action.payload.opponent,
       }
 
@@ -72,31 +73,30 @@ function reducer(state = defaultState, action) {
     case "OPPONENT_POST_ATTACK":
       return {
         ...state,
-        user: action.payload.player,
+        player: action.payload.player,
         opponent: action.payload.opponent,
       }
 
     case "SIGN_USER_OUT":
-      return {...state, user: null, game: null, opponent: null}
+      return {...state, user: null, player: null, game: null, opponent: null}
 
     case "FORFEIT":
       return {...state,
-        user: action.payload,
+        player: action.payload,
         opponent: null,
         game: null,
       }
 
     case "END_GAME":
       return {...state,
-        user: action.payload.player,
+        player: action.payload.player,
         opponent: null,
-        games: action.payload.games,
         game: action.payload.game,
       }
 
     case "NEW_GAME":
       return {...state,
-        user: action.payload.player,
+        player: action.payload.player,
         opponent: action.payload.opponent,
       }
 

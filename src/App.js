@@ -21,22 +21,30 @@ class App extends Component {
       }
     }).then(res => res.json()).then(opponent => {
         this.props.newGame({
-          opponent: opponent,
+          opponent: {
+            ...opponent,
+            hp: Number(opponent.hp),
+            charged: (opponent.charged === "true"),
+            defending: (opponent.defending === "true"),
+            status: opponent.status,
+            visible: (opponent.visible === "true"),
+            animation: opponent.animation,
+          },
           player: {
             ...this.props.user,
-            hp: 100,
-            charged: false,
-            defending: false,
-            status: true,
-            visible: true,
-            animation: "pulse",
+            hp: Number(this.props.user.hp),
+            charged: (this.props.user.charged === "true"),
+            defending: (this.props.user.defending === "true"),
+            status: this.props.user.status,
+            visible: this.props.user.visible,
+            animation: this.props.user.animation,
           },
         })
     })
   }
 
   optionRender = () => {
-    if (this.props.user) {
+    if (this.props.token) {
       if (this.props.opponent) {
         return (
           <div style={bottonGroupStyle}>
@@ -45,12 +53,12 @@ class App extends Component {
               <Form.Button color='black' onClick={this.props.help} content='Help' />
               <Form.Button color='black' onClick={() => this.props.forfeit({
                 ...this.props.user,
-                hp: 100,
-                defending: false,
-                charged: false,
-                status: true,
-                visible: true,
-                animation: "pulse",
+                hp: Number(this.props.user.hp),
+                charged: (this.props.user.charged === "true"),
+                defending: (this.props.user.defending === "true"),
+                status: this.props.user.status,
+                visible: (this.props.user.visible === "true"),
+                animation: this.props.user.animation,
               })} content='Forfeit' />
             </Button.Group>
             <Responsive as={Divider} minWidth={700} hidden/>

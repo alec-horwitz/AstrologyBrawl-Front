@@ -24,7 +24,15 @@ class SigningComponent extends Component {
       })
     }).then(res => res.json()).then(login => {
       if (login.token) {
-        this.props.handleSignIn(login)
+        this.props.handleSignIn({user: {
+          ...login.user,
+          hp: Number(login.user.hp),
+          charged: (login.user.charged === "true"),
+          defending: (login.user.defending === "true"),
+          status: true,
+          visible: (login.user.visible === "true"),
+          animation: "pulse",
+        }, token: login.token})
       } else {
         this.setState({
           notFound: true

@@ -149,7 +149,7 @@ class GameContainer extends Component {
       if ((this.props.opponent.hp > 25) && !(selection === 0 || selection === 1 || selection === 2)) {
         return 'Defending'
       } else {
-        if ((this.props.user.hp < this.props.opponent.hp)) {
+        if ((this.props.player.hp < this.props.opponent.hp)) {
           return 'Charging'
         } else {
           return 'Attacking'
@@ -190,7 +190,7 @@ class GameContainer extends Component {
     if (oA === 'Charging') {
       this.props.opponentCharge({
           player: {
-            ...this.props.user,
+            ...this.props.player,
             status: true,
           },
           opponent: {
@@ -205,7 +205,7 @@ class GameContainer extends Component {
     } else if (oA === 'Defending') {
       this.props.opponentDefense({
           player: {
-            ...this.props.user,
+            ...this.props.player,
             status: true,
           },
           opponent: {
@@ -220,15 +220,15 @@ class GameContainer extends Component {
     } else {
       let oAttack = "Attacking"
       let uAttack = "Blocking"
-      if (this.props.user.defending === true) {
+      if (this.props.player.defending === true) {
         uAttack =  'Defending'
       }
       if (this.props.opponent.charged === true) {
         oAttack = 'Charging'
       }
-      let opponentDmg = this.getDmgDelt(this.props.opponent, this.props.user, oAttack, uAttack)
+      let opponentDmg = this.getDmgDelt(this.props.opponent, this.props.player, oAttack, uAttack)
 
-      if ((this.props.user.hp - opponentDmg) < 1) {
+      if ((this.props.player.hp - opponentDmg) < 1) {
         this.GameOver(this.props.opponent, this.props.opponent.hp)
       } else {
         setTimeout(() => {
@@ -239,10 +239,10 @@ class GameContainer extends Component {
           setTimeout(() => {
             this.props.opponentAttack({
                 player: {
-                  ...this.props.user,
-                  visible: !this.props.user.visible,
+                  ...this.props.player,
+                  visible: !this.props.player.visible,
                   animation: "flash",
-                  hp: (this.props.user.hp - (opponentDmg)),
+                  hp: (this.props.player.hp - (opponentDmg)),
                 },
                 opponent: {
                   ...this.props.opponent,
@@ -253,7 +253,7 @@ class GameContainer extends Component {
             setTimeout(() => {
               this.props.opponentPostAttack({
                   player: {
-                    ...this.props.user,
+                    ...this.props.player,
                     defending: false,
                     status: true,
                   },
@@ -273,21 +273,21 @@ class GameContainer extends Component {
   handlePlayerAction = (oA, uA) => {
     if (uA === 'Charging') {
       this.props.playerCharge({
-        ...this.props.user,
+        ...this.props.player,
         status: false,
         animation: "glow",
         defending: false,
         charged: true,
-        visible: !this.props.user.visible})
+        visible: !this.props.player.visible})
       setTimeout(() => this.handleOpponentAction(oA, uA), 1000)
     } else if (uA === 'Defending') {
       this.props.playerDefense({
-        ...this.props.user,
+        ...this.props.player,
         status: false,
         animation: "jiggle",
         defending: true,
         charged: false,
-        visible: !this.props.user.visible})
+        visible: !this.props.player.visible})
       setTimeout(() => this.handleOpponentAction(oA, uA), 1000)
     } else {
       let uAttack = "Attacking"
@@ -295,18 +295,18 @@ class GameContainer extends Component {
       if (this.props.opponent.defending === true) {
         oAttack = 'Defending'
       }
-      if (this.props.user.charged === true) {
+      if (this.props.player.charged === true) {
         uAttack = 'Charging'
       }
-      let userDmg = this.getDmgDelt(this.props.user, this.props.opponent, uAttack, oAttack)
+      let userDmg = this.getDmgDelt(this.props.player, this.props.opponent, uAttack, oAttack)
       if ((this.props.opponent.hp - userDmg) < 1) {
-        this.GameOver(this.props.user, this.props.user.hp)
+        this.GameOver(this.props.player, this.props.player.hp)
       } else {
         this.props.playerAttack({
             player: {
-              ...this.props.user,
+              ...this.props.player,
               animation: "tada",
-              visible: !this.props.user.visible,
+              visible: !this.props.player.visible,
               status: false,
               charged: false,
             },
@@ -325,7 +325,7 @@ class GameContainer extends Component {
 
   GameOver = (winner, points) => {
     let messege
-    if (winner.id === this.props.user.id) {
+    if (winner.id === this.props.player.id) {
       messege = `YOU WON WITH A SCORE OF: ${Math.floor((100 + points)*100)}`
     } else {
       messege = "DEFEATED!!!"
@@ -336,10 +336,9 @@ class GameContainer extends Component {
       body: JSON.stringify({user_id: winner.id, winner_name: winner.name, score: Math.floor((100 + points)*100)})
     }).then(res => res.json()).then(game => {
       this.props.endGame({
-        games: [...this.props.games, game],
         game: {...game, mod0: messege},
         player: {
-          ...this.props.user,
+          ...this.props.player,
           defending: false,
           charged: false,
           status: true,
@@ -356,15 +355,15 @@ class GameContainer extends Component {
   }
 
   handleCards = () => {
-    let user = this.props.user
+    let user = this.props.player
     let opponent = this.props.opponent
     return (
       <Card.Group centered textAlign="center">
-        <Transition animation={this.props.user.animation} duration={500} visible={this.props.user.visible}>
+        <Transition animation={this.props.player.animation} duration={500} visible={this.props.player.visible}>
           <Card color='red' className="myCard">
             <Card.Content>
               <Card.Header>{user.name}</Card.Header>
-              <Progress percent={Math.floor(this.props.user.hp)} inverted color='red' progress />
+              <Progress percent={Math.floor(this.props.player.hp)} inverted color='red' progress />
               <Responsive as={Image} minWidth={740} src={user.avatar} />
               <Grid >
                 <Grid.Row columns={2}>
@@ -378,9 +377,9 @@ class GameContainer extends Component {
 
             <Card.Content>
               <Button.Group>
-                <Form.Button disabled={!this.props.user.status} inverted onClick={() => this.handleActions(this.opponentAction("Attacking"), "Attacking")} content='Attack' />
-                <Form.Button disabled={!this.props.user.status} inverted onClick={() => this.handleActions(this.opponentAction("Defending"), "Defending")} content='Defend' />
-                <Form.Button disabled={!this.props.user.status} inverted onClick={() => this.handleActions(this.opponentAction("Charging"), "Charging")} content='Charge' />
+                <Form.Button disabled={!this.props.player.status} inverted onClick={() => this.handleActions(this.opponentAction("Attacking"), "Attacking")} content='Attack' />
+                <Form.Button disabled={!this.props.player.status} inverted onClick={() => this.handleActions(this.opponentAction("Defending"), "Defending")} content='Defend' />
+                <Form.Button disabled={!this.props.player.status} inverted onClick={() => this.handleActions(this.opponentAction("Charging"), "Charging")} content='Charge' />
               </Button.Group>
             </Card.Content>
           </Card>

@@ -18,6 +18,7 @@ store.subscribe(() => {
   saveState({
     token: store.getState().token,
     user: store.getState().user,
+    player: store.getState().player,
     opponent: store.getState().opponent,
   })
 })

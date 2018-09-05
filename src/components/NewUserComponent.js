@@ -79,7 +79,15 @@ class NewUserComponent extends Component {
         })
       }).then(res => res.json()).then(userData => {
         if (userData.token) {
-          this.props.handleSignIn(userData)
+          this.props.handleSignIn({user: {
+            ...userData.user,
+            hp: Number(userData.user.hp),
+            charged: (userData.user.charged === "true"),
+            defending: (userData.user.defending === "true"),
+            status: true,
+            visible: (userData.user.visible === "true"),
+            animation: "pulse",
+          }, token: userData.token})
         } else {
           this.setState({
             notFound: true

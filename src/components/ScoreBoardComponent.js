@@ -42,7 +42,8 @@ class ScoreBoardComponent extends Component {
           'Authorization': `${this.props.token}`
         }
       }).then(res => res.json()).then(maxScorePage => {
-        let dat = games.map(game => ({player: game.winner_name.toString(), score: Number(game.score)}))
+        console.log(games);
+        let dat = games.map(game => ({player: game.winner_name, score: Number(game.score)}))
         modBoard({
           scorePage: 0,
           maxScorePage: maxScorePage,
@@ -60,9 +61,9 @@ class ScoreBoardComponent extends Component {
     let { scoreColumn, scorePage, maxScorePage, modBoard } = this.props
     fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games/pages/${Number(scorePage+n)}`, {
       headers: {'content-type': 'application/json',
-    "Authorization": this.props.token}
-  }).then(res => res.json()).then(games => {
-      let dat = games.map(game => ({player: game.winner_name.toString(), score: Number(game.score)}))
+      "Authorization": this.props.token}
+    }).then(res => res.json()).then(games => {
+      let dat = games.map(game => ({player: game.winner_name, score: Number(game.score)}))
       modBoard({
         scorePage: scorePage + n,
         maxScorePage: maxScorePage,
