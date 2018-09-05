@@ -20,7 +20,18 @@ class App extends Component {
         "Authorization": this.props.token
       }
     }).then(res => res.json()).then(opponent => {
-        this.props.newGame(opponent)
+        this.props.newGame({
+          opponent: opponent,
+          player: {
+            ...this.props.user,
+            hp: 100,
+            charged: false,
+            defending: false,
+            status: true,
+            visible: true,
+            animation: "pulse",
+          },
+        })
     })
   }
 
@@ -32,7 +43,15 @@ class App extends Component {
             <Responsive as={Divider} minWidth={700} hidden/>
             <Button.Group >
               <Form.Button color='black' onClick={this.props.help} content='Help' />
-              <Form.Button color='black' onClick={this.props.forfeit} content='Forfeit' />
+              <Form.Button color='black' onClick={() => this.props.forfeit({
+                ...this.props.user,
+                hp: 100,
+                defending: false,
+                charged: false,
+                status: true,
+                visible: true,
+                animation: "pulse",
+              })} content='Forfeit' />
             </Button.Group>
             <Responsive as={Divider} minWidth={700} hidden/>
             <GameContainer />
@@ -81,14 +100,14 @@ function mapDispatchToProps(dispatch){
     dataInit: (initData) => {
       dispatch({type: "INIT_DATA", payload: initData})
     },
-    newGame: (newGame) => {
-      dispatch({type: "NEW_GAME", payload: newGame})
+    newGame: (newGameResult) => {
+      dispatch({type: "NEW_GAME", payload: newGameResult})
     },
     handleSignOut: () => {
       dispatch({type: "SIGN_USER_OUT"})
     },
-    forfeit: () => {
-      dispatch({type: "FORFEIT"})
+    forfeit: (player) => {
+      dispatch({type: "FORFEIT", payload: player})
     },
     help: () => {
       dispatch({type: "HELP"})

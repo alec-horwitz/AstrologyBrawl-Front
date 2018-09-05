@@ -19,17 +19,6 @@ store.subscribe(() => {
     token: store.getState().token,
     user: store.getState().user,
     opponent: store.getState().opponent,
-    uStatus: store.getState().uStatus,
-    uAnimation: store.getState().uAnimation,
-    oStatus: store.getState().oStatus,
-    oAnimation: store.getState().oAnimation,
-    ohp: store.getState().ohp,
-    uhp: store.getState().uhp,
-    oA: store.getState().oA,
-    oCharged: store.getState().oCharged,
-    oDefending: store.getState().oDefending,
-    uDefending: store.getState().uDefending,
-    uCharged: store.getState().uCharged,
   })
 })
 
