@@ -31,21 +31,21 @@ import {connect} from 'react-redux'
 //   Leo: 'https://2.bp.blogspot.com/-1_2dylpfIqg/UV_hyTbRl_I/AAAAAAAAFAI/iZChMtwrNvo/s1600/Leo-Zodiac-Sign-1.jpeg',
 //   Sagittarius: 'https://2.bp.blogspot.com/-obkvSdEM3jY/UWaJwGUfL7I/AAAAAAAAFEc/fTgiP_0KJaE/s1600/Sagittarius.jpeg'
 // }
-//
-// const options = [
-//   { key: 'aqu', text: 'Aquarius', value: 'Aquarius' },
-//   { key: 'gem', text: 'Gemini', value: 'Gemini' },
-//   { key: 'lib', text: 'Libra', value: 'Libra' },
-//   { key: 'tau', text: 'Taurus', value: 'Taurus' },
-//   { key: 'vir', text: 'Virgo', value: 'Virgo' },
-//   { key: 'cap', text: 'Capricorn', value: 'Capricorn' },
-//   { key: 'pis', text: 'Pisces', value: 'Pisces' },
-//   { key: 'can', text: 'Cancer', value: 'Cancer' },
-//   { key: 'sco', text: 'Scorpio', value: 'Scorpio' },
-//   { key: 'ari', text: 'Aries', value: 'Aries' },
-//   { key: 'leo', text: 'Leo', value: 'Leo' },
-//   { key: 'sag', text: 'Sagittarius', value: 'Sagittarius' }
-// ]
+
+const options = [
+  { key: 'aqu', text: 'Aquarius', value: 'Aquarius' },
+  { key: 'gem', text: 'Gemini', value: 'Gemini' },
+  { key: 'lib', text: 'Libra', value: 'Libra' },
+  { key: 'tau', text: 'Taurus', value: 'Taurus' },
+  { key: 'vir', text: 'Virgo', value: 'Virgo' },
+  { key: 'cap', text: 'Capricorn', value: 'Capricorn' },
+  { key: 'pis', text: 'Pisces', value: 'Pisces' },
+  { key: 'can', text: 'Cancer', value: 'Cancer' },
+  { key: 'sco', text: 'Scorpio', value: 'Scorpio' },
+  { key: 'ari', text: 'Aries', value: 'Aries' },
+  { key: 'leo', text: 'Leo', value: 'Leo' },
+  { key: 'sag', text: 'Sagittarius', value: 'Sagittarius' }
+]
 
 class NewUserComponent extends Component {
   state = {
