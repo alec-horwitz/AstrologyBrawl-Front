@@ -90,15 +90,14 @@ class App extends Component {
         return (
           <Container textAlign="center">
             <Responsive as={Divider} minWidth={700} hidden/>
-            <Button.Group >
-              <Responsive as={Container} minWidth={700} >
-                <Form.Button color='black' onClick={() => this.handleStartGame(imageArena)} content='New Game' />
-              </Responsive>
-              <Responsive as={Container} maxWidth={701} >
-                <Form.Button color='black' onClick={() => this.handleStartGame(colorArena)} content='New Game' />
-              </Responsive>
+            <Responsive as={Button.Group} minWidth={700} >
+              <Form.Button color='black' onClick={() => this.handleStartGame(imageArena)} content='New Game' />
               <Form.Button color='black' onClick={this.props.handleSignOut} content='Sign Out' />
-            </Button.Group>
+            </Responsive>
+            <Responsive as={Button.Group} maxWidth={701} >
+              <Form.Button color='black' onClick={() => this.handleStartGame(colorArena)} content='New Game' />
+              <Form.Button color='black' onClick={this.props.handleSignOut} content='Sign Out' />
+            </Responsive>
             <Responsive as={Divider} minWidth={700} hidden/>
             <h1> {this.props.game ? this.props.game.mod0 : null} </h1>
             <Responsive as={Divider} minWidth={700} hidden/>

@@ -325,15 +325,36 @@ class GameContainer extends Component {
 
   GameOver = (winner, loser, points) => {
     let messege
+    // let winnerVal = ""
     if (winner.id === this.props.player.id) {
       messege = `YOU WON WITH A SCORE OF: ${Math.floor((100 + points)*100)}`
     } else {
       messege = "DEFEATED!!!"
     }
+    // for (var key in JSON.stringify(winner)) {
+    //   if (winnerVal === "") {
+    //     winnerVal = winnerVal + key + ":" + JSON.stringify(winner)[key]
+    //   } else {
+    //     winnerVal = winnerVal + "," + key + ":" + JSON.stringify(winner)[key]
+    //   }
+    // }
+    // console.log(winnerVal);
     fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games`, {
       method: "post",
       headers: {'content-type': 'application/json',"Authorization": this.props.token},
-      body: JSON.stringify({user_id: winner.id, winner_id: winner.id, winner_name: winner.name, loser_id: loser.id, score: Math.floor((100 + points)*100)})
+      body: JSON.stringify(
+        {
+          user_id: winner.id,
+          winner: JSON.stringify(winner),
+          winner_id: winner.id,
+          winner_name: winner.name,
+          winner_health: winner.hp,
+          loser: JSON.stringify(loser),
+          loser_name: loser.name,
+          loser_id: loser.id,
+          loser_health: loser.hp,
+          score: Math.floor((100 + points)*100)
+        })
     }).then(res => res.json()).then(game => {
       this.props.endGame({
         game: {...game, mod0: messege},
