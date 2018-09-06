@@ -9,6 +9,7 @@ import reducer from './reducers/reducer'
 import {Provider} from 'react-redux'
 import { loadState, saveState } from './localStorage'
 
+
 const persistedState = loadState();
 const store = createStore(reducer,persistedState, compose(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
@@ -20,6 +21,8 @@ store.subscribe(() => {
     user: store.getState().user,
     player: store.getState().player,
     opponent: store.getState().opponent,
+    defultBackground: store.getState().defultBackground,
+    arena: store.getState().arena,
   })
 })
 

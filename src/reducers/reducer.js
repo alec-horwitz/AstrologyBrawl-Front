@@ -14,6 +14,8 @@ const defaultState = {
   scoreColumn: null,
   scoreData: [],
   scoreDirection: null,
+  defultBackground: `https://wallpaper-house.com/data/out/10/wallpaper2you_419584.jpg`,
+  arena: `https://wallpaper-house.com/data/out/10/wallpaper2you_419584.jpg`,
 }
 
 function reducer(state = defaultState, action) {
@@ -78,13 +80,15 @@ function reducer(state = defaultState, action) {
       }
 
     case "SIGN_USER_OUT":
-      return {...state, user: null, player: null, game: null, opponent: null}
+    console.log("signOut");
+      return {...state, user: null, token: null, player: null, game: null, opponent: null}
 
     case "FORFEIT":
       return {...state,
         player: action.payload,
         opponent: null,
         game: null,
+        arena: state.defultBackground,
       }
 
     case "END_GAME":
@@ -92,12 +96,14 @@ function reducer(state = defaultState, action) {
         player: action.payload.player,
         opponent: null,
         game: action.payload.game,
+        arena: state.defultBackground,
       }
 
     case "NEW_GAME":
       return {...state,
         player: action.payload.player,
         opponent: action.payload.opponent,
+        arena: action.payload.arena,
       }
 
     case "SWITCH_SIGNING":

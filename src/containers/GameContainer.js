@@ -229,7 +229,7 @@ class GameContainer extends Component {
       let opponentDmg = this.getDmgDelt(this.props.opponent, this.props.player, oAttack, uAttack)
 
       if ((this.props.player.hp - opponentDmg) < 1) {
-        this.GameOver(this.props.opponent, this.props.opponent.hp)
+        this.GameOver(this.props.opponent, this.props.player, this.props.opponent.hp)
       } else {
         setTimeout(() => {
           this.props.opponentPreAttack({
@@ -300,7 +300,7 @@ class GameContainer extends Component {
       }
       let userDmg = this.getDmgDelt(this.props.player, this.props.opponent, uAttack, oAttack)
       if ((this.props.opponent.hp - userDmg) < 1) {
-        this.GameOver(this.props.player, this.props.player.hp)
+        this.GameOver(this.props.player, this.props.opponent, this.props.player.hp)
       } else {
         this.props.playerAttack({
             player: {
@@ -313,7 +313,7 @@ class GameContainer extends Component {
             opponent: {
               ...this.props.opponent,
               hp: (this.props.opponent.hp -(userDmg)),
-              visible: this.props.opponent.visible,
+              visible: !this.props.opponent.visible,
               animation: "flash",
               defending: false,
             }
@@ -323,7 +323,7 @@ class GameContainer extends Component {
     }
   }
 
-  GameOver = (winner, points) => {
+  GameOver = (winner, loser, points) => {
     let messege
     if (winner.id === this.props.player.id) {
       messege = `YOU WON WITH A SCORE OF: ${Math.floor((100 + points)*100)}`
@@ -333,7 +333,7 @@ class GameContainer extends Component {
     fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games`, {
       method: "post",
       headers: {'content-type': 'application/json',"Authorization": this.props.token},
-      body: JSON.stringify({user_id: winner.id, winner_name: winner.name, score: Math.floor((100 + points)*100)})
+      body: JSON.stringify({user_id: winner.id, winner: winner, winner_id: winner.id, winner_name: winner.name, loser: loser, loser_id: loser.id, score: Math.floor((100 + points)*100)})
     }).then(res => res.json()).then(game => {
       this.props.endGame({
         game: {...game, mod0: messege},

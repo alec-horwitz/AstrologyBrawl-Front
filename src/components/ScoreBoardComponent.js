@@ -42,7 +42,6 @@ class ScoreBoardComponent extends Component {
           'Authorization': `${this.props.token}`
         }
       }).then(res => res.json()).then(maxScorePage => {
-        console.log(games);
         let dat = games.map(game => ({player: game.winner_name, score: Number(game.score)}))
         modBoard({
           scorePage: 0,

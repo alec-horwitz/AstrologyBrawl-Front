@@ -1,16 +1,15 @@
 body {
   font-family: sans-serif;
-  /* text-align: right; */
   background-color: black;
   color: white
 }
 body {
-  background: url("https://wallpaper-house.com/data/out/10/wallpaper2you_419584.jpg") no-repeat center center fixed;
-  /* background-image: url("https://wallpaper-house.com/data/out/10/wallpaper2you_419584.jpg"); */
-  /* background-size: 100% 100%; */
+  background-image: url("https://wallpaper-house.com/data/out/10/wallpaper2you_419584.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  /* font-family: 'Inconsolata', monospace; */
 }
