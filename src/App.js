@@ -11,16 +11,23 @@ const bottonGroupStyle = {
   textAlign: `center`
 };
 
-const typeArena = {
+const imageArena = {
   water: {water:"https://cdn1.theinertia.com/wp-content/gallery/socal-texture/mg_4906.jpg", air:"https://upload.wikimedia.org/wikipedia/commons/2/2b/Hurricane_Paul_23_oct_2006_1500Z.jpg", fire:"https://farm6.staticflickr.com/5221/5671145784_08e1e44dd4_b.jpg", earth:"https://www.travelblissnow.com/wp-content/uploads/2017/05/flood-trees-1020x682.jpg"},
   air: {water:"https://upload.wikimedia.org/wikipedia/commons/2/2b/Hurricane_Paul_23_oct_2006_1500Z.jpg", air:"https://tau0.files.wordpress.com/2017/07/windpower-12.jpg", fire:"https://images.pexels.com/photos/959334/storm-clouds-clouds-sky-thunderstorm-959334.jpeg", earth:"https://2.bp.blogspot.com/-qlpBja9gLkU/T8Qjxx0ixNI/AAAAAAAALzM/2GdybjSQZ7Y/s1600/10818370-lg.jpg"},
   fire: {water:"https://farm6.staticflickr.com/5221/5671145784_08e1e44dd4_b.jpg", air:"https://images.pexels.com/photos/959334/storm-clouds-clouds-sky-thunderstorm-959334.jpeg", fire:"https://extraordinarymindspace.files.wordpress.com/2012/03/fire.jpg", earth:"https://images.pexels.com/photos/799467/pexels-photo-799467.jpeg"},
   earth: {water:"https://www.travelblissnow.com/wp-content/uploads/2017/05/flood-trees-1020x682.jpg", air:"https://2.bp.blogspot.com/-qlpBja9gLkU/T8Qjxx0ixNI/AAAAAAAALzM/2GdybjSQZ7Y/s1600/10818370-lg.jpg", fire:"https://images.pexels.com/photos/799467/pexels-photo-799467.jpeg", earth:"https://www.maxpixel.net/static/photo/1x/Woods-Dark-Trail-Spooky-Forest-Light-Path-Night-690415.jpg"},
 }
 
+const colorArena = {
+  water: {water:"http://1x1px.me/0000FF-1.png", air:"http://1x1px.me/9292C1-1.png", fire:"http://1x1px.me/800080-1.png", earth:"http://1x1px.me/00555F-1.png"},
+  air: {water:"http://1x1px.me/9292C1-1.png", air:"http://1x1px.me/7E7E7E-1.png", fire:"http://1x1px.me/FF8080-1.png", earth:"http://1x1px.me/80BD80-1.png"},
+  fire: {water:"http://1x1px.me/800080-1.png", air:"http://1x1px.me/FF8080-1.png", fire:"http://1x1px.me/NFF0000-1.png", earth:"http://1x1px.me/DEA500-1.png"},
+  earth: {water:"http://1x1px.me/00555F-1.png", air:"http://1x1px.me/80BD80-1.png", fire:"http://1x1px.me/DEA500-1.png", earth:"http://1x1px.me/00C800-1.png"},
+}
+
 class App extends Component {
 
-  handleStartGame = () => {
+  handleStartGame = (typeArena) => {
     fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/users/random/${this.props.user.id}`, {
       headers: {
         'content-type': 'application/json',
@@ -84,7 +91,12 @@ class App extends Component {
           <Container textAlign="center">
             <Responsive as={Divider} minWidth={700} hidden/>
             <Button.Group >
-              <Form.Button color='black' onClick={this.handleStartGame} content='New Game' />
+              <Responsive as={Container} minWidth={700} >
+                <Form.Button color='black' onClick={() => this.handleStartGame(imageArena)} content='New Game' />
+              </Responsive>
+              <Responsive as={Container} maxWidth={701} >
+                <Form.Button color='black' onClick={() => this.handleStartGame(colorArena)} content='New Game' />
+              </Responsive>
               <Form.Button color='black' onClick={this.props.handleSignOut} content='Sign Out' />
             </Button.Group>
             <Responsive as={Divider} minWidth={700} hidden/>
