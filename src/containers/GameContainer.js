@@ -333,7 +333,7 @@ class GameContainer extends Component {
     fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games`, {
       method: "post",
       headers: {'content-type': 'application/json',"Authorization": this.props.token},
-      body: JSON.stringify({user_id: winner.id, winner: winner, winner_id: winner.id, winner_name: winner.name, loser: loser, loser_id: loser.id, score: Math.floor((100 + points)*100)})
+      body: JSON.stringify({user_id: winner.id, winner_id: winner.id, winner_name: winner.name, loser_id: loser.id, score: Math.floor((100 + points)*100)})
     }).then(res => res.json()).then(game => {
       this.props.endGame({
         game: {...game, mod0: messege},

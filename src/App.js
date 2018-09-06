@@ -80,7 +80,6 @@ class App extends Component {
           </div>
         )
       } else {
-        console.log(this.props);
         return (
           <Container textAlign="center">
             <Responsive as={Divider} minWidth={700} hidden/>
@@ -111,7 +110,6 @@ class App extends Component {
     //   backgroundPosition: `center center`,
     //   backgroundAttachment: `fixed`
     // };
-    console.log(this.props);
     document.body.style.backgroundImage = 'url("' + this.props.arena + '")'
 
     return (

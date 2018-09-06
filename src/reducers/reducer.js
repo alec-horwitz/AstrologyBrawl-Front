@@ -80,7 +80,6 @@ function reducer(state = defaultState, action) {
       }
 
     case "SIGN_USER_OUT":
-    console.log("signOut");
       return {...state, user: null, token: null, player: null, game: null, opponent: null}
 
     case "FORFEIT":
