@@ -28,7 +28,7 @@ const colorArena = {
 class App extends Component {
 
   handleStartGame = (typeArena) => {
-    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/users/random/${this.props.user.id}`, {
+    fetch(`http://localhost:3000/api/v1/users/random/${this.props.user.id}`, {
       headers: {
         'content-type': 'application/json',
         "Authorization": this.props.token
@@ -94,7 +94,7 @@ class App extends Component {
               <Form.Button color='black' onClick={() => this.handleStartGame(imageArena)} content='New Game' />
               <Form.Button color='black' onClick={this.props.handleSignOut} content='Sign Out' />
             </Responsive>
-            <Responsive as={Button.Group} maxWidth={701} >
+            <Responsive as={Button.Group} maxWidth={800} >
               <Form.Button color='black' onClick={() => this.handleStartGame(colorArena)} content='New Game' />
               <Form.Button color='black' onClick={this.props.handleSignOut} content='Sign Out' />
             </Responsive>
