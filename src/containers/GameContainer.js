@@ -437,9 +437,9 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
   return {
-    newGame: (newGame) => {
-      dispatch({type: "NEW_GAME", payload: newGame})
-    },
+    // newGame: (newGame) => {
+    //   dispatch({type: "NEW_GAME", payload: newGame})
+    // },
     endGame: (endGameResult) => {
       dispatch({type: "END_GAME", payload: endGameResult})
     },

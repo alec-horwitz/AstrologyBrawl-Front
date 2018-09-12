@@ -20,8 +20,8 @@ const defaultState = {
 
 function reducer(state = defaultState, action) {
   switch (action.type) {
-    case "INIT_DATA":
-      return {...state, games: action.payload}
+    // case "INIT_DATA":
+    //   return {...state, games: action.payload}
 
     case "SIGN_USER_IN":
       return {...state, user: action.payload.user, token: action.payload.token}

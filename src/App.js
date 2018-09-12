@@ -138,9 +138,9 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
   return {
-    dataInit: (initData) => {
-      dispatch({type: "INIT_DATA", payload: initData})
-    },
+    // dataInit: (initData) => {
+    //   dispatch({type: "INIT_DATA", payload: initData})
+    // },
     newGame: (newGameResult) => {
       dispatch({type: "NEW_GAME", payload: newGameResult})
     },
