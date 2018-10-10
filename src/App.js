@@ -59,10 +59,6 @@ class App extends Component {
     })
   }
 
-  getArena = () => {
-    return "https://il6.picdn.net/shutterstock/videos/711148/thumb/1.jpg"
-  }
-
   optionRender = () => {
     if (this.props.token) {
       if (this.props.opponent) {

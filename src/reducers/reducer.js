@@ -1,3 +1,5 @@
+import {defaultBackground} from '../imageHashes.js'
+
 const defaultState = {
   token: null,
   user: null,
@@ -14,8 +16,8 @@ const defaultState = {
   scoreColumn: null,
   scoreData: [],
   scoreDirection: null,
-  defultBackground: `https://wallpaper-house.com/data/out/10/wallpaper2you_419584.jpg`,
-  arena: `https://wallpaper-house.com/data/out/10/wallpaper2you_419584.jpg`,
+  defaultBackground: defaultBackground,
+  arena: defaultBackground,
 }
 
 function reducer(state = defaultState, action) {
