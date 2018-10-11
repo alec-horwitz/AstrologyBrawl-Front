@@ -32,7 +32,7 @@ class NewUserComponent extends Component {
     let s = this.state
     e.preventDefault()
     if (s.name.length && s.password.length && s.sign1.length && s.sign2.length && s.sign3.length && (s.passwordConfirmation === s.password)) {
-      fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/users`, {
+      fetch(`${this.props.backend}/api/v1/users`, {
         method: "post",
         headers: {'content-type': 'application/json',},
         body: JSON.stringify({

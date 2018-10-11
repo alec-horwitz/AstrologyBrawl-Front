@@ -330,7 +330,7 @@ class GameContainer extends Component {
     } else {
       messege = "DEFEATED!!!"
     }
-    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/games`, {
+    fetch(`${this.props.backend}/api/v1/games`, {
       method: "post",
       headers: {'content-type': 'application/json',"Authorization": this.props.token},
       body: JSON.stringify(

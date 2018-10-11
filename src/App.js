@@ -29,7 +29,7 @@ const bottonGroupStyle = {
 class App extends Component {
 
   handleStartGame = (typeArena) => {
-    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/users/random/${this.props.user.id}`, {
+    fetch(`${this.props.backend}/api/v1/users/random/${this.props.user.id}`, {
       headers: {
         'content-type': 'application/json',
         "Authorization": this.props.token

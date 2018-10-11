@@ -15,7 +15,7 @@ class SigningComponent extends Component {
     let password
     e.target.password.value ? password = e.target.password.value : password = null
     e.target.name.value ? name = e.target.name.value : name = null
-    fetch(`https://astrology-brawl-back.herokuapp.com/api/v1/sessions`, {
+    fetch(`${this.props.backend}/api/v1/sessions`, {
       method: "post",
       headers: {'content-type': 'application/json',},
       body: JSON.stringify({

@@ -1,26 +1,4 @@
-import {defaultBackground} from '../imageHashes.js'
-
-const defaultState = {
-  token: null,
-  user: null,
-  games: "null",
-  game: null,
-  player: null,
-  opponent: null,
-  singing: false,
-  showHelp: false,
-  activeIndex: 0,
-  mainIndex: 0,
-  scorePage: 0,
-  maxScorePage: 0,
-  scoreColumn: null,
-  scoreData: [],
-  scoreDirection: null,
-  defaultBackground: defaultBackground,
-  arena: defaultBackground,
-}
-
-function reducer(state = defaultState, action) {
+function reducer(state, action) {
   switch (action.type) {
     // case "INIT_DATA":
     //   return {...state, games: action.payload}
