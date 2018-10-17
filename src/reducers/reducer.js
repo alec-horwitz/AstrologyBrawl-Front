@@ -1,3 +1,5 @@
+import {defaultBackground} from '../imageHashes.js'
+
 function reducer(state, action) {
   switch (action.type) {
     // case "INIT_DATA":
@@ -67,7 +69,7 @@ function reducer(state, action) {
         player: action.payload,
         opponent: null,
         game: null,
-        arena: state.defultBackground,
+        arena: defaultBackground,
       }
 
     case "END_GAME":
@@ -75,7 +77,7 @@ function reducer(state, action) {
         player: action.payload.player,
         opponent: null,
         game: action.payload.game,
-        arena: state.defultBackground,
+        arena: defaultBackground,
       }
 
     case "NEW_GAME":

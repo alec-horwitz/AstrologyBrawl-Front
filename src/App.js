@@ -5,36 +5,27 @@ import {connect} from 'react-redux'
 import GameContainer from './containers/GameContainer';
 import FormContainer from './containers/FormContainer';
 import {Responsive, Form, Container, Button, Divider} from 'semantic-ui-react'
-import {imageArena, colorArena} from './imageHashes.js'
+// import {imageArena, colorArena} from './imageHashes.js'
+import {defaultBackground} from './imageHashes.js'
 import './App.css';
 
 const bottonGroupStyle = {
   textAlign: `center`
 };
 
-// const imageArena = {
-//   water: {water:"https://cdn1.theinertia.com/wp-content/gallery/socal-texture/mg_4906.jpg", air:"https://upload.wikimedia.org/wikipedia/commons/2/2b/Hurricane_Paul_23_oct_2006_1500Z.jpg", fire:"https://farm6.staticflickr.com/5221/5671145784_08e1e44dd4_b.jpg", earth:"https://www.travelblissnow.com/wp-content/uploads/2017/05/flood-trees-1020x682.jpg"},
-//   air: {water:"https://upload.wikimedia.org/wikipedia/commons/2/2b/Hurricane_Paul_23_oct_2006_1500Z.jpg", air:"https://tau0.files.wordpress.com/2017/07/windpower-12.jpg", fire:"https://images.pexels.com/photos/959334/storm-clouds-clouds-sky-thunderstorm-959334.jpeg", earth:"https://2.bp.blogspot.com/-qlpBja9gLkU/T8Qjxx0ixNI/AAAAAAAALzM/2GdybjSQZ7Y/s1600/10818370-lg.jpg"},
-//   fire: {water:"https://farm6.staticflickr.com/5221/5671145784_08e1e44dd4_b.jpg", air:"https://images.pexels.com/photos/959334/storm-clouds-clouds-sky-thunderstorm-959334.jpeg", fire:"https://extraordinarymindspace.files.wordpress.com/2012/03/fire.jpg", earth:"https://images.pexels.com/photos/799467/pexels-photo-799467.jpeg"},
-//   earth: {water:"https://www.travelblissnow.com/wp-content/uploads/2017/05/flood-trees-1020x682.jpg", air:"https://2.bp.blogspot.com/-qlpBja9gLkU/T8Qjxx0ixNI/AAAAAAAALzM/2GdybjSQZ7Y/s1600/10818370-lg.jpg", fire:"https://images.pexels.com/photos/799467/pexels-photo-799467.jpeg", earth:"https://www.maxpixel.net/static/photo/1x/Woods-Dark-Trail-Spooky-Forest-Light-Path-Night-690415.jpg"},
-// }
-//
-// const colorArena = {
-//   water: {water:"http://1x1px.me/0000FF-1.png", air:"http://1x1px.me/9292C1-1.png", fire:"http://1x1px.me/800080-1.png", earth:"http://1x1px.me/00555F-1.png"},
-//   air: {water:"http://1x1px.me/9292C1-1.png", air:"http://1x1px.me/7E7E7E-1.png", fire:"http://1x1px.me/FF8080-1.png", earth:"http://1x1px.me/80BD80-1.png"},
-//   fire: {water:"http://1x1px.me/800080-1.png", air:"http://1x1px.me/FF8080-1.png", fire:"http://1x1px.me/NFF0000-1.png", earth:"http://1x1px.me/DEA500-1.png"},
-//   earth: {water:"http://1x1px.me/00555F-1.png", air:"http://1x1px.me/80BD80-1.png", fire:"http://1x1px.me/DEA500-1.png", earth:"http://1x1px.me/00C800-1.png"},
-// }
-
 class App extends Component {
 
-  handleStartGame = (typeArena) => {
+  handleStartGame = (shouldUseImage) => {
     fetch(`${this.props.backend}/api/v1/users/random/${this.props.user.id}`, {
       headers: {
         'content-type': 'application/json',
         "Authorization": this.props.token
       }
-    }).then(res => res.json()).then(opponent => {
+    }).then(res => res.json()).then(res => {
+        let opponent = {...res.opponent}
+        let arena
+        shouldUseImage ? arena = res.arena_image : arena = res.arena_color
+        arena === '' ? arena = defaultBackground : arena = arena
         this.props.newGame({
           opponent: {
             ...opponent,
@@ -54,7 +45,7 @@ class App extends Component {
             visible: this.props.user.visible,
             animation: this.props.user.animation,
           },
-          arena: typeArena[this.props.user.type1][opponent.type1]
+          arena: arena
         })
     })
   }
@@ -86,11 +77,11 @@ class App extends Component {
           <Container textAlign="center">
             <Responsive as={Divider} minWidth={700} hidden/>
             <Responsive as={Button.Group} minWidth={700} >
-              <Form.Button color='black' onClick={() => this.handleStartGame(imageArena)} content='New Game' />
+              <Form.Button color='black' onClick={() => this.handleStartGame(true)} content='New Game' />
               <Form.Button color='black' onClick={this.props.handleSignOut} content='Sign Out' />
             </Responsive>
             <Responsive as={Button.Group} maxWidth={800} >
-              <Form.Button color='black' onClick={() => this.handleStartGame(colorArena)} content='New Game' />
+              <Form.Button color='black' onClick={() => this.handleStartGame(false)} content='New Game' />
               <Form.Button color='black' onClick={this.props.handleSignOut} content='Sign Out' />
             </Responsive>
             <Responsive as={Divider} minWidth={700} hidden/>
@@ -110,12 +101,6 @@ class App extends Component {
   }
 
   render() {
-    // let inlineStyle = {
-    //   backgroundImage: 'url("' + `https://wallpaper-house.com/data/out/10/wallpaper2you_419584.jpg` + '")',
-    //   backgroundRepeat: `no-repeat`,
-    //   backgroundPosition: `center center`,
-    //   backgroundAttachment: `fixed`
-    // };
     document.body.style.backgroundImage = 'url("' + this.props.arena + '")'
 
     return (
