@@ -1,4 +1,5 @@
-import {defaultBackground} from './imageHashes.js'
+import {defaultBackground} from './base64Images.js'
+import {menuSongs} from './songURLs.js'
 
 const defaultState = {
   backend: `https://astrology-brawl-back.herokuapp.com`,
@@ -18,6 +19,7 @@ const defaultState = {
   scoreDirection: null,
   defaultBackground: defaultBackground,
   arena: defaultBackground,
+  songs: menuSongs
 }
 
 

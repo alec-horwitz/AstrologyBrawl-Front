@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import ScoreBoardComponent from './components/ScoreBoardComponent';
 import HelpComponent from './components/HelpComponent';
+import MusicPlayerComponent from './components/MusicPlayerComponent';
 import {connect} from 'react-redux'
 import GameContainer from './containers/GameContainer';
 import FormContainer from './containers/FormContainer';
 import {Responsive, Form, Container, Button, Divider} from 'semantic-ui-react'
-// import {imageArena, colorArena} from './imageHashes.js'
-import {defaultBackground} from './imageHashes.js'
+import {defaultBackground} from './base64Images.js'
 import './App.css';
 
 const bottonGroupStyle = {
@@ -81,6 +81,7 @@ class App extends Component {
         // </Responsive>
         return (
           <Container textAlign="center">
+            {true ? <MusicPlayerComponent /> : null}
             <Responsive as={Divider} minWidth={700} hidden/>
             <Button.Group >
               <Form.Button color='black' onClick={() => this.handleStartGame(true)} content='New Game' />
@@ -102,9 +103,9 @@ class App extends Component {
     }
   }
 
+
   render() {
     document.body.style.backgroundImage = 'url("' + this.props.arena + '")'
-
     return (
       <div className="App">
         {this.props.showHelp ? <HelpComponent /> : null}
@@ -120,9 +121,6 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
   return {
-    // dataInit: (initData) => {
-    //   dispatch({type: "INIT_DATA", payload: initData})
-    // },
     newGame: (newGameResult) => {
       dispatch({type: "NEW_GAME", payload: newGameResult})
     },

@@ -1,4 +1,5 @@
-import {defaultBackground} from '../imageHashes.js'
+import {defaultBackground} from '../base64Images.js'
+import {menuSongs, battleSongs} from '../songURLs.js'
 
 function reducer(state, action) {
   switch (action.type) {
@@ -70,6 +71,7 @@ function reducer(state, action) {
         opponent: null,
         game: null,
         arena: defaultBackground,
+        songs: menuSongs,
       }
 
     case "END_GAME":
@@ -78,6 +80,7 @@ function reducer(state, action) {
         opponent: null,
         game: action.payload.game,
         arena: defaultBackground,
+        songs: menuSongs,
       }
 
     case "NEW_GAME":
@@ -85,6 +88,7 @@ function reducer(state, action) {
         player: action.payload.player,
         opponent: action.payload.opponent,
         arena: action.payload.arena,
+        songs: battleSongs,
       }
 
     case "SWITCH_SIGNING":

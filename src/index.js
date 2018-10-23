@@ -23,6 +23,7 @@ store.subscribe(() => {
     opponent: store.getState().opponent,
     defultBackground: store.getState().defultBackground,
     arena: store.getState().arena,
+    songs: store.getState().songs,
   })
 })
 
