@@ -2,7 +2,7 @@ import {defaultBackground} from './base64Images.js'
 import {menuSongs} from './songURLs.js'
 
 const defaultState = {
-  backend: `https://astrology-brawl-back.herokuapp.com`,
+  backend: `http://localhost:3000`,
   token: null,
   user: null,
   game: null,
