@@ -55,6 +55,7 @@ class App extends Component {
       if (this.props.opponent) {
         return (
           <div style={bottonGroupStyle}>
+            {true ? <MusicPlayerComponent /> : null}
             <Responsive as={Divider} minWidth={700} hidden/>
             <Button.Group >
               <Form.Button color='black' onClick={this.props.help} content='Help' />

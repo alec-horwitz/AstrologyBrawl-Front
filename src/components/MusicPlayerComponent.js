@@ -27,23 +27,25 @@ class MusicPlayerComponent extends Component {
 
   soundTrack = (songs) => {
 
+    let song = this.shuffleSongList(songs)[0]
+
     return (
       <iframe
         width="0%"
         height="0"
         scrolling="no"
-        frameborder="no"
+        frameBorder="no"
         allow="autoplay"
-        src={this.shuffleSongList(songs)[0]}
+        src={song}
       />
     )
   }
 
   render() {
-
+    let songs = this.props.songs
     return (
       <div className="MusicPlayer">
-        {this.soundTrack(this.props.songs)}
+        {this.soundTrack(songs)}
       </div>
     )
   }
