@@ -30,5 +30,13 @@ Username: test
 
 Password: test
 
+When the app runs for the first time on your browser it should load the login screen which should look like this:
+![login](./login.png)
 
-Here's the live version of the app if you want to see what it should look like: https://astrology-brawl.herokuapp.com/
+After you either login or create an account you will be at the scoreboard screen which should look like this:
+![scoreboard](./scoreboard.png)
+
+If you click the click the new game button you will be at the battle screen which should look like this:
+![battle](./battle.png)
+
+Here's a link to the the live version of the app if you want to try it out online: https://astrology-brawl.herokuapp.com/
