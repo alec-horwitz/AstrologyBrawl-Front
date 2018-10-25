@@ -21,7 +21,7 @@ Open up a terminal window, navigate to the directory this read me resides in and
 
 npm will try to run on port 3000 but if you followed the instruction properly the backend should already be running on that port. As such when npm asks if you'd like to run on a different port answer "y" for yes.
 
-If you start the frontend before the backend ruby will not be so helpful if finding another port to start on for you. This is why you must start the backend first.
+If you start the frontend before the backend ruby will not be so helpful in finding another port to start on for you. This is why you must start the backend first.
 
 
 Here is an account you can use to test the code:
@@ -29,3 +29,6 @@ Here is an account you can use to test the code:
 Username: test
 
 Password: test
+
+
+Here's the live version of the app if you want to see what it should look like: https://astrology-brawl.herokuapp.com/
