@@ -1,6 +1,5 @@
 export const menuSongs = [
-  "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1688282&color=%23080000&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false",
-  "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/233762714&color=%23080000&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false",
+  "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/96467",
 ]
 
 export const battleSongs = [
