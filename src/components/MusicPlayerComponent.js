@@ -1,51 +1,38 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import { Segment, Container } from 'semantic-ui-react'
 import './Signing.css';
 
 class MusicPlayerComponent extends Component {
 
-
-  shuffleSongList = (songs) => {
-
-    let songsToShuffle = [...songs]
-
-    let shuffledSongs = []
-    let songsToShuffleLength = songsToShuffle.length
-    const maxSongs = songsToShuffleLength
-
-    for (var i = 0; i < maxSongs; i++) {
-      let song = songsToShuffle[Math.floor(Math.random()*songsToShuffleLength)];
-      shuffledSongs = [...shuffledSongs, song]
-      let index = songsToShuffle.indexOf(song)
-      songsToShuffle = [...songsToShuffle.slice(0,index), ...songsToShuffle.slice(index+1)];
-      songsToShuffleLength = songsToShuffle.length
-    }
-
-    return shuffledSongs
+  soundTrack = (delay) => {
+    //The Danger Zone!!!
+    // setTimeout(() => {
+    //   this.props.handleSongChange(this.props.songIndex < (this.props.songs.length - 1) ? this.props.songIndex+1 : 0)
+    //   this.soundTrack(this.props.songIndex, Number(this.props.songs[this.props.songIndex].duration))
+    // }, delay)
   }
 
-  soundTrack = (songs) => {
-
-    let song = this.shuffleSongList(songs)[0]
-
+  iframeRender = () => {
+    console.log(this.props.songs[this.props.songIndex].name);
     return (
       <iframe
-        width="0%"
-        height="0"
+        title="MusicPlayer"
+        width="15%"
+        height="20"
         scrolling="no"
         frameBorder="no"
         allow="autoplay"
-        src={song}
+        src={this.props.songs[this.props.songIndex].url}
       />
     )
   }
 
+
   render() {
-    let songs = this.props.songs
+    this.soundTrack(0)
     return (
       <div className="MusicPlayer">
-        {this.soundTrack(songs)}
+        {this.iframeRender()}
       </div>
     )
   }
@@ -57,8 +44,8 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
   return {
-    handleSignIn: user => {
-      dispatch({type: "SIGN_USER_IN", payload: user})
+    handleSongChange: song => {
+      dispatch({type: "CHANGE_SONG", payload: song})
     }
   }
 }

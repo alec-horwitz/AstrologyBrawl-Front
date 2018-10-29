@@ -1,5 +1,5 @@
 import {defaultBackground} from '../base64Images.js'
-import {menuSongs, battleSongs} from '../songURLs.js'
+// import {menuSongs, battleSongs} from '../songURLs.js'
 
 function reducer(state, action) {
   switch (action.type) {
@@ -71,7 +71,7 @@ function reducer(state, action) {
         opponent: null,
         game: null,
         arena: defaultBackground,
-        songs: menuSongs,
+        songs: state.menuSongs,
       }
 
     case "END_GAME":
@@ -80,7 +80,7 @@ function reducer(state, action) {
         opponent: null,
         game: action.payload.game,
         arena: defaultBackground,
-        songs: menuSongs,
+        songs: state.menuSongs,
       }
 
     case "NEW_GAME":
@@ -88,7 +88,7 @@ function reducer(state, action) {
         player: action.payload.player,
         opponent: action.payload.opponent,
         arena: action.payload.arena,
-        songs: battleSongs,
+        songs: state.battleSongs,
       }
 
     case "SWITCH_SIGNING":
@@ -103,13 +103,16 @@ function reducer(state, action) {
     case "MAIN_INDEX":
       return {...state, mainIndex: action.payload}
 
-      case "SCOREBOARD_MOD":
-        return {...state,
-        scorePage: action.payload.scorePage,
-        maxScorePage: action.payload.maxScorePage,
-        scoreColumn: action.payload.scoreColumn,
-        scoreData: action.payload.scoreData,
-        scoreDirection: action.payload.scoreDirection}
+    case "SCOREBOARD_MOD":
+      return {...state,
+      scorePage: action.payload.scorePage,
+      maxScorePage: action.payload.maxScorePage,
+      scoreColumn: action.payload.scoreColumn,
+      scoreData: action.payload.scoreData,
+      scoreDirection: action.payload.scoreDirection}
+
+    case "CHANGE_SONG":
+      return {...state, songIndex: action.payload}
 
     default:
       return state
