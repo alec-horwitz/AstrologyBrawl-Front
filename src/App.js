@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 // import {} from 'semantic-ui-react'
-import MusicPlayerComponent from './components/MusicPlayerComponent';
 import HelpComponent from './components/HelpComponent';
 import GameContainer from './containers/GameContainer';
 import MainMenuContainer from './containers/MainMenuContainer';
@@ -13,7 +12,6 @@ class App extends Component {
   optionRender = () => {
     return (
       <div>
-        {true ? <MusicPlayerComponent /> : null}
         {this.props.opponent ? <GameContainer /> : <MainMenuContainer />}
       </div>
     )

@@ -1,5 +1,5 @@
 import {defaultBackground} from '../base64Images.js'
-// import {menuSongs, battleSongs} from '../songURLs.js'
+import {menuSongs, battleSongs, shuffleSongList} from '../songURLs.js'
 
 function reducer(state, action) {
   switch (action.type) {
@@ -63,7 +63,15 @@ function reducer(state, action) {
       }
 
     case "SIGN_USER_OUT":
-      return {...state, user: null, token: null, player: null, game: null, opponent: null}
+      return {...state,
+        user: null,
+        token: null,
+        player: null,
+        game: null, 
+        opponent: null,
+        songs: shuffleSongList(menuSongs),
+        songIndex: 0
+      }
 
     case "FORFEIT":
       return {...state,
@@ -71,7 +79,8 @@ function reducer(state, action) {
         opponent: null,
         game: null,
         arena: defaultBackground,
-        songs: state.menuSongs,
+        songs: shuffleSongList(menuSongs),
+        songIndex: 0
       }
 
     case "END_GAME":
@@ -80,7 +89,8 @@ function reducer(state, action) {
         opponent: null,
         game: action.payload.game,
         arena: defaultBackground,
-        songs: state.menuSongs,
+        songs: shuffleSongList(menuSongs),
+        songIndex: 0
       }
 
     case "NEW_GAME":
@@ -88,7 +98,8 @@ function reducer(state, action) {
         player: action.payload.player,
         opponent: action.payload.opponent,
         arena: action.payload.arena,
-        songs: state.battleSongs,
+        songs: shuffleSongList(battleSongs),
+        songIndex: 0
       }
 
     case "SWITCH_SIGNING":

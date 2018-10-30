@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { Responsive, Button, Form, Divider } from 'semantic-ui-react';
 import CardComponent from '../components/CardComponent';
+import MusicPlayerComponent from '../components/MusicPlayerComponent';
 import './Game.css';
 
 const bottonGroupStyle = {
@@ -13,6 +14,7 @@ class GameContainer extends Component {
   render() {
     return (
       <div className="GameContainer" style={bottonGroupStyle}>
+        {true ? <MusicPlayerComponent /> : null}
         <Responsive as={Divider} minWidth={700} hidden/>
         <Button.Group >
           <Form.Button color='black' onClick={this.props.help} content='Help' />

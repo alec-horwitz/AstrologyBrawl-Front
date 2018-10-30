@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import ScoreBoardComponent from '../components/ScoreBoardComponent';
+import MusicPlayerComponent from '../components/MusicPlayerComponent';
 import {defaultBackground} from '../base64Images.js'
 import {Responsive, Form, Container, Button, Divider} from 'semantic-ui-react'
 
@@ -48,6 +49,7 @@ class MainMenuContainer extends Component {
     return (
 
       <Container textAlign="center">
+        {true ? <MusicPlayerComponent /> : null}
         <Responsive as={Divider} minWidth={700} hidden/>
         <Button.Group >
           <Form.Button color='black' onClick={() => this.handleStartGame(true)} content='New Game' />

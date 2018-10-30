@@ -1,5 +1,5 @@
 import {defaultBackground} from './base64Images.js'
-import {menuSongs, battleSongs} from './songURLs.js'
+import {menuSongs, shuffleSongList} from './songURLs.js'
 
 const defaultState = {
   backend: `http://localhost:3000`,
@@ -19,9 +19,7 @@ const defaultState = {
   scoreDirection: null,
   defaultBackground: defaultBackground,
   arena: defaultBackground,
-  menuSongs: menuSongs,
-  battleSongs: battleSongs,
-  songs: menuSongs,
+  songs: shuffleSongList(menuSongs),
   songIndex: 0
 }
 

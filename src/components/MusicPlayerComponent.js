@@ -1,39 +1,65 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import './Signing.css';
 
+//!!!THIS CODE IS SUPER UNDER CONSTRUCTION!!!
 class MusicPlayerComponent extends Component {
+  mounted = 0
+  myTimeout
+  song = 0
 
-  soundTrack = (delay) => {
-    //The Danger Zone!!!
-    // setTimeout(() => {
-    //   this.props.handleSongChange(this.props.songIndex < (this.props.songs.length - 1) ? this.props.songIndex+1 : 0)
-    //   this.soundTrack(this.props.songIndex, Number(this.props.songs[this.props.songIndex].duration))
-    // }, delay)
+  willUnmount = () => {
+    clearTimeout(this.myTimeout);
   }
 
-  iframeRender = () => {
-    console.log(this.props.songs[this.props.songIndex].name);
-    return (
-      <iframe
-        title="MusicPlayer"
-        width="15%"
-        height="20"
-        scrolling="no"
-        frameBorder="no"
-        allow="autoplay"
-        src={this.props.songs[this.props.songIndex].url}
-      />
-    )
+  componentDidMount = () => {
+    // this.soundTrack(this.props.songs) // Not working yet
+    this.mounted++
+    console.log(this.props.songs); // logs playlist
+  }
+
+  soundTrack = (songs) => {
+    //The Danger Zone!!! (i.e. The part that is the most under construction)
+    let differences = [...songs.keys()].filter((index) => {
+      return !(songs[index].name === this.props.songs[index].name)
+    })
+    // if (differences.length < 1) {
+    // } else {
+    //   clearTimeout(myTimeout);
+    // }
+
+    if ((this.props.songIndex < this.props.songs.length) && (this.props.songIndex === this.song) && (differences.length < 1)) {
+      let duration = this.props.songs[this.song].duration
+      this.myTimeout = setTimeout(() => {
+        if ((this.props.songIndex < this.props.songs.length) && (this.props.songIndex === this.song) && (differences.length < 1)) {
+          this.song++
+          this.props.handleSongChange(this.song)
+          this.soundTrack(songs, this.song)
+        } else {
+          clearTimeout(this.myTimeout);
+        }
+      }, duration)
+    } else {
+      clearTimeout(this.myTimeout);
+    }
+
+    // else {
+    //   this.props.handleSongChange(current),
+    //   this.soundTrack(songs, current)
+    // }
   }
 
 
   render() {
-    this.soundTrack(0)
+    // Without the soundTrack() function working will only play the first song on the playlist once unless you switch between the battle and main menu screen
     return (
-      <div className="MusicPlayer">
-        {this.iframeRender()}
-      </div>
+      <iframe
+        title="MusicPlayer"
+        width="0"
+        height="0"
+        src={this.props.songs[this.song].url}
+        frameBorder="0"
+        allow="autoplay; encrypted-media"
+      />
     )
   }
 }
