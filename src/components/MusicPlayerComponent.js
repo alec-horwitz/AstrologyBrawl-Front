@@ -48,18 +48,24 @@ class MusicPlayerComponent extends Component {
     // }
   }
 
+  iframeRender = () => {
+    return (<iframe
+      title="MusicPlayer"
+      width="0"
+      height="0"
+      src={this.props.songs[this.song].url}
+      frameBorder="0"
+      allow="autoplay; encrypted-media"
+    />)
+  }
+
 
   render() {
     // Without the soundTrack() function working will only play the first song on the playlist once unless you switch between the battle and main menu screen
     return (
-      <iframe
-        title="MusicPlayer"
-        width="0"
-        height="0"
-        src={this.props.songs[this.song].url}
-        frameBorder="0"
-        allow="autoplay; encrypted-media"
-      />
+      <div>
+        {!this.props.mute ? this.iframeRender() : null}
+      </div>
     )
   }
 }

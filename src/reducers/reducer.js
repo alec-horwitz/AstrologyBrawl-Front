@@ -67,7 +67,7 @@ function reducer(state, action) {
         user: null,
         token: null,
         player: null,
-        game: null, 
+        game: null,
         opponent: null,
         songs: shuffleSongList(menuSongs),
         songIndex: 0
@@ -124,6 +124,9 @@ function reducer(state, action) {
 
     case "CHANGE_SONG":
       return {...state, songIndex: action.payload}
+
+      case "TOGGLE_MUTE":
+        return {...state, mute: !state.mute}
 
     default:
       return state

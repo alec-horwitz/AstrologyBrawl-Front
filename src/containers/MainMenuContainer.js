@@ -52,6 +52,7 @@ class MainMenuContainer extends Component {
         {true ? <MusicPlayerComponent /> : null}
         <Responsive as={Divider} minWidth={700} hidden/>
         <Button.Group >
+          <Form.Button color='black' onClick={this.props.handleAudioToggle} content='Toggle Audio' />
           <Form.Button color='black' onClick={() => this.handleStartGame(true)} content='New Game' />
           <Form.Button color='black' onClick={this.props.handleSignOut} content='Sign Out' />
         </Button.Group>
@@ -78,6 +79,9 @@ function mapDispatchToProps(dispatch){
     },
     handleSignOut: () => {
       dispatch({type: "SIGN_USER_OUT"})
+    },
+    handleAudioToggle: () => {
+      dispatch({type: "TOGGLE_MUTES"})
     },
   }
 }

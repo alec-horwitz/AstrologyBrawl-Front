@@ -17,6 +17,7 @@ class GameContainer extends Component {
         {true ? <MusicPlayerComponent /> : null}
         <Responsive as={Divider} minWidth={700} hidden/>
         <Button.Group >
+          <Form.Button color='black' onClick={this.props.handleAudioToggle} content='Toggle Audio' />
           <Form.Button color='black' onClick={this.props.help} content='Help' />
           <Form.Button color='black' onClick={() => this.props.forfeit({
               ...this.props.user,
@@ -46,7 +47,10 @@ function mapDispatchToProps(dispatch){
     },
     help: () => {
       dispatch({type: "HELP"})
-    }
+    },
+    handleAudioToggle: () => {
+      dispatch({type: "TOGGLE_MUTES"})
+    },
 
   }
 }
