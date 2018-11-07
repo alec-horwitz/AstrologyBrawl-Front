@@ -49,7 +49,7 @@ function mapDispatchToProps(dispatch){
       dispatch({type: "HELP"})
     },
     handleAudioToggle: () => {
-      dispatch({type: "TOGGLE_MUTES"})
+      dispatch({type: "TOGGLE_MUTE"})
     },
 
   }

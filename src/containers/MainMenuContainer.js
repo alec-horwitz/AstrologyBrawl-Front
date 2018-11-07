@@ -81,7 +81,7 @@ function mapDispatchToProps(dispatch){
       dispatch({type: "SIGN_USER_OUT"})
     },
     handleAudioToggle: () => {
-      dispatch({type: "TOGGLE_MUTES"})
+      dispatch({type: "TOGGLE_MUTE"})
     },
   }
 }
