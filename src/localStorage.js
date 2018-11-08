@@ -21,7 +21,7 @@ const defaultState = {
   arena: defaultBackground,
   songs: shuffleSongList(menuSongs),
   songIndex: 0,
-  mute: false,
+  mute: true,
 }
 
 
