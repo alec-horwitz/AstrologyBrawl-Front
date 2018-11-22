@@ -13,12 +13,14 @@ function reducer(state, action) {
       return {
         ...state,
         player: action.payload,
+        gameHistory: [...state.gameHistory, {player: action.payload, opponent: state.opponent}],
       }
 
     case "PLAYER_CHARGE":
       return {
         ...state,
         player: action.payload,
+        gameHistory: [...state.gameHistory, {player: action.payload, opponent: state.opponent}],
       }
 
     case "PLAYER_ATTACK":
@@ -26,6 +28,7 @@ function reducer(state, action) {
         ...state,
         player: action.payload.player,
         opponent: action.payload.opponent,
+        gameHistory: [...state.gameHistory, action.payload],
       }
 
     case "OPPONENT_DEFENSE":
@@ -33,6 +36,7 @@ function reducer(state, action) {
         ...state,
         player: action.payload.player,
         opponent: action.payload.opponent,
+        gameHistory: [...state.gameHistory, action.payload],
       }
 
     case "OPPONENT_CHARGE":
@@ -40,6 +44,7 @@ function reducer(state, action) {
         ...state,
         player: action.payload.player,
         opponent: action.payload.opponent,
+        gameHistory: [...state.gameHistory, action.payload],
       }
 
     case "OPPONENT_ATTACK":
@@ -47,6 +52,7 @@ function reducer(state, action) {
         ...state,
         player: action.payload.player,
         opponent: action.payload.opponent,
+        gameHistory: [...state.gameHistory, action.payload],
       }
 
     case "OPPONENT_PRE_ATTACK":
@@ -99,7 +105,8 @@ function reducer(state, action) {
         opponent: action.payload.opponent,
         arena: action.payload.arena,
         songs: shuffleSongList(battleSongs),
-        songIndex: 0
+        songIndex: 0,
+        gameHistory: [{player: action.payload.player, opponent: action.payload.opponent}]
       }
 
     case "SWITCH_SIGNING":

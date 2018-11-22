@@ -24,6 +24,7 @@ store.subscribe(() => {
     defultBackground: store.getState().defultBackground,
     arena: store.getState().arena,
     songs: store.getState().songs,
+    gameHistory: store.getState().gameHistory,
   })
 })
 

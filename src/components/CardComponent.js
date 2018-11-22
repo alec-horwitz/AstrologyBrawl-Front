@@ -327,6 +327,16 @@ class CardComponent extends Component {
 
   GameOver = (winner, loser, points) => {
     let messege
+    let gamePlayer
+    let gameOpponent
+
+    if (winner.id === this.props.player.id) {
+      gamePlayer = winner
+      gameOpponent = loser
+    } else {
+      gamePlayer = loser
+      gameOpponent = winner
+    }
     if (winner.id === this.props.player.id) {
       messege = `YOU WON WITH A SCORE OF: ${Math.floor((100 + points)*100)}`
     } else {
@@ -337,7 +347,6 @@ class CardComponent extends Component {
       headers: {'content-type': 'application/json',"Authorization": this.props.token},
       body: JSON.stringify(
         {
-          user_id: winner.id,
           winner: JSON.stringify(winner),
           winner_id: winner.id,
           winner_name: winner.name,
@@ -346,7 +355,8 @@ class CardComponent extends Component {
           loser_name: loser.name,
           loser_id: loser.id,
           loser_health: loser.hp,
-          score: Math.floor((100 + points)*100)
+          score: Math.floor((100 + points)*100),
+          game_history: JSON.stringify(this.props.gameHistory)
         })
     }).then(res => res.json()).then(game => {
       this.props.endGame({

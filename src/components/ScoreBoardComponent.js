@@ -42,7 +42,7 @@ class ScoreBoardComponent extends Component {
           'Authorization': `${this.props.token}`
         }
       }).then(res => res.json()).then(maxScorePage => {
-        let dat = games.map(game => ({player: game.winner_name, score: Number(game.score)}))
+        let dat = games.map(game => ({player: JSON.parse(game.winner).name, score: Number(game.score)}))
         modBoard({
           scorePage: 0,
           maxScorePage: maxScorePage,
@@ -62,7 +62,7 @@ class ScoreBoardComponent extends Component {
       headers: {'content-type': 'application/json',
       "Authorization": this.props.token}
     }).then(res => res.json()).then(games => {
-      let dat = games.map(game => ({player: game.winner_name, score: Number(game.score)}))
+      let dat = games.map(game => ({player: JSON.parse(game.winner).name, score: Number(game.score)}))
       modBoard({
         scorePage: scorePage + n,
         maxScorePage: maxScorePage,
