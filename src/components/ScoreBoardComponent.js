@@ -29,40 +29,31 @@ class ScoreBoardComponent extends Component {
   }
 
   componentDidMount = () => {
-    let { scoreColumn, modBoard } = this.props
-    fetch(`${this.props.backend}/api/v1/games/pages/${0}`, {
-      headers: {
-        'content-type': 'application/json',
-        'Authorization': `${this.props.token}`
-      }
-    }).then(res => res.json()).then(games => {
+    this.handleNextPage(0, 1)
+  }
+
+  handleNextPage = (n, DidMount) => {
+    let { scoreColumn, scorePage, modBoard } = this.props
+    let maxScorePage
+    if (DidMount) {
       fetch(`${this.props.backend}/api/v1/games/pages`, {
         headers: {
           'content-type': 'application/json',
           'Authorization': `${this.props.token}`
         }
-      }).then(res => res.json()).then(maxScorePage => {
-        let dat = games.map(game => ({player: JSON.parse(game.winner).name, score: Number(game.score)}))
-        modBoard({
-          scorePage: 0,
-          maxScorePage: maxScorePage,
-          scoreColumn: scoreColumn,
-          scoreDirection: 'descending',
-          scoreData: _.sortBy(dat, [(a) => {
-            return 2000 - a.score
-          }])
-        })
+      }).then(res => res.json()).then(maxNumScorePage => {
+        maxScorePage = maxNumScorePage
       })
-    })
-  }
-
-  handleNextPage = (n) => {
-    let { scoreColumn, scorePage, maxScorePage, modBoard } = this.props
+    } else {
+      maxScorePage = this.props.maxScorePage
+    }
     fetch(`${this.props.backend}/api/v1/games/pages/${Number(scorePage+n)}`, {
-      headers: {'content-type': 'application/json',
-      "Authorization": this.props.token}
+      headers: {
+        'content-type': 'application/json',
+        "Authorization": this.props.token
+      }
     }).then(res => res.json()).then(games => {
-      let dat = games.map(game => ({player: JSON.parse(game.winner).name, score: Number(game.score)}))
+      let dat = games.map(game => ({player: JSON.parse(game.winner).name, score: Number(game.score), history: JSON.parse(game.game_history)}))
       modBoard({
         scorePage: scorePage + n,
         maxScorePage: maxScorePage,
@@ -87,13 +78,16 @@ class ScoreBoardComponent extends Component {
                 sorted={scoreColumn === 'player' ? scoreDirection : null}
                 onClick={this.handleSort('player')}
                 >
-                Player
+                Winner
               </Table.HeaderCell>
               <Table.HeaderCell
                 sorted={scoreColumn === 'score' ? scoreDirection : null}
                 onClick={this.handleSort('score')}
                 >
                 Score
+              </Table.HeaderCell>
+              <Table.HeaderCell>
+
               </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
@@ -102,12 +96,13 @@ class ScoreBoardComponent extends Component {
               <Table.Row name={player} key={UUID()}>
                 <Table.Cell>{player}</Table.Cell>
                 <Table.Cell>{score}</Table.Cell>
+                <Table.Cell>{<Button color='black' content='new feature coming soon' fluid />}</Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>
         </Table>
-        {scorePage ? <Button onClick={() => this.handleNextPage(-1)} color='black' content='Back' icon='left arrow' labelPosition='left' /> : null}
-        {scorePage !== maxScorePage ? <Button onClick={() => this.handleNextPage(1)} color='black' content='Next' icon='right arrow' labelPosition='right' /> : null}
+        {scorePage ? <Button onClick={() => this.handleNextPage(-1, 0)} color='black' content='Back' icon='left arrow' labelPosition='left' /> : null}
+        {scorePage !== maxScorePage ? <Button onClick={() => this.handleNextPage(1, 0)} color='black' content='Next' icon='right arrow' labelPosition='right' /> : null}
       </Container>
     )
   }
