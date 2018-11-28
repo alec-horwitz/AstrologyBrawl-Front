@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import { Feed, Container, Divider, Responsive, Button, Grid, Transition, Card, Image, Progress, Segment, Form } from 'semantic-ui-react';
+import { Feed, Divider, Responsive, Button, Grid, Transition, Card, Image, Progress, Segment, Form } from 'semantic-ui-react';
 import MusicPlayerComponent from '../components/MusicPlayerComponent';
 
 const bottonGroupStyle = {textAlign: `center`};

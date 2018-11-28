@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { Divider, Responsive, Button, Grid, Transition, Card, Image, Progress, Segment, Form } from 'semantic-ui-react';
+import { Button, Form } from 'semantic-ui-react';
 import CardComponent from '../components/CardComponent';
 import './Game.css';
 
@@ -329,16 +329,16 @@ class GameContainer extends Component {
 
     GameOver = (winner, loser, points) => {
       let messege
-      let gamePlayer
-      let gameOpponent
-
-      if (winner.id === this.props.player.id) {
-        gamePlayer = winner
-        gameOpponent = loser
-      } else {
-        gamePlayer = loser
-        gameOpponent = winner
-      }
+      // let gamePlayer
+      // let gameOpponent
+      //
+      // if (winner.id === this.props.player.id) {
+      //   gamePlayer = winner
+      //   gameOpponent = loser
+      // } else {
+      //   gamePlayer = loser
+      //   gameOpponent = winner
+      // }
       if (winner.id === this.props.player.id) {
         messege = `YOU WON WITH A SCORE OF: ${Math.floor((100 + points)*100)}`
       } else {

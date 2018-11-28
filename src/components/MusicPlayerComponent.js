@@ -1,80 +1,30 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+// import PlaySongComponent from './PlaySongComponent';
 
-//!!!THIS CODE IS SUPER UNDER CONSTRUCTION!!!
 class MusicPlayerComponent extends Component {
-  mounted = 0
-  myTimeout
-  song = 0
 
-  willUnmount = () => {
-    clearTimeout(this.myTimeout);
-  }
-
-  componentDidMount = () => {
-    // this.soundTrack(this.props.songs) // Not working yet
-    this.mounted++
-    console.log(this.props.songs); // logs playlist
-  }
-
-  soundTrack = (songs) => {
-    //The Danger Zone!!! (i.e. The part that is the most under construction)
-    let differences = [...songs.keys()].filter((index) => {
-      return !(songs[index].name === this.props.songs[index].name)
-    })
-    // if (differences.length < 1) {
-    // } else {
-    //   clearTimeout(myTimeout);
-    // }
-
-    if ((this.props.songIndex < this.props.songs.length) && (this.props.songIndex === this.song) && (differences.length < 1)) {
-      let duration = this.props.songs[this.song].duration
-      this.myTimeout = setTimeout(() => {
-        if ((this.props.songIndex < this.props.songs.length) && (this.props.songIndex === this.song) && (differences.length < 1)) {
-          this.song++
-          this.props.handleSongChange(this.song)
-          this.soundTrack(songs, this.song)
-        } else {
-          clearTimeout(this.myTimeout);
-        }
-      }, duration)
+  handleNextSong = () => {
+    console.log("SUCCESS");
+    if (this.props.songIndex < this.props.songs) {
+      this.props.handleSongChange(this.props.songIndex + 1)
     } else {
-      clearTimeout(this.myTimeout);
+      this.props.handleSongChange(0)
     }
-
-    // else {
-    //   this.props.handleSongChange(current),
-    //   this.soundTrack(songs, current)
-    // }
   }
-
-  iframeRender = () => {
-    return (<iframe
-      title="MusicPlayer"
-      width="0"
-      height="0"
-      src={this.props.songs[this.song].url}
-      frameBorder="0"
-      allow="autoplay; encrypted-media"
-    />)
-  }
-
 
   render() {
-    // Without the soundTrack() function working will only play the first song on the playlist once unless you switch between the battle and main menu screen
     return (
       <iframe
+        onEnded={this.handleNextSong}
         title="MusicPlayer"
-        width="0"
-        height="0"
-        src={!this.props.mute ? this.props.songs[this.song].url : null}
+        width="50"
+        height="50"
+        src={!this.props.mute ? this.props.songs[this.props.songIndex].url : null}
         frameBorder="0"
         allow="autoplay; encrypted-media"
       />
     )
-    // <div>
-    //   {!this.props.mute ? this.iframeRender() : null}
-    // </div>
   }
 }
 
