@@ -18,8 +18,8 @@ class MusicPlayerComponent extends Component {
       <iframe
         onEnded={this.handleNextSong}
         title="MusicPlayer"
-        width="50"
-        height="50"
+        width="0"
+        height="0"
         src={!this.props.mute ? this.props.songs[this.props.songIndex].url : null}
         frameBorder="0"
         allow="autoplay; encrypted-media"
